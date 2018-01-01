@@ -18,7 +18,7 @@ const timeout = 120
 // should be the full path to the SC2 executable. cwd is a path to the directory to run
 // SC2 from. If cwd is the empty string then the current directory is used. If windowed
 // is false then the SC2 client will start in fullscreen mode. When the SC2 client exits
-// one value will be sent over the exit channel.
+// for any reason one value will be sent over the exit channel.
 func LaunchSC2(exePath, cwd string, windowed bool, exit chan<- struct{}) (*Client, error) {
 	freePort, err := freeport.GetFreePort()
 	if err != nil {
