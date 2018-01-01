@@ -97,10 +97,7 @@ func (c *Client) nextResponse(resp *sc2api.Response) error {
 		return fmt.Errorf("unmarshal: %v", err)
 	}
 
-	if resp != nil && resp.Status != nil {
-		c.status = *resp.Status
-	}
-
+	c.status = resp.Status
 	return nil
 }
 
@@ -147,4 +144,69 @@ func (c *Client) Ping() (*sc2api.ResponsePing, error) {
 	}
 
 	return resp.GetPing(), nil
+}
+
+// CreateGame creates a new game with the given settings.
+func (c *Client) CreateGame(settings *sc2api.RequestCreateGame) error {
+	req := &sc2api.Request{
+		Request: &sc2api.Request_CreateGame{
+			CreateGame: settings,
+		},
+	}
+	resp, err := c.ReqResp(req)
+	if err != nil {
+		return err
+	}
+	cg := resp.GetCreateGame()
+	if cg.Error != 0 {
+		return fmt.Errorf("create game: %s (%s)", cg.GetError(), cg.GetErrorDetails())
+	}
+	return nil
+}
+
+// JoinGameAsObserver joins the game as an observer of all players. Options can be nil.
+func (c *Client) JoinGameAsObserver(options *sc2api.InterfaceOptions) (playerID uint32, e error) {
+	if options == nil {
+		options = &sc2api.InterfaceOptions{}
+	}
+	settings := &sc2api.RequestJoinGame{
+		Participation: &sc2api.RequestJoinGame_ObservedPlayerId{
+			ObservedPlayerId: 0,
+		},
+		Options: options,
+	}
+
+	return c.joinGame(settings)
+}
+
+// JoinGameAsParticipant joins the game as a participant. Options can be nil.
+func (c *Client) JoinGameAsParticipant(race sc2api.Race, options *sc2api.InterfaceOptions) (playerID uint32, e error) {
+	if options == nil {
+		options = &sc2api.InterfaceOptions{}
+	}
+	settings := &sc2api.RequestJoinGame{
+		Participation: &sc2api.RequestJoinGame_Race{
+			Race: race,
+		},
+		Options: options,
+	}
+
+	return c.joinGame(settings)
+}
+
+func (c *Client) joinGame(settings *sc2api.RequestJoinGame) (playerID uint32, e error) {
+	req := &sc2api.Request{
+		Request: &sc2api.Request_JoinGame{
+			JoinGame: settings,
+		},
+	}
+	resp, err := c.ReqResp(req)
+	if err != nil {
+		return 0, err
+	}
+	jg := resp.GetJoinGame()
+	if jg.Error != 0 {
+		return 0, fmt.Errorf("join game: %s (%s)", jg.GetError(), jg.GetErrorDetails())
+	}
+	return jg.GetPlayerId(), nil
 }

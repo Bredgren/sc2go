@@ -3,13 +3,24 @@ package main
 import (
 	"fmt"
 	"log"
+	"math/rand"
 	"path/filepath"
 	"strings"
+	"time"
 
 	"github.com/Bredgren/sc2go/sc2"
+	sc2api "github.com/Bredgren/sc2go/sc2apiprotocol"
 )
 
+var seed = uint32(time.Now().Unix())
+
+func init() {
+	rand.Seed(int64(seed))
+}
+
 func main() {
+	fmt.Println("Random Seed:", seed)
+
 	basePath := "C:/Program Files (x86)/StarCraft II"
 	version := "Base60321"
 	exe := "SC2_x64.exe"
@@ -23,6 +34,12 @@ func main() {
 		log.Fatalln("LaunchSC2:", err)
 	}
 	defer cl.Close()
+	defer func() {
+		cl.Close()
+		// Wait for application to close (not necessarily caused by cl.Close())
+		<-exit
+		log.Println("Done.")
+	}()
 
 	log.Println(cl.GetStatus())
 
@@ -42,9 +59,39 @@ func main() {
 	log.Println("Game Version", ping.GetGameVersion())
 	log.Println("Data Version", ping.GetDataVersion())
 
-	cl.Quit()
+	mapChoice := maps.GetBattlenetMapNames()[rand.Intn(len(maps.GetBattlenetMapNames()))]
+	log.Printf("Creating game on map '%s'\n", mapChoice)
+	err = cl.CreateGame(&sc2api.RequestCreateGame{
+		Map: sc2.BattleNetMap(mapChoice),
+		PlayerSetup: []*sc2api.PlayerSetup{
+			// {
+			// 	Type: sc2api.PlayerType_Participant,
+			// },
+			{
+				Type: sc2api.PlayerType_Observer,
+			},
+			{
+				Type:       sc2api.PlayerType_Computer,
+				Race:       sc2api.Race_Random,
+				Difficulty: sc2api.Difficulty_CheatInsane,
+			},
+			{
+				Type:       sc2api.PlayerType_Computer,
+				Race:       sc2api.Race_Random,
+				Difficulty: sc2api.Difficulty_VeryEasy,
+			},
+		},
+		RandomSeed: seed,
+		Realtime:   true,
+	})
+	if err != nil {
+		log.Fatal(err)
+	}
 
-	<-exit
-
-	log.Println("Done.")
+	// id, err := cl.JoinGameAsParticipant(sc2api.Race_Random, nil)
+	id, err := cl.JoinGameAsObserver(nil)
+	if err != nil {
+		log.Fatal(err)
+	}
+	fmt.Println("Joined as player", id)
 }
