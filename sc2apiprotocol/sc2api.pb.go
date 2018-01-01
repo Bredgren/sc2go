@@ -1361,7 +1361,7 @@ type Response struct {
 	//	*Response_Debug
 	Response         isResponse_Response `protobuf_oneof:"response"`
 	Error            []string            `protobuf:"bytes,98,rep,name=error" json:"error,omitempty"`
-	Status           *Status             `protobuf:"varint,99,opt,name=status,enum=Status" json:"status,omitempty"`
+	Status           Status              `protobuf:"varint,99,opt,name=status,enum=Status" json:"status,omitempty"`
 	XXX_unrecognized []byte              `json:"-"`
 }
 
@@ -1622,8 +1622,8 @@ func (m *Response) GetError() []string {
 }
 
 func (m *Response) GetStatus() Status {
-	if m != nil && m.Status != nil {
-		return *m.Status
+	if m != nil {
+		return m.Status
 	}
 	return Status_launched
 }
@@ -2072,9 +2072,9 @@ type RequestCreateGame struct {
 	//	*RequestCreateGame_BattlenetMapName
 	Map              isRequestCreateGame_Map `protobuf_oneof:"Map"`
 	PlayerSetup      []*PlayerSetup          `protobuf:"bytes,3,rep,name=player_setup,json=playerSetup" json:"player_setup,omitempty"`
-	DisableFog       *bool                   `protobuf:"varint,4,opt,name=disable_fog,json=disableFog" json:"disable_fog,omitempty"`
-	RandomSeed       *uint32                 `protobuf:"varint,5,opt,name=random_seed,json=randomSeed" json:"random_seed,omitempty"`
-	Realtime         *bool                   `protobuf:"varint,6,opt,name=realtime" json:"realtime,omitempty"`
+	DisableFog       bool                    `protobuf:"varint,4,opt,name=disable_fog,json=disableFog" json:"disable_fog,omitempty"`
+	RandomSeed       uint32                  `protobuf:"varint,5,opt,name=random_seed,json=randomSeed" json:"random_seed,omitempty"`
+	Realtime         bool                    `protobuf:"varint,6,opt,name=realtime" json:"realtime,omitempty"`
 	XXX_unrecognized []byte                  `json:"-"`
 }
 
@@ -2126,22 +2126,22 @@ func (m *RequestCreateGame) GetPlayerSetup() []*PlayerSetup {
 }
 
 func (m *RequestCreateGame) GetDisableFog() bool {
-	if m != nil && m.DisableFog != nil {
-		return *m.DisableFog
+	if m != nil {
+		return m.DisableFog
 	}
 	return false
 }
 
 func (m *RequestCreateGame) GetRandomSeed() uint32 {
-	if m != nil && m.RandomSeed != nil {
-		return *m.RandomSeed
+	if m != nil {
+		return m.RandomSeed
 	}
 	return 0
 }
 
 func (m *RequestCreateGame) GetRealtime() bool {
-	if m != nil && m.Realtime != nil {
-		return *m.Realtime
+	if m != nil {
+		return m.Realtime
 	}
 	return false
 }
@@ -2220,9 +2220,9 @@ type LocalMap struct {
 	// A map can be specified either by a file path or the data of the .SC2Map file.
 	// If you provide both, it will play the game using map_data and store map_path
 	// into the replay. (260 character max)
-	MapPath          *string `protobuf:"bytes,1,opt,name=map_path,json=mapPath" json:"map_path,omitempty"`
-	MapData          []byte  `protobuf:"bytes,7,opt,name=map_data,json=mapData" json:"map_data,omitempty"`
-	XXX_unrecognized []byte  `json:"-"`
+	MapPath          string `protobuf:"bytes,1,opt,name=map_path,json=mapPath" json:"map_path,omitempty"`
+	MapData          []byte `protobuf:"bytes,7,opt,name=map_data,json=mapData" json:"map_data,omitempty"`
+	XXX_unrecognized []byte `json:"-"`
 }
 
 func (m *LocalMap) Reset()                    { *m = LocalMap{} }
@@ -2231,8 +2231,8 @@ func (*LocalMap) ProtoMessage()               {}
 func (*LocalMap) Descriptor() ([]byte, []int) { return fileDescriptorSC2API, []int{3} }
 
 func (m *LocalMap) GetMapPath() string {
-	if m != nil && m.MapPath != nil {
-		return *m.MapPath
+	if m != nil {
+		return m.MapPath
 	}
 	return ""
 }
@@ -2245,9 +2245,9 @@ func (m *LocalMap) GetMapData() []byte {
 }
 
 type ResponseCreateGame struct {
-	Error            *ResponseCreateGame_Error `protobuf:"varint,1,opt,name=error,enum=ResponseCreateGame_Error" json:"error,omitempty"`
-	ErrorDetails     *string                   `protobuf:"bytes,2,opt,name=error_details,json=errorDetails" json:"error_details,omitempty"`
-	XXX_unrecognized []byte                    `json:"-"`
+	Error            ResponseCreateGame_Error `protobuf:"varint,1,opt,name=error,enum=ResponseCreateGame_Error" json:"error,omitempty"`
+	ErrorDetails     string                   `protobuf:"bytes,2,opt,name=error_details,json=errorDetails" json:"error_details,omitempty"`
+	XXX_unrecognized []byte                   `json:"-"`
 }
 
 func (m *ResponseCreateGame) Reset()                    { *m = ResponseCreateGame{} }
@@ -2256,15 +2256,15 @@ func (*ResponseCreateGame) ProtoMessage()               {}
 func (*ResponseCreateGame) Descriptor() ([]byte, []int) { return fileDescriptorSC2API, []int{4} }
 
 func (m *ResponseCreateGame) GetError() ResponseCreateGame_Error {
-	if m != nil && m.Error != nil {
-		return *m.Error
+	if m != nil {
+		return m.Error
 	}
 	return ResponseCreateGame_MissingMap
 }
 
 func (m *ResponseCreateGame) GetErrorDetails() string {
-	if m != nil && m.ErrorDetails != nil {
-		return *m.ErrorDetails
+	if m != nil {
+		return m.ErrorDetails
 	}
 	return ""
 }
@@ -2281,7 +2281,7 @@ type RequestJoinGame struct {
 	ServerPorts   *PortSet                        `protobuf:"bytes,4,opt,name=server_ports,json=serverPorts" json:"server_ports,omitempty"`
 	ClientPorts   []*PortSet                      `protobuf:"bytes,5,rep,name=client_ports,json=clientPorts" json:"client_ports,omitempty"`
 	// Currently only a singe client is supported.
-	SharedPort       *int32 `protobuf:"varint,6,opt,name=shared_port,json=sharedPort" json:"shared_port,omitempty"`
+	SharedPort       int32  `protobuf:"varint,6,opt,name=shared_port,json=sharedPort" json:"shared_port,omitempty"`
 	XXX_unrecognized []byte `json:"-"`
 }
 
@@ -2347,8 +2347,8 @@ func (m *RequestJoinGame) GetClientPorts() []*PortSet {
 }
 
 func (m *RequestJoinGame) GetSharedPort() int32 {
-	if m != nil && m.SharedPort != nil {
-		return *m.SharedPort
+	if m != nil {
+		return m.SharedPort
 	}
 	return 0
 }
@@ -2418,8 +2418,8 @@ func _RequestJoinGame_OneofSizer(msg proto.Message) (n int) {
 }
 
 type PortSet struct {
-	GamePort         *int32 `protobuf:"varint,1,opt,name=game_port,json=gamePort" json:"game_port,omitempty"`
-	BasePort         *int32 `protobuf:"varint,2,opt,name=base_port,json=basePort" json:"base_port,omitempty"`
+	GamePort         int32  `protobuf:"varint,1,opt,name=game_port,json=gamePort" json:"game_port,omitempty"`
+	BasePort         int32  `protobuf:"varint,2,opt,name=base_port,json=basePort" json:"base_port,omitempty"`
 	XXX_unrecognized []byte `json:"-"`
 }
 
@@ -2429,24 +2429,24 @@ func (*PortSet) ProtoMessage()               {}
 func (*PortSet) Descriptor() ([]byte, []int) { return fileDescriptorSC2API, []int{6} }
 
 func (m *PortSet) GetGamePort() int32 {
-	if m != nil && m.GamePort != nil {
-		return *m.GamePort
+	if m != nil {
+		return m.GamePort
 	}
 	return 0
 }
 
 func (m *PortSet) GetBasePort() int32 {
-	if m != nil && m.BasePort != nil {
-		return *m.BasePort
+	if m != nil {
+		return m.BasePort
 	}
 	return 0
 }
 
 type ResponseJoinGame struct {
-	PlayerId         *uint32                 `protobuf:"varint,1,opt,name=player_id,json=playerId" json:"player_id,omitempty"`
-	Error            *ResponseJoinGame_Error `protobuf:"varint,2,opt,name=error,enum=ResponseJoinGame_Error" json:"error,omitempty"`
-	ErrorDetails     *string                 `protobuf:"bytes,3,opt,name=error_details,json=errorDetails" json:"error_details,omitempty"`
-	XXX_unrecognized []byte                  `json:"-"`
+	PlayerId         uint32                 `protobuf:"varint,1,opt,name=player_id,json=playerId" json:"player_id,omitempty"`
+	Error            ResponseJoinGame_Error `protobuf:"varint,2,opt,name=error,enum=ResponseJoinGame_Error" json:"error,omitempty"`
+	ErrorDetails     string                 `protobuf:"bytes,3,opt,name=error_details,json=errorDetails" json:"error_details,omitempty"`
+	XXX_unrecognized []byte                 `json:"-"`
 }
 
 func (m *ResponseJoinGame) Reset()                    { *m = ResponseJoinGame{} }
@@ -2455,22 +2455,22 @@ func (*ResponseJoinGame) ProtoMessage()               {}
 func (*ResponseJoinGame) Descriptor() ([]byte, []int) { return fileDescriptorSC2API, []int{7} }
 
 func (m *ResponseJoinGame) GetPlayerId() uint32 {
-	if m != nil && m.PlayerId != nil {
-		return *m.PlayerId
+	if m != nil {
+		return m.PlayerId
 	}
 	return 0
 }
 
 func (m *ResponseJoinGame) GetError() ResponseJoinGame_Error {
-	if m != nil && m.Error != nil {
-		return *m.Error
+	if m != nil {
+		return m.Error
 	}
 	return ResponseJoinGame_MissingParticipation
 }
 
 func (m *ResponseJoinGame) GetErrorDetails() string {
-	if m != nil && m.ErrorDetails != nil {
-		return *m.ErrorDetails
+	if m != nil {
+		return m.ErrorDetails
 	}
 	return ""
 }
@@ -2486,9 +2486,9 @@ func (*RequestRestartGame) ProtoMessage()               {}
 func (*RequestRestartGame) Descriptor() ([]byte, []int) { return fileDescriptorSC2API, []int{8} }
 
 type ResponseRestartGame struct {
-	Error            *ResponseRestartGame_Error `protobuf:"varint,1,opt,name=error,enum=ResponseRestartGame_Error" json:"error,omitempty"`
-	ErrorDetails     *string                    `protobuf:"bytes,2,opt,name=error_details,json=errorDetails" json:"error_details,omitempty"`
-	XXX_unrecognized []byte                     `json:"-"`
+	Error            ResponseRestartGame_Error `protobuf:"varint,1,opt,name=error,enum=ResponseRestartGame_Error" json:"error,omitempty"`
+	ErrorDetails     string                    `protobuf:"bytes,2,opt,name=error_details,json=errorDetails" json:"error_details,omitempty"`
+	XXX_unrecognized []byte                    `json:"-"`
 }
 
 func (m *ResponseRestartGame) Reset()                    { *m = ResponseRestartGame{} }
@@ -2497,15 +2497,15 @@ func (*ResponseRestartGame) ProtoMessage()               {}
 func (*ResponseRestartGame) Descriptor() ([]byte, []int) { return fileDescriptorSC2API, []int{9} }
 
 func (m *ResponseRestartGame) GetError() ResponseRestartGame_Error {
-	if m != nil && m.Error != nil {
-		return *m.Error
+	if m != nil {
+		return m.Error
 	}
 	return ResponseRestartGame_LaunchError
 }
 
 func (m *ResponseRestartGame) GetErrorDetails() string {
-	if m != nil && m.ErrorDetails != nil {
-		return *m.ErrorDetails
+	if m != nil {
+		return m.ErrorDetails
 	}
 	return ""
 }
@@ -2517,10 +2517,10 @@ type RequestStartReplay struct {
 	//	*RequestStartReplay_ReplayData
 	Replay           isRequestStartReplay_Replay `protobuf_oneof:"replay"`
 	MapData          []byte                      `protobuf:"bytes,6,opt,name=map_data,json=mapData" json:"map_data,omitempty"`
-	ObservedPlayerId *int32                      `protobuf:"varint,2,opt,name=observed_player_id,json=observedPlayerId" json:"observed_player_id,omitempty"`
+	ObservedPlayerId int32                       `protobuf:"varint,2,opt,name=observed_player_id,json=observedPlayerId" json:"observed_player_id,omitempty"`
 	Options          *InterfaceOptions           `protobuf:"bytes,3,opt,name=options" json:"options,omitempty"`
-	DisableFog       *bool                       `protobuf:"varint,4,opt,name=disable_fog,json=disableFog" json:"disable_fog,omitempty"`
-	Realtime         *bool                       `protobuf:"varint,7,opt,name=realtime" json:"realtime,omitempty"`
+	DisableFog       bool                        `protobuf:"varint,4,opt,name=disable_fog,json=disableFog" json:"disable_fog,omitempty"`
+	Realtime         bool                        `protobuf:"varint,7,opt,name=realtime" json:"realtime,omitempty"`
 	XXX_unrecognized []byte                      `json:"-"`
 }
 
@@ -2572,8 +2572,8 @@ func (m *RequestStartReplay) GetMapData() []byte {
 }
 
 func (m *RequestStartReplay) GetObservedPlayerId() int32 {
-	if m != nil && m.ObservedPlayerId != nil {
-		return *m.ObservedPlayerId
+	if m != nil {
+		return m.ObservedPlayerId
 	}
 	return 0
 }
@@ -2586,15 +2586,15 @@ func (m *RequestStartReplay) GetOptions() *InterfaceOptions {
 }
 
 func (m *RequestStartReplay) GetDisableFog() bool {
-	if m != nil && m.DisableFog != nil {
-		return *m.DisableFog
+	if m != nil {
+		return m.DisableFog
 	}
 	return false
 }
 
 func (m *RequestStartReplay) GetRealtime() bool {
-	if m != nil && m.Realtime != nil {
-		return *m.Realtime
+	if m != nil {
+		return m.Realtime
 	}
 	return false
 }
@@ -2666,9 +2666,9 @@ func _RequestStartReplay_OneofSizer(msg proto.Message) (n int) {
 }
 
 type ResponseStartReplay struct {
-	Error            *ResponseStartReplay_Error `protobuf:"varint,1,opt,name=error,enum=ResponseStartReplay_Error" json:"error,omitempty"`
-	ErrorDetails     *string                    `protobuf:"bytes,2,opt,name=error_details,json=errorDetails" json:"error_details,omitempty"`
-	XXX_unrecognized []byte                     `json:"-"`
+	Error            ResponseStartReplay_Error `protobuf:"varint,1,opt,name=error,enum=ResponseStartReplay_Error" json:"error,omitempty"`
+	ErrorDetails     string                    `protobuf:"bytes,2,opt,name=error_details,json=errorDetails" json:"error_details,omitempty"`
+	XXX_unrecognized []byte                    `json:"-"`
 }
 
 func (m *ResponseStartReplay) Reset()                    { *m = ResponseStartReplay{} }
@@ -2677,15 +2677,15 @@ func (*ResponseStartReplay) ProtoMessage()               {}
 func (*ResponseStartReplay) Descriptor() ([]byte, []int) { return fileDescriptorSC2API, []int{11} }
 
 func (m *ResponseStartReplay) GetError() ResponseStartReplay_Error {
-	if m != nil && m.Error != nil {
-		return *m.Error
+	if m != nil {
+		return m.Error
 	}
 	return ResponseStartReplay_MissingReplay
 }
 
 func (m *ResponseStartReplay) GetErrorDetails() string {
-	if m != nil && m.ErrorDetails != nil {
-		return *m.ErrorDetails
+	if m != nil {
+		return m.ErrorDetails
 	}
 	return ""
 }
@@ -2779,9 +2779,9 @@ func (*RequestGameInfo) ProtoMessage()               {}
 func (*RequestGameInfo) Descriptor() ([]byte, []int) { return fileDescriptorSC2API, []int{20} }
 
 type ResponseGameInfo struct {
-	MapName          *string           `protobuf:"bytes,1,opt,name=map_name,json=mapName" json:"map_name,omitempty"`
+	MapName          string            `protobuf:"bytes,1,opt,name=map_name,json=mapName" json:"map_name,omitempty"`
 	ModNames         []string          `protobuf:"bytes,6,rep,name=mod_names,json=modNames" json:"mod_names,omitempty"`
-	LocalMapPath     *string           `protobuf:"bytes,2,opt,name=local_map_path,json=localMapPath" json:"local_map_path,omitempty"`
+	LocalMapPath     string            `protobuf:"bytes,2,opt,name=local_map_path,json=localMapPath" json:"local_map_path,omitempty"`
 	PlayerInfo       []*PlayerInfo     `protobuf:"bytes,3,rep,name=player_info,json=playerInfo" json:"player_info,omitempty"`
 	StartRaw         *StartRaw         `protobuf:"bytes,4,opt,name=start_raw,json=startRaw" json:"start_raw,omitempty"`
 	Options          *InterfaceOptions `protobuf:"bytes,5,opt,name=options" json:"options,omitempty"`
@@ -2794,8 +2794,8 @@ func (*ResponseGameInfo) ProtoMessage()               {}
 func (*ResponseGameInfo) Descriptor() ([]byte, []int) { return fileDescriptorSC2API, []int{21} }
 
 func (m *ResponseGameInfo) GetMapName() string {
-	if m != nil && m.MapName != nil {
-		return *m.MapName
+	if m != nil {
+		return m.MapName
 	}
 	return ""
 }
@@ -2808,8 +2808,8 @@ func (m *ResponseGameInfo) GetModNames() []string {
 }
 
 func (m *ResponseGameInfo) GetLocalMapPath() string {
-	if m != nil && m.LocalMapPath != nil {
-		return *m.LocalMapPath
+	if m != nil {
+		return m.LocalMapPath
 	}
 	return ""
 }
@@ -2837,7 +2837,7 @@ func (m *ResponseGameInfo) GetOptions() *InterfaceOptions {
 
 // -----------------------------------------------------------------------------
 type RequestObservation struct {
-	DisableFog       *bool  `protobuf:"varint,1,opt,name=disable_fog,json=disableFog" json:"disable_fog,omitempty"`
+	DisableFog       bool   `protobuf:"varint,1,opt,name=disable_fog,json=disableFog" json:"disable_fog,omitempty"`
 	XXX_unrecognized []byte `json:"-"`
 }
 
@@ -2847,8 +2847,8 @@ func (*RequestObservation) ProtoMessage()               {}
 func (*RequestObservation) Descriptor() ([]byte, []int) { return fileDescriptorSC2API, []int{22} }
 
 func (m *RequestObservation) GetDisableFog() bool {
-	if m != nil && m.DisableFog != nil {
-		return *m.DisableFog
+	if m != nil {
+		return m.DisableFog
 	}
 	return false
 }
@@ -2903,9 +2903,9 @@ func (m *ResponseObservation) GetChat() []*ChatReceived {
 }
 
 type ChatReceived struct {
-	PlayerId         *uint32 `protobuf:"varint,1,opt,name=player_id,json=playerId" json:"player_id,omitempty"`
-	Message          *string `protobuf:"bytes,2,opt,name=message" json:"message,omitempty"`
-	XXX_unrecognized []byte  `json:"-"`
+	PlayerId         uint32 `protobuf:"varint,1,opt,name=player_id,json=playerId" json:"player_id,omitempty"`
+	Message          string `protobuf:"bytes,2,opt,name=message" json:"message,omitempty"`
+	XXX_unrecognized []byte `json:"-"`
 }
 
 func (m *ChatReceived) Reset()                    { *m = ChatReceived{} }
@@ -2914,15 +2914,15 @@ func (*ChatReceived) ProtoMessage()               {}
 func (*ChatReceived) Descriptor() ([]byte, []int) { return fileDescriptorSC2API, []int{24} }
 
 func (m *ChatReceived) GetPlayerId() uint32 {
-	if m != nil && m.PlayerId != nil {
-		return *m.PlayerId
+	if m != nil {
+		return m.PlayerId
 	}
 	return 0
 }
 
 func (m *ChatReceived) GetMessage() string {
-	if m != nil && m.Message != nil {
-		return *m.Message
+	if m != nil {
+		return m.Message
 	}
 	return ""
 }
@@ -2991,8 +2991,8 @@ func (*ResponseObserverAction) Descriptor() ([]byte, []int) { return fileDescrip
 
 // -----------------------------------------------------------------------------
 type RequestStep struct {
-	Count            *uint32 `protobuf:"varint,1,opt,name=count" json:"count,omitempty"`
-	XXX_unrecognized []byte  `json:"-"`
+	Count            uint32 `protobuf:"varint,1,opt,name=count" json:"count,omitempty"`
+	XXX_unrecognized []byte `json:"-"`
 }
 
 func (m *RequestStep) Reset()                    { *m = RequestStep{} }
@@ -3001,8 +3001,8 @@ func (*RequestStep) ProtoMessage()               {}
 func (*RequestStep) Descriptor() ([]byte, []int) { return fileDescriptorSC2API, []int{29} }
 
 func (m *RequestStep) GetCount() uint32 {
-	if m != nil && m.Count != nil {
-		return *m.Count
+	if m != nil {
+		return m.Count
 	}
 	return 0
 }
@@ -3018,11 +3018,11 @@ func (*ResponseStep) Descriptor() ([]byte, []int) { return fileDescriptorSC2API,
 
 // -----------------------------------------------------------------------------
 type RequestData struct {
-	AbilityId        *bool  `protobuf:"varint,1,opt,name=ability_id,json=abilityId" json:"ability_id,omitempty"`
-	UnitTypeId       *bool  `protobuf:"varint,2,opt,name=unit_type_id,json=unitTypeId" json:"unit_type_id,omitempty"`
-	UpgradeId        *bool  `protobuf:"varint,3,opt,name=upgrade_id,json=upgradeId" json:"upgrade_id,omitempty"`
-	BuffId           *bool  `protobuf:"varint,4,opt,name=buff_id,json=buffId" json:"buff_id,omitempty"`
-	EffectId         *bool  `protobuf:"varint,5,opt,name=effect_id,json=effectId" json:"effect_id,omitempty"`
+	AbilityId        bool   `protobuf:"varint,1,opt,name=ability_id,json=abilityId" json:"ability_id,omitempty"`
+	UnitTypeId       bool   `protobuf:"varint,2,opt,name=unit_type_id,json=unitTypeId" json:"unit_type_id,omitempty"`
+	UpgradeId        bool   `protobuf:"varint,3,opt,name=upgrade_id,json=upgradeId" json:"upgrade_id,omitempty"`
+	BuffId           bool   `protobuf:"varint,4,opt,name=buff_id,json=buffId" json:"buff_id,omitempty"`
+	EffectId         bool   `protobuf:"varint,5,opt,name=effect_id,json=effectId" json:"effect_id,omitempty"`
 	XXX_unrecognized []byte `json:"-"`
 }
 
@@ -3032,36 +3032,36 @@ func (*RequestData) ProtoMessage()               {}
 func (*RequestData) Descriptor() ([]byte, []int) { return fileDescriptorSC2API, []int{31} }
 
 func (m *RequestData) GetAbilityId() bool {
-	if m != nil && m.AbilityId != nil {
-		return *m.AbilityId
+	if m != nil {
+		return m.AbilityId
 	}
 	return false
 }
 
 func (m *RequestData) GetUnitTypeId() bool {
-	if m != nil && m.UnitTypeId != nil {
-		return *m.UnitTypeId
+	if m != nil {
+		return m.UnitTypeId
 	}
 	return false
 }
 
 func (m *RequestData) GetUpgradeId() bool {
-	if m != nil && m.UpgradeId != nil {
-		return *m.UpgradeId
+	if m != nil {
+		return m.UpgradeId
 	}
 	return false
 }
 
 func (m *RequestData) GetBuffId() bool {
-	if m != nil && m.BuffId != nil {
-		return *m.BuffId
+	if m != nil {
+		return m.BuffId
 	}
 	return false
 }
 
 func (m *RequestData) GetEffectId() bool {
-	if m != nil && m.EffectId != nil {
-		return *m.EffectId
+	if m != nil {
+		return m.EffectId
 	}
 	return false
 }
@@ -3148,7 +3148,7 @@ type RequestReplayInfo struct {
 	//	*RequestReplayInfo_ReplayPath
 	//	*RequestReplayInfo_ReplayData
 	Replay           isRequestReplayInfo_Replay `protobuf_oneof:"replay"`
-	DownloadData     *bool                      `protobuf:"varint,3,opt,name=download_data,json=downloadData" json:"download_data,omitempty"`
+	DownloadData     bool                       `protobuf:"varint,3,opt,name=download_data,json=downloadData" json:"download_data,omitempty"`
 	XXX_unrecognized []byte                     `json:"-"`
 }
 
@@ -3193,8 +3193,8 @@ func (m *RequestReplayInfo) GetReplayData() []byte {
 }
 
 func (m *RequestReplayInfo) GetDownloadData() bool {
-	if m != nil && m.DownloadData != nil {
-		return *m.DownloadData
+	if m != nil {
+		return m.DownloadData
 	}
 	return false
 }
@@ -3268,8 +3268,8 @@ func _RequestReplayInfo_OneofSizer(msg proto.Message) (n int) {
 type PlayerInfoExtra struct {
 	PlayerInfo       *PlayerInfo   `protobuf:"bytes,1,opt,name=player_info,json=playerInfo" json:"player_info,omitempty"`
 	PlayerResult     *PlayerResult `protobuf:"bytes,2,opt,name=player_result,json=playerResult" json:"player_result,omitempty"`
-	PlayerMmr        *int32        `protobuf:"varint,3,opt,name=player_mmr,json=playerMmr" json:"player_mmr,omitempty"`
-	PlayerApm        *int32        `protobuf:"varint,4,opt,name=player_apm,json=playerApm" json:"player_apm,omitempty"`
+	PlayerMmr        int32         `protobuf:"varint,3,opt,name=player_mmr,json=playerMmr" json:"player_mmr,omitempty"`
+	PlayerApm        int32         `protobuf:"varint,4,opt,name=player_apm,json=playerApm" json:"player_apm,omitempty"`
 	XXX_unrecognized []byte        `json:"-"`
 }
 
@@ -3293,32 +3293,32 @@ func (m *PlayerInfoExtra) GetPlayerResult() *PlayerResult {
 }
 
 func (m *PlayerInfoExtra) GetPlayerMmr() int32 {
-	if m != nil && m.PlayerMmr != nil {
-		return *m.PlayerMmr
+	if m != nil {
+		return m.PlayerMmr
 	}
 	return 0
 }
 
 func (m *PlayerInfoExtra) GetPlayerApm() int32 {
-	if m != nil && m.PlayerApm != nil {
-		return *m.PlayerApm
+	if m != nil {
+		return m.PlayerApm
 	}
 	return 0
 }
 
 type ResponseReplayInfo struct {
-	MapName             *string                   `protobuf:"bytes,1,opt,name=map_name,json=mapName" json:"map_name,omitempty"`
-	LocalMapPath        *string                   `protobuf:"bytes,2,opt,name=local_map_path,json=localMapPath" json:"local_map_path,omitempty"`
-	PlayerInfo          []*PlayerInfoExtra        `protobuf:"bytes,3,rep,name=player_info,json=playerInfo" json:"player_info,omitempty"`
-	GameDurationLoops   *uint32                   `protobuf:"varint,4,opt,name=game_duration_loops,json=gameDurationLoops" json:"game_duration_loops,omitempty"`
-	GameDurationSeconds *float32                  `protobuf:"fixed32,5,opt,name=game_duration_seconds,json=gameDurationSeconds" json:"game_duration_seconds,omitempty"`
-	GameVersion         *string                   `protobuf:"bytes,6,opt,name=game_version,json=gameVersion" json:"game_version,omitempty"`
-	DataVersion         *string                   `protobuf:"bytes,11,opt,name=data_version,json=dataVersion" json:"data_version,omitempty"`
-	DataBuild           *uint32                   `protobuf:"varint,7,opt,name=data_build,json=dataBuild" json:"data_build,omitempty"`
-	BaseBuild           *uint32                   `protobuf:"varint,8,opt,name=base_build,json=baseBuild" json:"base_build,omitempty"`
-	Error               *ResponseReplayInfo_Error `protobuf:"varint,9,opt,name=error,enum=ResponseReplayInfo_Error" json:"error,omitempty"`
-	ErrorDetails        *string                   `protobuf:"bytes,10,opt,name=error_details,json=errorDetails" json:"error_details,omitempty"`
-	XXX_unrecognized    []byte                    `json:"-"`
+	MapName             string                   `protobuf:"bytes,1,opt,name=map_name,json=mapName" json:"map_name,omitempty"`
+	LocalMapPath        string                   `protobuf:"bytes,2,opt,name=local_map_path,json=localMapPath" json:"local_map_path,omitempty"`
+	PlayerInfo          []*PlayerInfoExtra       `protobuf:"bytes,3,rep,name=player_info,json=playerInfo" json:"player_info,omitempty"`
+	GameDurationLoops   uint32                   `protobuf:"varint,4,opt,name=game_duration_loops,json=gameDurationLoops" json:"game_duration_loops,omitempty"`
+	GameDurationSeconds float32                  `protobuf:"fixed32,5,opt,name=game_duration_seconds,json=gameDurationSeconds" json:"game_duration_seconds,omitempty"`
+	GameVersion         string                   `protobuf:"bytes,6,opt,name=game_version,json=gameVersion" json:"game_version,omitempty"`
+	DataVersion         string                   `protobuf:"bytes,11,opt,name=data_version,json=dataVersion" json:"data_version,omitempty"`
+	DataBuild           uint32                   `protobuf:"varint,7,opt,name=data_build,json=dataBuild" json:"data_build,omitempty"`
+	BaseBuild           uint32                   `protobuf:"varint,8,opt,name=base_build,json=baseBuild" json:"base_build,omitempty"`
+	Error               ResponseReplayInfo_Error `protobuf:"varint,9,opt,name=error,enum=ResponseReplayInfo_Error" json:"error,omitempty"`
+	ErrorDetails        string                   `protobuf:"bytes,10,opt,name=error_details,json=errorDetails" json:"error_details,omitempty"`
+	XXX_unrecognized    []byte                   `json:"-"`
 }
 
 func (m *ResponseReplayInfo) Reset()                    { *m = ResponseReplayInfo{} }
@@ -3327,15 +3327,15 @@ func (*ResponseReplayInfo) ProtoMessage()               {}
 func (*ResponseReplayInfo) Descriptor() ([]byte, []int) { return fileDescriptorSC2API, []int{37} }
 
 func (m *ResponseReplayInfo) GetMapName() string {
-	if m != nil && m.MapName != nil {
-		return *m.MapName
+	if m != nil {
+		return m.MapName
 	}
 	return ""
 }
 
 func (m *ResponseReplayInfo) GetLocalMapPath() string {
-	if m != nil && m.LocalMapPath != nil {
-		return *m.LocalMapPath
+	if m != nil {
+		return m.LocalMapPath
 	}
 	return ""
 }
@@ -3348,57 +3348,57 @@ func (m *ResponseReplayInfo) GetPlayerInfo() []*PlayerInfoExtra {
 }
 
 func (m *ResponseReplayInfo) GetGameDurationLoops() uint32 {
-	if m != nil && m.GameDurationLoops != nil {
-		return *m.GameDurationLoops
+	if m != nil {
+		return m.GameDurationLoops
 	}
 	return 0
 }
 
 func (m *ResponseReplayInfo) GetGameDurationSeconds() float32 {
-	if m != nil && m.GameDurationSeconds != nil {
-		return *m.GameDurationSeconds
+	if m != nil {
+		return m.GameDurationSeconds
 	}
 	return 0
 }
 
 func (m *ResponseReplayInfo) GetGameVersion() string {
-	if m != nil && m.GameVersion != nil {
-		return *m.GameVersion
+	if m != nil {
+		return m.GameVersion
 	}
 	return ""
 }
 
 func (m *ResponseReplayInfo) GetDataVersion() string {
-	if m != nil && m.DataVersion != nil {
-		return *m.DataVersion
+	if m != nil {
+		return m.DataVersion
 	}
 	return ""
 }
 
 func (m *ResponseReplayInfo) GetDataBuild() uint32 {
-	if m != nil && m.DataBuild != nil {
-		return *m.DataBuild
+	if m != nil {
+		return m.DataBuild
 	}
 	return 0
 }
 
 func (m *ResponseReplayInfo) GetBaseBuild() uint32 {
-	if m != nil && m.BaseBuild != nil {
-		return *m.BaseBuild
+	if m != nil {
+		return m.BaseBuild
 	}
 	return 0
 }
 
 func (m *ResponseReplayInfo) GetError() ResponseReplayInfo_Error {
-	if m != nil && m.Error != nil {
-		return *m.Error
+	if m != nil {
+		return m.Error
 	}
 	return ResponseReplayInfo_MissingReplay
 }
 
 func (m *ResponseReplayInfo) GetErrorDetails() string {
-	if m != nil && m.ErrorDetails != nil {
-		return *m.ErrorDetails
+	if m != nil {
+		return m.ErrorDetails
 	}
 	return ""
 }
@@ -3444,9 +3444,9 @@ func (m *ResponseAvailableMaps) GetBattlenetMapNames() []string {
 // -----------------------------------------------------------------------------
 // Copies map data into the path specified.
 type RequestSaveMap struct {
-	MapPath          *string `protobuf:"bytes,1,opt,name=map_path,json=mapPath" json:"map_path,omitempty"`
-	MapData          []byte  `protobuf:"bytes,2,opt,name=map_data,json=mapData" json:"map_data,omitempty"`
-	XXX_unrecognized []byte  `json:"-"`
+	MapPath          string `protobuf:"bytes,1,opt,name=map_path,json=mapPath" json:"map_path,omitempty"`
+	MapData          []byte `protobuf:"bytes,2,opt,name=map_data,json=mapData" json:"map_data,omitempty"`
+	XXX_unrecognized []byte `json:"-"`
 }
 
 func (m *RequestSaveMap) Reset()                    { *m = RequestSaveMap{} }
@@ -3455,8 +3455,8 @@ func (*RequestSaveMap) ProtoMessage()               {}
 func (*RequestSaveMap) Descriptor() ([]byte, []int) { return fileDescriptorSC2API, []int{40} }
 
 func (m *RequestSaveMap) GetMapPath() string {
-	if m != nil && m.MapPath != nil {
-		return *m.MapPath
+	if m != nil {
+		return m.MapPath
 	}
 	return ""
 }
@@ -3469,8 +3469,8 @@ func (m *RequestSaveMap) GetMapData() []byte {
 }
 
 type ResponseSaveMap struct {
-	Error            *ResponseSaveMap_Error `protobuf:"varint,1,opt,name=error,enum=ResponseSaveMap_Error" json:"error,omitempty"`
-	XXX_unrecognized []byte                 `json:"-"`
+	Error            ResponseSaveMap_Error `protobuf:"varint,1,opt,name=error,enum=ResponseSaveMap_Error" json:"error,omitempty"`
+	XXX_unrecognized []byte                `json:"-"`
 }
 
 func (m *ResponseSaveMap) Reset()                    { *m = ResponseSaveMap{} }
@@ -3479,8 +3479,8 @@ func (*ResponseSaveMap) ProtoMessage()               {}
 func (*ResponseSaveMap) Descriptor() ([]byte, []int) { return fileDescriptorSC2API, []int{41} }
 
 func (m *ResponseSaveMap) GetError() ResponseSaveMap_Error {
-	if m != nil && m.Error != nil {
-		return *m.Error
+	if m != nil {
+		return m.Error
 	}
 	return ResponseSaveMap_InvalidMapData
 }
@@ -3496,11 +3496,11 @@ func (*RequestPing) ProtoMessage()               {}
 func (*RequestPing) Descriptor() ([]byte, []int) { return fileDescriptorSC2API, []int{42} }
 
 type ResponsePing struct {
-	GameVersion      *string `protobuf:"bytes,1,opt,name=game_version,json=gameVersion" json:"game_version,omitempty"`
-	DataVersion      *string `protobuf:"bytes,2,opt,name=data_version,json=dataVersion" json:"data_version,omitempty"`
-	DataBuild        *uint32 `protobuf:"varint,3,opt,name=data_build,json=dataBuild" json:"data_build,omitempty"`
-	BaseBuild        *uint32 `protobuf:"varint,4,opt,name=base_build,json=baseBuild" json:"base_build,omitempty"`
-	XXX_unrecognized []byte  `json:"-"`
+	GameVersion      string `protobuf:"bytes,1,opt,name=game_version,json=gameVersion" json:"game_version,omitempty"`
+	DataVersion      string `protobuf:"bytes,2,opt,name=data_version,json=dataVersion" json:"data_version,omitempty"`
+	DataBuild        uint32 `protobuf:"varint,3,opt,name=data_build,json=dataBuild" json:"data_build,omitempty"`
+	BaseBuild        uint32 `protobuf:"varint,4,opt,name=base_build,json=baseBuild" json:"base_build,omitempty"`
+	XXX_unrecognized []byte `json:"-"`
 }
 
 func (m *ResponsePing) Reset()                    { *m = ResponsePing{} }
@@ -3509,29 +3509,29 @@ func (*ResponsePing) ProtoMessage()               {}
 func (*ResponsePing) Descriptor() ([]byte, []int) { return fileDescriptorSC2API, []int{43} }
 
 func (m *ResponsePing) GetGameVersion() string {
-	if m != nil && m.GameVersion != nil {
-		return *m.GameVersion
+	if m != nil {
+		return m.GameVersion
 	}
 	return ""
 }
 
 func (m *ResponsePing) GetDataVersion() string {
-	if m != nil && m.DataVersion != nil {
-		return *m.DataVersion
+	if m != nil {
+		return m.DataVersion
 	}
 	return ""
 }
 
 func (m *ResponsePing) GetDataBuild() uint32 {
-	if m != nil && m.DataBuild != nil {
-		return *m.DataBuild
+	if m != nil {
+		return m.DataBuild
 	}
 	return 0
 }
 
 func (m *ResponsePing) GetBaseBuild() uint32 {
-	if m != nil && m.BaseBuild != nil {
-		return *m.BaseBuild
+	if m != nil {
+		return m.BaseBuild
 	}
 	return 0
 }
@@ -3564,11 +3564,11 @@ func (*ResponseDebug) ProtoMessage()               {}
 func (*ResponseDebug) Descriptor() ([]byte, []int) { return fileDescriptorSC2API, []int{45} }
 
 type PlayerSetup struct {
-	Type *PlayerType `protobuf:"varint,1,opt,name=type,enum=PlayerType" json:"type,omitempty"`
+	Type PlayerType `protobuf:"varint,1,opt,name=type,enum=PlayerType" json:"type,omitempty"`
 	// Only used for a computer player.
-	Race             *Race       `protobuf:"varint,2,opt,name=race,enum=Race" json:"race,omitempty"`
-	Difficulty       *Difficulty `protobuf:"varint,3,opt,name=difficulty,enum=Difficulty" json:"difficulty,omitempty"`
-	XXX_unrecognized []byte      `json:"-"`
+	Race             Race       `protobuf:"varint,2,opt,name=race,enum=Race" json:"race,omitempty"`
+	Difficulty       Difficulty `protobuf:"varint,3,opt,name=difficulty,enum=Difficulty" json:"difficulty,omitempty"`
+	XXX_unrecognized []byte     `json:"-"`
 }
 
 func (m *PlayerSetup) Reset()                    { *m = PlayerSetup{} }
@@ -3577,28 +3577,28 @@ func (*PlayerSetup) ProtoMessage()               {}
 func (*PlayerSetup) Descriptor() ([]byte, []int) { return fileDescriptorSC2API, []int{46} }
 
 func (m *PlayerSetup) GetType() PlayerType {
-	if m != nil && m.Type != nil {
-		return *m.Type
+	if m != nil {
+		return m.Type
 	}
 	return PlayerType_Participant
 }
 
 func (m *PlayerSetup) GetRace() Race {
-	if m != nil && m.Race != nil {
-		return *m.Race
+	if m != nil {
+		return m.Race
 	}
 	return Race_NoRace
 }
 
 func (m *PlayerSetup) GetDifficulty() Difficulty {
-	if m != nil && m.Difficulty != nil {
-		return *m.Difficulty
+	if m != nil {
+		return m.Difficulty
 	}
 	return Difficulty_VeryEasy
 }
 
 type SpatialCameraSetup struct {
-	Width             *float32 `protobuf:"fixed32,1,opt,name=width" json:"width,omitempty"`
+	Width             float32  `protobuf:"fixed32,1,opt,name=width" json:"width,omitempty"`
 	Resolution        *Size2DI `protobuf:"bytes,2,opt,name=resolution" json:"resolution,omitempty"`
 	MinimapResolution *Size2DI `protobuf:"bytes,3,opt,name=minimap_resolution,json=minimapResolution" json:"minimap_resolution,omitempty"`
 	XXX_unrecognized  []byte   `json:"-"`
@@ -3610,8 +3610,8 @@ func (*SpatialCameraSetup) ProtoMessage()               {}
 func (*SpatialCameraSetup) Descriptor() ([]byte, []int) { return fileDescriptorSC2API, []int{47} }
 
 func (m *SpatialCameraSetup) GetWidth() float32 {
-	if m != nil && m.Width != nil {
-		return *m.Width
+	if m != nil {
+		return m.Width
 	}
 	return 0
 }
@@ -3632,8 +3632,8 @@ func (m *SpatialCameraSetup) GetMinimapResolution() *Size2DI {
 
 type InterfaceOptions struct {
 	// Interface options
-	Raw              *bool               `protobuf:"varint,1,opt,name=raw" json:"raw,omitempty"`
-	Score            *bool               `protobuf:"varint,2,opt,name=score" json:"score,omitempty"`
+	Raw              bool                `protobuf:"varint,1,opt,name=raw" json:"raw,omitempty"`
+	Score            bool                `protobuf:"varint,2,opt,name=score" json:"score,omitempty"`
 	FeatureLayer     *SpatialCameraSetup `protobuf:"bytes,3,opt,name=feature_layer,json=featureLayer" json:"feature_layer,omitempty"`
 	Render           *SpatialCameraSetup `protobuf:"bytes,4,opt,name=render" json:"render,omitempty"`
 	XXX_unrecognized []byte              `json:"-"`
@@ -3645,15 +3645,15 @@ func (*InterfaceOptions) ProtoMessage()               {}
 func (*InterfaceOptions) Descriptor() ([]byte, []int) { return fileDescriptorSC2API, []int{48} }
 
 func (m *InterfaceOptions) GetRaw() bool {
-	if m != nil && m.Raw != nil {
-		return *m.Raw
+	if m != nil {
+		return m.Raw
 	}
 	return false
 }
 
 func (m *InterfaceOptions) GetScore() bool {
-	if m != nil && m.Score != nil {
-		return *m.Score
+	if m != nil {
+		return m.Score
 	}
 	return false
 }
@@ -3675,12 +3675,12 @@ func (m *InterfaceOptions) GetRender() *SpatialCameraSetup {
 type PlayerInfo struct {
 	// Identifier that will be used to reference this player.
 	// SC2 will always assign playerIds starting from 1 in standard Melee maps. This may not be true in custom maps.
-	PlayerId         *uint32     `protobuf:"varint,1,opt,name=player_id,json=playerId" json:"player_id,omitempty"`
-	Type             *PlayerType `protobuf:"varint,2,opt,name=type,enum=PlayerType" json:"type,omitempty"`
-	RaceRequested    *Race       `protobuf:"varint,3,opt,name=race_requested,json=raceRequested,enum=Race" json:"race_requested,omitempty"`
-	RaceActual       *Race       `protobuf:"varint,4,opt,name=race_actual,json=raceActual,enum=Race" json:"race_actual,omitempty"`
-	Difficulty       *Difficulty `protobuf:"varint,5,opt,name=difficulty,enum=Difficulty" json:"difficulty,omitempty"`
-	XXX_unrecognized []byte      `json:"-"`
+	PlayerId         uint32     `protobuf:"varint,1,opt,name=player_id,json=playerId" json:"player_id,omitempty"`
+	Type             PlayerType `protobuf:"varint,2,opt,name=type,enum=PlayerType" json:"type,omitempty"`
+	RaceRequested    Race       `protobuf:"varint,3,opt,name=race_requested,json=raceRequested,enum=Race" json:"race_requested,omitempty"`
+	RaceActual       Race       `protobuf:"varint,4,opt,name=race_actual,json=raceActual,enum=Race" json:"race_actual,omitempty"`
+	Difficulty       Difficulty `protobuf:"varint,5,opt,name=difficulty,enum=Difficulty" json:"difficulty,omitempty"`
+	XXX_unrecognized []byte     `json:"-"`
 }
 
 func (m *PlayerInfo) Reset()                    { *m = PlayerInfo{} }
@@ -3689,53 +3689,53 @@ func (*PlayerInfo) ProtoMessage()               {}
 func (*PlayerInfo) Descriptor() ([]byte, []int) { return fileDescriptorSC2API, []int{49} }
 
 func (m *PlayerInfo) GetPlayerId() uint32 {
-	if m != nil && m.PlayerId != nil {
-		return *m.PlayerId
+	if m != nil {
+		return m.PlayerId
 	}
 	return 0
 }
 
 func (m *PlayerInfo) GetType() PlayerType {
-	if m != nil && m.Type != nil {
-		return *m.Type
+	if m != nil {
+		return m.Type
 	}
 	return PlayerType_Participant
 }
 
 func (m *PlayerInfo) GetRaceRequested() Race {
-	if m != nil && m.RaceRequested != nil {
-		return *m.RaceRequested
+	if m != nil {
+		return m.RaceRequested
 	}
 	return Race_NoRace
 }
 
 func (m *PlayerInfo) GetRaceActual() Race {
-	if m != nil && m.RaceActual != nil {
-		return *m.RaceActual
+	if m != nil {
+		return m.RaceActual
 	}
 	return Race_NoRace
 }
 
 func (m *PlayerInfo) GetDifficulty() Difficulty {
-	if m != nil && m.Difficulty != nil {
-		return *m.Difficulty
+	if m != nil {
+		return m.Difficulty
 	}
 	return Difficulty_VeryEasy
 }
 
 type PlayerCommon struct {
-	PlayerId         *uint32 `protobuf:"varint,1,opt,name=player_id,json=playerId" json:"player_id,omitempty"`
-	Minerals         *uint32 `protobuf:"varint,2,opt,name=minerals" json:"minerals,omitempty"`
-	Vespene          *uint32 `protobuf:"varint,3,opt,name=vespene" json:"vespene,omitempty"`
-	FoodCap          *uint32 `protobuf:"varint,4,opt,name=food_cap,json=foodCap" json:"food_cap,omitempty"`
-	FoodUsed         *uint32 `protobuf:"varint,5,opt,name=food_used,json=foodUsed" json:"food_used,omitempty"`
-	FoodArmy         *uint32 `protobuf:"varint,6,opt,name=food_army,json=foodArmy" json:"food_army,omitempty"`
-	FoodWorkers      *uint32 `protobuf:"varint,7,opt,name=food_workers,json=foodWorkers" json:"food_workers,omitempty"`
-	IdleWorkerCount  *uint32 `protobuf:"varint,8,opt,name=idle_worker_count,json=idleWorkerCount" json:"idle_worker_count,omitempty"`
-	ArmyCount        *uint32 `protobuf:"varint,9,opt,name=army_count,json=armyCount" json:"army_count,omitempty"`
-	WarpGateCount    *uint32 `protobuf:"varint,10,opt,name=warp_gate_count,json=warpGateCount" json:"warp_gate_count,omitempty"`
-	LarvaCount       *uint32 `protobuf:"varint,11,opt,name=larva_count,json=larvaCount" json:"larva_count,omitempty"`
-	XXX_unrecognized []byte  `json:"-"`
+	PlayerId         uint32 `protobuf:"varint,1,opt,name=player_id,json=playerId" json:"player_id,omitempty"`
+	Minerals         uint32 `protobuf:"varint,2,opt,name=minerals" json:"minerals,omitempty"`
+	Vespene          uint32 `protobuf:"varint,3,opt,name=vespene" json:"vespene,omitempty"`
+	FoodCap          uint32 `protobuf:"varint,4,opt,name=food_cap,json=foodCap" json:"food_cap,omitempty"`
+	FoodUsed         uint32 `protobuf:"varint,5,opt,name=food_used,json=foodUsed" json:"food_used,omitempty"`
+	FoodArmy         uint32 `protobuf:"varint,6,opt,name=food_army,json=foodArmy" json:"food_army,omitempty"`
+	FoodWorkers      uint32 `protobuf:"varint,7,opt,name=food_workers,json=foodWorkers" json:"food_workers,omitempty"`
+	IdleWorkerCount  uint32 `protobuf:"varint,8,opt,name=idle_worker_count,json=idleWorkerCount" json:"idle_worker_count,omitempty"`
+	ArmyCount        uint32 `protobuf:"varint,9,opt,name=army_count,json=armyCount" json:"army_count,omitempty"`
+	WarpGateCount    uint32 `protobuf:"varint,10,opt,name=warp_gate_count,json=warpGateCount" json:"warp_gate_count,omitempty"`
+	LarvaCount       uint32 `protobuf:"varint,11,opt,name=larva_count,json=larvaCount" json:"larva_count,omitempty"`
+	XXX_unrecognized []byte `json:"-"`
 }
 
 func (m *PlayerCommon) Reset()                    { *m = PlayerCommon{} }
@@ -3744,84 +3744,84 @@ func (*PlayerCommon) ProtoMessage()               {}
 func (*PlayerCommon) Descriptor() ([]byte, []int) { return fileDescriptorSC2API, []int{50} }
 
 func (m *PlayerCommon) GetPlayerId() uint32 {
-	if m != nil && m.PlayerId != nil {
-		return *m.PlayerId
+	if m != nil {
+		return m.PlayerId
 	}
 	return 0
 }
 
 func (m *PlayerCommon) GetMinerals() uint32 {
-	if m != nil && m.Minerals != nil {
-		return *m.Minerals
+	if m != nil {
+		return m.Minerals
 	}
 	return 0
 }
 
 func (m *PlayerCommon) GetVespene() uint32 {
-	if m != nil && m.Vespene != nil {
-		return *m.Vespene
+	if m != nil {
+		return m.Vespene
 	}
 	return 0
 }
 
 func (m *PlayerCommon) GetFoodCap() uint32 {
-	if m != nil && m.FoodCap != nil {
-		return *m.FoodCap
+	if m != nil {
+		return m.FoodCap
 	}
 	return 0
 }
 
 func (m *PlayerCommon) GetFoodUsed() uint32 {
-	if m != nil && m.FoodUsed != nil {
-		return *m.FoodUsed
+	if m != nil {
+		return m.FoodUsed
 	}
 	return 0
 }
 
 func (m *PlayerCommon) GetFoodArmy() uint32 {
-	if m != nil && m.FoodArmy != nil {
-		return *m.FoodArmy
+	if m != nil {
+		return m.FoodArmy
 	}
 	return 0
 }
 
 func (m *PlayerCommon) GetFoodWorkers() uint32 {
-	if m != nil && m.FoodWorkers != nil {
-		return *m.FoodWorkers
+	if m != nil {
+		return m.FoodWorkers
 	}
 	return 0
 }
 
 func (m *PlayerCommon) GetIdleWorkerCount() uint32 {
-	if m != nil && m.IdleWorkerCount != nil {
-		return *m.IdleWorkerCount
+	if m != nil {
+		return m.IdleWorkerCount
 	}
 	return 0
 }
 
 func (m *PlayerCommon) GetArmyCount() uint32 {
-	if m != nil && m.ArmyCount != nil {
-		return *m.ArmyCount
+	if m != nil {
+		return m.ArmyCount
 	}
 	return 0
 }
 
 func (m *PlayerCommon) GetWarpGateCount() uint32 {
-	if m != nil && m.WarpGateCount != nil {
-		return *m.WarpGateCount
+	if m != nil {
+		return m.WarpGateCount
 	}
 	return 0
 }
 
 func (m *PlayerCommon) GetLarvaCount() uint32 {
-	if m != nil && m.LarvaCount != nil {
-		return *m.LarvaCount
+	if m != nil {
+		return m.LarvaCount
 	}
 	return 0
 }
 
 type Observation struct {
-	GameLoop         *uint32                  `protobuf:"varint,9,opt,name=game_loop,json=gameLoop" json:"game_loop,omitempty"`
+	GameLoop         uint32                   `protobuf:"varint,9,opt,name=game_loop,json=gameLoop" json:"game_loop,omitempty"`
 	PlayerCommon     *PlayerCommon            `protobuf:"bytes,1,opt,name=player_common,json=playerCommon" json:"player_common,omitempty"`
 	Alerts           []Alert                  `protobuf:"varint,10,rep,name=alerts,enum=Alert" json:"alerts,omitempty"`
 	Abilities        []*AvailableAbility      `protobuf:"bytes,3,rep,name=abilities" json:"abilities,omitempty"`
@@ -3839,8 +3839,8 @@ func (*Observation) ProtoMessage()               {}
 func (*Observation) Descriptor() ([]byte, []int) { return fileDescriptorSC2API, []int{51} }
 
 func (m *Observation) GetGameLoop() uint32 {
-	if m != nil && m.GameLoop != nil {
-		return *m.GameLoop
+	if m != nil {
+		return m.GameLoop
 	}
 	return 0
 }
@@ -3951,9 +3951,9 @@ func (m *Action) GetActionChat() *ActionChat {
 }
 
 type ActionChat struct {
-	Channel          *ActionChat_Channel `protobuf:"varint,1,opt,name=channel,enum=ActionChat_Channel" json:"channel,omitempty"`
-	Message          *string             `protobuf:"bytes,2,opt,name=message" json:"message,omitempty"`
-	XXX_unrecognized []byte              `json:"-"`
+	Channel          ActionChat_Channel `protobuf:"varint,1,opt,name=channel,enum=ActionChat_Channel" json:"channel,omitempty"`
+	Message          string             `protobuf:"bytes,2,opt,name=message" json:"message,omitempty"`
+	XXX_unrecognized []byte             `json:"-"`
 }
 
 func (m *ActionChat) Reset()                    { *m = ActionChat{} }
@@ -3962,24 +3962,24 @@ func (*ActionChat) ProtoMessage()               {}
 func (*ActionChat) Descriptor() ([]byte, []int) { return fileDescriptorSC2API, []int{53} }
 
 func (m *ActionChat) GetChannel() ActionChat_Channel {
-	if m != nil && m.Channel != nil {
-		return *m.Channel
+	if m != nil {
+		return m.Channel
 	}
 	return ActionChat_Broadcast
 }
 
 func (m *ActionChat) GetMessage() string {
-	if m != nil && m.Message != nil {
-		return *m.Message
+	if m != nil {
+		return m.Message
 	}
 	return ""
 }
 
 type ActionError struct {
-	UnitTag          *uint64       `protobuf:"varint,1,opt,name=unit_tag,json=unitTag" json:"unit_tag,omitempty"`
-	AbilityId        *uint64       `protobuf:"varint,2,opt,name=ability_id,json=abilityId" json:"ability_id,omitempty"`
-	Result           *ActionResult `protobuf:"varint,3,opt,name=result,enum=ActionResult" json:"result,omitempty"`
-	XXX_unrecognized []byte        `json:"-"`
+	UnitTag          uint64       `protobuf:"varint,1,opt,name=unit_tag,json=unitTag" json:"unit_tag,omitempty"`
+	AbilityId        uint64       `protobuf:"varint,2,opt,name=ability_id,json=abilityId" json:"ability_id,omitempty"`
+	Result           ActionResult `protobuf:"varint,3,opt,name=result,enum=ActionResult" json:"result,omitempty"`
+	XXX_unrecognized []byte       `json:"-"`
 }
 
 func (m *ActionError) Reset()                    { *m = ActionError{} }
@@ -3988,22 +3988,22 @@ func (*ActionError) ProtoMessage()               {}
 func (*ActionError) Descriptor() ([]byte, []int) { return fileDescriptorSC2API, []int{54} }
 
 func (m *ActionError) GetUnitTag() uint64 {
-	if m != nil && m.UnitTag != nil {
-		return *m.UnitTag
+	if m != nil {
+		return m.UnitTag
 	}
 	return 0
 }
 
 func (m *ActionError) GetAbilityId() uint64 {
-	if m != nil && m.AbilityId != nil {
-		return *m.AbilityId
+	if m != nil {
+		return m.AbilityId
 	}
 	return 0
 }
 
 func (m *ActionError) GetResult() ActionResult {
-	if m != nil && m.Result != nil {
-		return *m.Result
+	if m != nil {
+		return m.Result
 	}
 	return ActionResult_Success
 }
@@ -4193,8 +4193,8 @@ func _ObserverAction_OneofSizer(msg proto.Message) (n int) {
 }
 
 type ActionObserverPlayerPerspective struct {
-	PlayerId         *uint32 `protobuf:"varint,1,opt,name=player_id,json=playerId" json:"player_id,omitempty"`
-	XXX_unrecognized []byte  `json:"-"`
+	PlayerId         uint32 `protobuf:"varint,1,opt,name=player_id,json=playerId" json:"player_id,omitempty"`
+	XXX_unrecognized []byte `json:"-"`
 }
 
 func (m *ActionObserverPlayerPerspective) Reset()         { *m = ActionObserverPlayerPerspective{} }
@@ -4205,8 +4205,8 @@ func (*ActionObserverPlayerPerspective) Descriptor() ([]byte, []int) {
 }
 
 func (m *ActionObserverPlayerPerspective) GetPlayerId() uint32 {
-	if m != nil && m.PlayerId != nil {
-		return *m.PlayerId
+	if m != nil {
+		return m.PlayerId
 	}
 	return 0
 }
@@ -4215,8 +4215,8 @@ type ActionObserverCameraMove struct {
 	WorldPos *Point2D `protobuf:"bytes,1,opt,name=world_pos,json=worldPos" json:"world_pos,omitempty"`
 	// Distance between camera and terrain. Larger value zooms out camera.
 	// Defaults to standard camera distance if set to 0.
-	Distance         *float32 `protobuf:"fixed32,2,opt,name=distance" json:"distance,omitempty"`
-	XXX_unrecognized []byte   `json:"-"`
+	Distance         float32 `protobuf:"fixed32,2,opt,name=distance" json:"distance,omitempty"`
+	XXX_unrecognized []byte  `json:"-"`
 }
 
 func (m *ActionObserverCameraMove) Reset()                    { *m = ActionObserverCameraMove{} }
@@ -4232,15 +4232,15 @@ func (m *ActionObserverCameraMove) GetWorldPos() *Point2D {
 }
 
 func (m *ActionObserverCameraMove) GetDistance() float32 {
-	if m != nil && m.Distance != nil {
-		return *m.Distance
+	if m != nil {
+		return m.Distance
 	}
 	return 0
 }
 
 type ActionObserverCameraFollowPlayer struct {
-	PlayerId         *uint32 `protobuf:"varint,1,opt,name=player_id,json=playerId" json:"player_id,omitempty"`
-	XXX_unrecognized []byte  `json:"-"`
+	PlayerId         uint32 `protobuf:"varint,1,opt,name=player_id,json=playerId" json:"player_id,omitempty"`
+	XXX_unrecognized []byte `json:"-"`
 }
 
 func (m *ActionObserverCameraFollowPlayer) Reset()         { *m = ActionObserverCameraFollowPlayer{} }
@@ -4251,8 +4251,8 @@ func (*ActionObserverCameraFollowPlayer) Descriptor() ([]byte, []int) {
 }
 
 func (m *ActionObserverCameraFollowPlayer) GetPlayerId() uint32 {
-	if m != nil && m.PlayerId != nil {
-		return *m.PlayerId
+	if m != nil {
+		return m.PlayerId
 	}
 	return 0
 }
@@ -4277,9 +4277,9 @@ func (m *ActionObserverCameraFollowUnits) GetUnitTags() []uint64 {
 }
 
 type PlayerResult struct {
-	PlayerId         *uint32 `protobuf:"varint,1,opt,name=player_id,json=playerId" json:"player_id,omitempty"`
-	Result           *Result `protobuf:"varint,2,opt,name=result,enum=Result" json:"result,omitempty"`
-	XXX_unrecognized []byte  `json:"-"`
+	PlayerId         uint32 `protobuf:"varint,1,opt,name=player_id,json=playerId" json:"player_id,omitempty"`
+	Result           Result `protobuf:"varint,2,opt,name=result,enum=Result" json:"result,omitempty"`
+	XXX_unrecognized []byte `json:"-"`
 }
 
 func (m *PlayerResult) Reset()                    { *m = PlayerResult{} }
@@ -4288,15 +4288,15 @@ func (*PlayerResult) ProtoMessage()               {}
 func (*PlayerResult) Descriptor() ([]byte, []int) { return fileDescriptorSC2API, []int{60} }
 
 func (m *PlayerResult) GetPlayerId() uint32 {
-	if m != nil && m.PlayerId != nil {
-		return *m.PlayerId
+	if m != nil {
+		return m.PlayerId
 	}
 	return 0
 }
 
 func (m *PlayerResult) GetResult() Result {
-	if m != nil && m.Result != nil {
-		return *m.Result
+	if m != nil {
+		return m.Result
 	}
 	return Result_Victory
 }

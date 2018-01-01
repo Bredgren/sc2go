@@ -531,12 +531,12 @@ func _ActionSpatial_OneofSizer(msg proto.Message) (n int) {
 }
 
 type ActionSpatialUnitCommand struct {
-	AbilityId *int32 `protobuf:"varint,1,opt,name=ability_id,json=abilityId" json:"ability_id,omitempty"`
+	AbilityId int32 `protobuf:"varint,1,opt,name=ability_id,json=abilityId" json:"ability_id,omitempty"`
 	// Types that are valid to be assigned to Target:
 	//	*ActionSpatialUnitCommand_TargetScreenCoord
 	//	*ActionSpatialUnitCommand_TargetMinimapCoord
 	Target           isActionSpatialUnitCommand_Target `protobuf_oneof:"target"`
-	QueueCommand     *bool                             `protobuf:"varint,4,opt,name=queue_command,json=queueCommand" json:"queue_command,omitempty"`
+	QueueCommand     bool                              `protobuf:"varint,4,opt,name=queue_command,json=queueCommand" json:"queue_command,omitempty"`
 	XXX_unrecognized []byte                            `json:"-"`
 }
 
@@ -567,8 +567,8 @@ func (m *ActionSpatialUnitCommand) GetTarget() isActionSpatialUnitCommand_Target
 }
 
 func (m *ActionSpatialUnitCommand) GetAbilityId() int32 {
-	if m != nil && m.AbilityId != nil {
-		return *m.AbilityId
+	if m != nil {
+		return m.AbilityId
 	}
 	return 0
 }
@@ -588,8 +588,8 @@ func (m *ActionSpatialUnitCommand) GetTargetMinimapCoord() *PointI {
 }
 
 func (m *ActionSpatialUnitCommand) GetQueueCommand() bool {
-	if m != nil && m.QueueCommand != nil {
-		return *m.QueueCommand
+	if m != nil {
+		return m.QueueCommand
 	}
 	return false
 }
@@ -686,9 +686,9 @@ func (m *ActionSpatialCameraMove) GetCenterMinimap() *PointI {
 }
 
 type ActionSpatialUnitSelectionPoint struct {
-	SelectionScreenCoord *PointI                               `protobuf:"bytes,1,opt,name=selection_screen_coord,json=selectionScreenCoord" json:"selection_screen_coord,omitempty"`
-	Type                 *ActionSpatialUnitSelectionPoint_Type `protobuf:"varint,2,opt,name=type,enum=ActionSpatialUnitSelectionPoint_Type" json:"type,omitempty"`
-	XXX_unrecognized     []byte                                `json:"-"`
+	SelectionScreenCoord *PointI                              `protobuf:"bytes,1,opt,name=selection_screen_coord,json=selectionScreenCoord" json:"selection_screen_coord,omitempty"`
+	Type                 ActionSpatialUnitSelectionPoint_Type `protobuf:"varint,2,opt,name=type,enum=ActionSpatialUnitSelectionPoint_Type" json:"type,omitempty"`
+	XXX_unrecognized     []byte                               `json:"-"`
 }
 
 func (m *ActionSpatialUnitSelectionPoint) Reset()         { *m = ActionSpatialUnitSelectionPoint{} }
@@ -706,15 +706,15 @@ func (m *ActionSpatialUnitSelectionPoint) GetSelectionScreenCoord() *PointI {
 }
 
 func (m *ActionSpatialUnitSelectionPoint) GetType() ActionSpatialUnitSelectionPoint_Type {
-	if m != nil && m.Type != nil {
-		return *m.Type
+	if m != nil {
+		return m.Type
 	}
 	return ActionSpatialUnitSelectionPoint_Select
 }
 
 type ActionSpatialUnitSelectionRect struct {
 	SelectionScreenCoord []*RectangleI `protobuf:"bytes,1,rep,name=selection_screen_coord,json=selectionScreenCoord" json:"selection_screen_coord,omitempty"`
-	SelectionAdd         *bool         `protobuf:"varint,2,opt,name=selection_add,json=selectionAdd" json:"selection_add,omitempty"`
+	SelectionAdd         bool          `protobuf:"varint,2,opt,name=selection_add,json=selectionAdd" json:"selection_add,omitempty"`
 	XXX_unrecognized     []byte        `json:"-"`
 }
 
@@ -733,8 +733,8 @@ func (m *ActionSpatialUnitSelectionRect) GetSelectionScreenCoord() []*RectangleI
 }
 
 func (m *ActionSpatialUnitSelectionRect) GetSelectionAdd() bool {
-	if m != nil && m.SelectionAdd != nil {
-		return *m.SelectionAdd
+	if m != nil {
+		return m.SelectionAdd
 	}
 	return false
 }

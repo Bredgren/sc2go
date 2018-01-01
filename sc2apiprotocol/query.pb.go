@@ -38,7 +38,7 @@ type RequestQuery struct {
 	Pathing                    []*RequestQueryPathing            `protobuf:"bytes,1,rep,name=pathing" json:"pathing,omitempty"`
 	Abilities                  []*RequestQueryAvailableAbilities `protobuf:"bytes,2,rep,name=abilities" json:"abilities,omitempty"`
 	Placements                 []*RequestQueryBuildingPlacement  `protobuf:"bytes,3,rep,name=placements" json:"placements,omitempty"`
-	IgnoreResourceRequirements *bool                             `protobuf:"varint,4,opt,name=ignore_resource_requirements,json=ignoreResourceRequirements" json:"ignore_resource_requirements,omitempty"`
+	IgnoreResourceRequirements bool                              `protobuf:"varint,4,opt,name=ignore_resource_requirements,json=ignoreResourceRequirements" json:"ignore_resource_requirements,omitempty"`
 	XXX_unrecognized           []byte                            `json:"-"`
 }
 
@@ -69,8 +69,8 @@ func (m *RequestQuery) GetPlacements() []*RequestQueryBuildingPlacement {
 }
 
 func (m *RequestQuery) GetIgnoreResourceRequirements() bool {
-	if m != nil && m.IgnoreResourceRequirements != nil {
-		return *m.IgnoreResourceRequirements
+	if m != nil {
+		return m.IgnoreResourceRequirements
 	}
 	return false
 }
@@ -235,8 +235,8 @@ func _RequestQueryPathing_OneofSizer(msg proto.Message) (n int) {
 }
 
 type ResponseQueryPathing struct {
-	Distance         *float32 `protobuf:"fixed32,1,opt,name=distance" json:"distance,omitempty"`
-	XXX_unrecognized []byte   `json:"-"`
+	Distance         float32 `protobuf:"fixed32,1,opt,name=distance" json:"distance,omitempty"`
+	XXX_unrecognized []byte  `json:"-"`
 }
 
 func (m *ResponseQueryPathing) Reset()                    { *m = ResponseQueryPathing{} }
@@ -245,16 +245,16 @@ func (*ResponseQueryPathing) ProtoMessage()               {}
 func (*ResponseQueryPathing) Descriptor() ([]byte, []int) { return fileDescriptorQuery, []int{3} }
 
 func (m *ResponseQueryPathing) GetDistance() float32 {
-	if m != nil && m.Distance != nil {
-		return *m.Distance
+	if m != nil {
+		return m.Distance
 	}
 	return 0
 }
 
 // --------------------------------------------------------------------------------------------------
 type RequestQueryAvailableAbilities struct {
-	UnitTag          *uint64 `protobuf:"varint,1,opt,name=unit_tag,json=unitTag" json:"unit_tag,omitempty"`
-	XXX_unrecognized []byte  `json:"-"`
+	UnitTag          uint64 `protobuf:"varint,1,opt,name=unit_tag,json=unitTag" json:"unit_tag,omitempty"`
+	XXX_unrecognized []byte `json:"-"`
 }
 
 func (m *RequestQueryAvailableAbilities) Reset()         { *m = RequestQueryAvailableAbilities{} }
@@ -265,16 +265,16 @@ func (*RequestQueryAvailableAbilities) Descriptor() ([]byte, []int) {
 }
 
 func (m *RequestQueryAvailableAbilities) GetUnitTag() uint64 {
-	if m != nil && m.UnitTag != nil {
-		return *m.UnitTag
+	if m != nil {
+		return m.UnitTag
 	}
 	return 0
 }
 
 type ResponseQueryAvailableAbilities struct {
 	Abilities        []*AvailableAbility `protobuf:"bytes,1,rep,name=abilities" json:"abilities,omitempty"`
-	UnitTag          *uint64             `protobuf:"varint,2,opt,name=unit_tag,json=unitTag" json:"unit_tag,omitempty"`
-	UnitTypeId       *uint32             `protobuf:"varint,3,opt,name=unit_type_id,json=unitTypeId" json:"unit_type_id,omitempty"`
+	UnitTag          uint64              `protobuf:"varint,2,opt,name=unit_tag,json=unitTag" json:"unit_tag,omitempty"`
+	UnitTypeId       uint32              `protobuf:"varint,3,opt,name=unit_type_id,json=unitTypeId" json:"unit_type_id,omitempty"`
 	XXX_unrecognized []byte              `json:"-"`
 }
 
@@ -293,24 +293,24 @@ func (m *ResponseQueryAvailableAbilities) GetAbilities() []*AvailableAbility {
 }
 
 func (m *ResponseQueryAvailableAbilities) GetUnitTag() uint64 {
-	if m != nil && m.UnitTag != nil {
-		return *m.UnitTag
+	if m != nil {
+		return m.UnitTag
 	}
 	return 0
 }
 
 func (m *ResponseQueryAvailableAbilities) GetUnitTypeId() uint32 {
-	if m != nil && m.UnitTypeId != nil {
-		return *m.UnitTypeId
+	if m != nil {
+		return m.UnitTypeId
 	}
 	return 0
 }
 
 // --------------------------------------------------------------------------------------------------
 type RequestQueryBuildingPlacement struct {
-	AbilityId        *int32   `protobuf:"varint,1,opt,name=ability_id,json=abilityId" json:"ability_id,omitempty"`
+	AbilityId        int32    `protobuf:"varint,1,opt,name=ability_id,json=abilityId" json:"ability_id,omitempty"`
 	TargetPos        *Point2D `protobuf:"bytes,2,opt,name=target_pos,json=targetPos" json:"target_pos,omitempty"`
-	PlacingUnitTag   *uint64  `protobuf:"varint,3,opt,name=placing_unit_tag,json=placingUnitTag" json:"placing_unit_tag,omitempty"`
+	PlacingUnitTag   uint64   `protobuf:"varint,3,opt,name=placing_unit_tag,json=placingUnitTag" json:"placing_unit_tag,omitempty"`
 	XXX_unrecognized []byte   `json:"-"`
 }
 
@@ -322,8 +322,8 @@ func (*RequestQueryBuildingPlacement) Descriptor() ([]byte, []int) {
 }
 
 func (m *RequestQueryBuildingPlacement) GetAbilityId() int32 {
-	if m != nil && m.AbilityId != nil {
-		return *m.AbilityId
+	if m != nil {
+		return m.AbilityId
 	}
 	return 0
 }
@@ -336,15 +336,15 @@ func (m *RequestQueryBuildingPlacement) GetTargetPos() *Point2D {
 }
 
 func (m *RequestQueryBuildingPlacement) GetPlacingUnitTag() uint64 {
-	if m != nil && m.PlacingUnitTag != nil {
-		return *m.PlacingUnitTag
+	if m != nil {
+		return m.PlacingUnitTag
 	}
 	return 0
 }
 
 type ResponseQueryBuildingPlacement struct {
-	Result           *ActionResult `protobuf:"varint,1,opt,name=result,enum=ActionResult" json:"result,omitempty"`
-	XXX_unrecognized []byte        `json:"-"`
+	Result           ActionResult `protobuf:"varint,1,opt,name=result,enum=ActionResult" json:"result,omitempty"`
+	XXX_unrecognized []byte       `json:"-"`
 }
 
 func (m *ResponseQueryBuildingPlacement) Reset()         { *m = ResponseQueryBuildingPlacement{} }
@@ -355,8 +355,8 @@ func (*ResponseQueryBuildingPlacement) Descriptor() ([]byte, []int) {
 }
 
 func (m *ResponseQueryBuildingPlacement) GetResult() ActionResult {
-	if m != nil && m.Result != nil {
-		return *m.Result
+	if m != nil {
+		return m.Result
 	}
 	return ActionResult_Success
 }

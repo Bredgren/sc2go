@@ -179,22 +179,22 @@ func (Weapon_TargetType) EnumDescriptor() ([]byte, []int) { return fileDescripto
 // Stuff omitted: transient.
 // Stuff that may be important: cost, range, Alignment, targetfilters.
 type AbilityData struct {
-	AbilityId          *uint32             `protobuf:"varint,1,opt,name=ability_id,json=abilityId" json:"ability_id,omitempty"`
-	LinkName           *string             `protobuf:"bytes,2,opt,name=link_name,json=linkName" json:"link_name,omitempty"`
-	LinkIndex          *uint32             `protobuf:"varint,3,opt,name=link_index,json=linkIndex" json:"link_index,omitempty"`
-	ButtonName         *string             `protobuf:"bytes,4,opt,name=button_name,json=buttonName" json:"button_name,omitempty"`
-	FriendlyName       *string             `protobuf:"bytes,5,opt,name=friendly_name,json=friendlyName" json:"friendly_name,omitempty"`
-	Hotkey             *string             `protobuf:"bytes,6,opt,name=hotkey" json:"hotkey,omitempty"`
-	RemapsToAbilityId  *uint32             `protobuf:"varint,7,opt,name=remaps_to_ability_id,json=remapsToAbilityId" json:"remaps_to_ability_id,omitempty"`
-	Available          *bool               `protobuf:"varint,8,opt,name=available" json:"available,omitempty"`
-	Target             *AbilityData_Target `protobuf:"varint,9,opt,name=target,enum=AbilityData_Target" json:"target,omitempty"`
-	AllowMinimap       *bool               `protobuf:"varint,10,opt,name=allow_minimap,json=allowMinimap" json:"allow_minimap,omitempty"`
-	AllowAutocast      *bool               `protobuf:"varint,11,opt,name=allow_autocast,json=allowAutocast" json:"allow_autocast,omitempty"`
-	IsBuilding         *bool               `protobuf:"varint,12,opt,name=is_building,json=isBuilding" json:"is_building,omitempty"`
-	FootprintRadius    *float32            `protobuf:"fixed32,13,opt,name=footprint_radius,json=footprintRadius" json:"footprint_radius,omitempty"`
-	IsInstantPlacement *bool               `protobuf:"varint,14,opt,name=is_instant_placement,json=isInstantPlacement" json:"is_instant_placement,omitempty"`
-	CastRange          *float32            `protobuf:"fixed32,15,opt,name=cast_range,json=castRange" json:"cast_range,omitempty"`
-	XXX_unrecognized   []byte              `json:"-"`
+	AbilityId          uint32             `protobuf:"varint,1,opt,name=ability_id,json=abilityId" json:"ability_id,omitempty"`
+	LinkName           string             `protobuf:"bytes,2,opt,name=link_name,json=linkName" json:"link_name,omitempty"`
+	LinkIndex          uint32             `protobuf:"varint,3,opt,name=link_index,json=linkIndex" json:"link_index,omitempty"`
+	ButtonName         string             `protobuf:"bytes,4,opt,name=button_name,json=buttonName" json:"button_name,omitempty"`
+	FriendlyName       string             `protobuf:"bytes,5,opt,name=friendly_name,json=friendlyName" json:"friendly_name,omitempty"`
+	Hotkey             string             `protobuf:"bytes,6,opt,name=hotkey" json:"hotkey,omitempty"`
+	RemapsToAbilityId  uint32             `protobuf:"varint,7,opt,name=remaps_to_ability_id,json=remapsToAbilityId" json:"remaps_to_ability_id,omitempty"`
+	Available          bool               `protobuf:"varint,8,opt,name=available" json:"available,omitempty"`
+	Target             AbilityData_Target `protobuf:"varint,9,opt,name=target,enum=AbilityData_Target" json:"target,omitempty"`
+	AllowMinimap       bool               `protobuf:"varint,10,opt,name=allow_minimap,json=allowMinimap" json:"allow_minimap,omitempty"`
+	AllowAutocast      bool               `protobuf:"varint,11,opt,name=allow_autocast,json=allowAutocast" json:"allow_autocast,omitempty"`
+	IsBuilding         bool               `protobuf:"varint,12,opt,name=is_building,json=isBuilding" json:"is_building,omitempty"`
+	FootprintRadius    float32            `protobuf:"fixed32,13,opt,name=footprint_radius,json=footprintRadius" json:"footprint_radius,omitempty"`
+	IsInstantPlacement bool               `protobuf:"varint,14,opt,name=is_instant_placement,json=isInstantPlacement" json:"is_instant_placement,omitempty"`
+	CastRange          float32            `protobuf:"fixed32,15,opt,name=cast_range,json=castRange" json:"cast_range,omitempty"`
+	XXX_unrecognized   []byte             `json:"-"`
 }
 
 func (m *AbilityData) Reset()                    { *m = AbilityData{} }
@@ -203,114 +203,114 @@ func (*AbilityData) ProtoMessage()               {}
 func (*AbilityData) Descriptor() ([]byte, []int) { return fileDescriptorData, []int{0} }
 
 func (m *AbilityData) GetAbilityId() uint32 {
-	if m != nil && m.AbilityId != nil {
-		return *m.AbilityId
+	if m != nil {
+		return m.AbilityId
 	}
 	return 0
 }
 
 func (m *AbilityData) GetLinkName() string {
-	if m != nil && m.LinkName != nil {
-		return *m.LinkName
+	if m != nil {
+		return m.LinkName
 	}
 	return ""
 }
 
 func (m *AbilityData) GetLinkIndex() uint32 {
-	if m != nil && m.LinkIndex != nil {
-		return *m.LinkIndex
+	if m != nil {
+		return m.LinkIndex
 	}
 	return 0
 }
 
 func (m *AbilityData) GetButtonName() string {
-	if m != nil && m.ButtonName != nil {
-		return *m.ButtonName
+	if m != nil {
+		return m.ButtonName
 	}
 	return ""
 }
 
 func (m *AbilityData) GetFriendlyName() string {
-	if m != nil && m.FriendlyName != nil {
-		return *m.FriendlyName
+	if m != nil {
+		return m.FriendlyName
 	}
 	return ""
 }
 
 func (m *AbilityData) GetHotkey() string {
-	if m != nil && m.Hotkey != nil {
-		return *m.Hotkey
+	if m != nil {
+		return m.Hotkey
 	}
 	return ""
 }
 
 func (m *AbilityData) GetRemapsToAbilityId() uint32 {
-	if m != nil && m.RemapsToAbilityId != nil {
-		return *m.RemapsToAbilityId
+	if m != nil {
+		return m.RemapsToAbilityId
 	}
 	return 0
 }
 
 func (m *AbilityData) GetAvailable() bool {
-	if m != nil && m.Available != nil {
-		return *m.Available
+	if m != nil {
+		return m.Available
 	}
 	return false
 }
 
 func (m *AbilityData) GetTarget() AbilityData_Target {
-	if m != nil && m.Target != nil {
-		return *m.Target
+	if m != nil {
+		return m.Target
 	}
 	return AbilityData_None
 }
 
 func (m *AbilityData) GetAllowMinimap() bool {
-	if m != nil && m.AllowMinimap != nil {
-		return *m.AllowMinimap
+	if m != nil {
+		return m.AllowMinimap
 	}
 	return false
 }
 
 func (m *AbilityData) GetAllowAutocast() bool {
-	if m != nil && m.AllowAutocast != nil {
-		return *m.AllowAutocast
+	if m != nil {
+		return m.AllowAutocast
 	}
 	return false
 }
 
 func (m *AbilityData) GetIsBuilding() bool {
-	if m != nil && m.IsBuilding != nil {
-		return *m.IsBuilding
+	if m != nil {
+		return m.IsBuilding
 	}
 	return false
 }
 
 func (m *AbilityData) GetFootprintRadius() float32 {
-	if m != nil && m.FootprintRadius != nil {
-		return *m.FootprintRadius
+	if m != nil {
+		return m.FootprintRadius
 	}
 	return 0
 }
 
 func (m *AbilityData) GetIsInstantPlacement() bool {
-	if m != nil && m.IsInstantPlacement != nil {
-		return *m.IsInstantPlacement
+	if m != nil {
+		return m.IsInstantPlacement
 	}
 	return false
 }
 
 func (m *AbilityData) GetCastRange() float32 {
-	if m != nil && m.CastRange != nil {
-		return *m.CastRange
+	if m != nil {
+		return m.CastRange
 	}
 	return 0
 }
 
 type DamageBonus struct {
-	Attribute        *Attribute `protobuf:"varint,1,opt,name=attribute,enum=Attribute" json:"attribute,omitempty"`
-	Bonus            *float32   `protobuf:"fixed32,2,opt,name=bonus" json:"bonus,omitempty"`
-	XXX_unrecognized []byte     `json:"-"`
+	Attribute        Attribute `protobuf:"varint,1,opt,name=attribute,enum=Attribute" json:"attribute,omitempty"`
+	Bonus            float32   `protobuf:"fixed32,2,opt,name=bonus" json:"bonus,omitempty"`
+	XXX_unrecognized []byte    `json:"-"`
 }
 
 func (m *DamageBonus) Reset()                    { *m = DamageBonus{} }
@@ -319,27 +319,27 @@ func (*DamageBonus) ProtoMessage()               {}
 func (*DamageBonus) Descriptor() ([]byte, []int) { return fileDescriptorData, []int{1} }
 
 func (m *DamageBonus) GetAttribute() Attribute {
-	if m != nil && m.Attribute != nil {
-		return *m.Attribute
+	if m != nil {
+		return m.Attribute
 	}
 	return Attribute_Light
 }
 
 func (m *DamageBonus) GetBonus() float32 {
-	if m != nil && m.Bonus != nil {
-		return *m.Bonus
+	if m != nil {
+		return m.Bonus
 	}
 	return 0
 }
 
 type Weapon struct {
-	Type             *Weapon_TargetType `protobuf:"varint,1,opt,name=type,enum=Weapon_TargetType" json:"type,omitempty"`
-	Damage           *float32           `protobuf:"fixed32,2,opt,name=damage" json:"damage,omitempty"`
-	DamageBonus      []*DamageBonus     `protobuf:"bytes,3,rep,name=damage_bonus,json=damageBonus" json:"damage_bonus,omitempty"`
-	Attacks          *uint32            `protobuf:"varint,4,opt,name=attacks" json:"attacks,omitempty"`
-	Range            *float32           `protobuf:"fixed32,5,opt,name=range" json:"range,omitempty"`
-	Speed            *float32           `protobuf:"fixed32,6,opt,name=speed" json:"speed,omitempty"`
-	XXX_unrecognized []byte             `json:"-"`
+	Type             Weapon_TargetType `protobuf:"varint,1,opt,name=type,enum=Weapon_TargetType" json:"type,omitempty"`
+	Damage           float32           `protobuf:"fixed32,2,opt,name=damage" json:"damage,omitempty"`
+	DamageBonus      []*DamageBonus    `protobuf:"bytes,3,rep,name=damage_bonus,json=damageBonus" json:"damage_bonus,omitempty"`
+	Attacks          uint32            `protobuf:"varint,4,opt,name=attacks" json:"attacks,omitempty"`
+	Range            float32           `protobuf:"fixed32,5,opt,name=range" json:"range,omitempty"`
+	Speed            float32           `protobuf:"fixed32,6,opt,name=speed" json:"speed,omitempty"`
+	XXX_unrecognized []byte            `json:"-"`
 }
 
 func (m *Weapon) Reset()                    { *m = Weapon{} }
@@ -348,15 +348,15 @@ func (*Weapon) ProtoMessage()               {}
 func (*Weapon) Descriptor() ([]byte, []int) { return fileDescriptorData, []int{2} }
 
 func (m *Weapon) GetType() Weapon_TargetType {
-	if m != nil && m.Type != nil {
-		return *m.Type
+	if m != nil {
+		return m.Type
 	}
 	return Weapon_Ground
 }
 
 func (m *Weapon) GetDamage() float32 {
-	if m != nil && m.Damage != nil {
-		return *m.Damage
+	if m != nil {
+		return m.Damage
 	}
 	return 0
 }
@@ -369,49 +369,49 @@ func (m *Weapon) GetDamageBonus() []*DamageBonus {
 }
 
 func (m *Weapon) GetAttacks() uint32 {
-	if m != nil && m.Attacks != nil {
-		return *m.Attacks
+	if m != nil {
+		return m.Attacks
 	}
 	return 0
 }
 
 func (m *Weapon) GetRange() float32 {
-	if m != nil && m.Range != nil {
-		return *m.Range
+	if m != nil {
+		return m.Range
 	}
 	return 0
 }
 
 func (m *Weapon) GetSpeed() float32 {
-	if m != nil && m.Speed != nil {
-		return *m.Speed
+	if m != nil {
+		return m.Speed
 	}
 	return 0
 }
 
 type UnitTypeData struct {
-	UnitId          *uint32  `protobuf:"varint,1,opt,name=unit_id,json=unitId" json:"unit_id,omitempty"`
-	Name            *string  `protobuf:"bytes,2,opt,name=name" json:"name,omitempty"`
-	Available       *bool    `protobuf:"varint,3,opt,name=available" json:"available,omitempty"`
-	CargoSize       *uint32  `protobuf:"varint,4,opt,name=cargo_size,json=cargoSize" json:"cargo_size,omitempty"`
-	MineralCost     *uint32  `protobuf:"varint,12,opt,name=mineral_cost,json=mineralCost" json:"mineral_cost,omitempty"`
-	VespeneCost     *uint32  `protobuf:"varint,13,opt,name=vespene_cost,json=vespeneCost" json:"vespene_cost,omitempty"`
-	FoodRequired    *float32 `protobuf:"fixed32,14,opt,name=food_required,json=foodRequired" json:"food_required,omitempty"`
-	FoodProvided    *float32 `protobuf:"fixed32,18,opt,name=food_provided,json=foodProvided" json:"food_provided,omitempty"`
-	AbilityId       *uint32  `protobuf:"varint,15,opt,name=ability_id,json=abilityId" json:"ability_id,omitempty"`
-	Race            *Race    `protobuf:"varint,16,opt,name=race,enum=Race" json:"race,omitempty"`
-	BuildTime       *float32 `protobuf:"fixed32,17,opt,name=build_time,json=buildTime" json:"build_time,omitempty"`
-	HasVespene      *bool    `protobuf:"varint,19,opt,name=has_vespene,json=hasVespene" json:"has_vespene,omitempty"`
-	HasMinerals     *bool    `protobuf:"varint,20,opt,name=has_minerals,json=hasMinerals" json:"has_minerals,omitempty"`
-	SightRange      *float32 `protobuf:"fixed32,25,opt,name=sight_range,json=sightRange" json:"sight_range,omitempty"`
+	UnitId          uint32   `protobuf:"varint,1,opt,name=unit_id,json=unitId" json:"unit_id,omitempty"`
+	Name            string   `protobuf:"bytes,2,opt,name=name" json:"name,omitempty"`
+	Available       bool     `protobuf:"varint,3,opt,name=available" json:"available,omitempty"`
+	CargoSize       uint32   `protobuf:"varint,4,opt,name=cargo_size,json=cargoSize" json:"cargo_size,omitempty"`
+	MineralCost     uint32   `protobuf:"varint,12,opt,name=mineral_cost,json=mineralCost" json:"mineral_cost,omitempty"`
+	VespeneCost     uint32   `protobuf:"varint,13,opt,name=vespene_cost,json=vespeneCost" json:"vespene_cost,omitempty"`
+	FoodRequired    float32  `protobuf:"fixed32,14,opt,name=food_required,json=foodRequired" json:"food_required,omitempty"`
+	FoodProvided    float32  `protobuf:"fixed32,18,opt,name=food_provided,json=foodProvided" json:"food_provided,omitempty"`
+	AbilityId       uint32   `protobuf:"varint,15,opt,name=ability_id,json=abilityId" json:"ability_id,omitempty"`
+	Race            Race     `protobuf:"varint,16,opt,name=race,enum=Race" json:"race,omitempty"`
+	BuildTime       float32  `protobuf:"fixed32,17,opt,name=build_time,json=buildTime" json:"build_time,omitempty"`
+	HasVespene      bool     `protobuf:"varint,19,opt,name=has_vespene,json=hasVespene" json:"has_vespene,omitempty"`
+	HasMinerals     bool     `protobuf:"varint,20,opt,name=has_minerals,json=hasMinerals" json:"has_minerals,omitempty"`
+	SightRange      float32  `protobuf:"fixed32,25,opt,name=sight_range,json=sightRange" json:"sight_range,omitempty"`
 	TechAlias       []uint32 `protobuf:"varint,21,rep,name=tech_alias,json=techAlias" json:"tech_alias,omitempty"`
-	UnitAlias       *uint32  `protobuf:"varint,22,opt,name=unit_alias,json=unitAlias" json:"unit_alias,omitempty"`
-	TechRequirement *uint32  `protobuf:"varint,23,opt,name=tech_requirement,json=techRequirement" json:"tech_requirement,omitempty"`
-	RequireAttached *bool    `protobuf:"varint,24,opt,name=require_attached,json=requireAttached" json:"require_attached,omitempty"`
+	UnitAlias       uint32   `protobuf:"varint,22,opt,name=unit_alias,json=unitAlias" json:"unit_alias,omitempty"`
+	TechRequirement uint32   `protobuf:"varint,23,opt,name=tech_requirement,json=techRequirement" json:"tech_requirement,omitempty"`
+	RequireAttached bool     `protobuf:"varint,24,opt,name=require_attached,json=requireAttached" json:"require_attached,omitempty"`
 	// Values include changes from upgrades
 	Attributes       []Attribute `protobuf:"varint,8,rep,name=attributes,enum=Attribute" json:"attributes,omitempty"`
-	MovementSpeed    *float32    `protobuf:"fixed32,9,opt,name=movement_speed,json=movementSpeed" json:"movement_speed,omitempty"`
-	Armor            *float32    `protobuf:"fixed32,10,opt,name=armor" json:"armor,omitempty"`
+	MovementSpeed    float32     `protobuf:"fixed32,9,opt,name=movement_speed,json=movementSpeed" json:"movement_speed,omitempty"`
+	Armor            float32     `protobuf:"fixed32,10,opt,name=armor" json:"armor,omitempty"`
 	Weapons          []*Weapon   `protobuf:"bytes,11,rep,name=weapons" json:"weapons,omitempty"`
 	XXX_unrecognized []byte      `json:"-"`
 }
@@ -422,99 +422,99 @@ func (*UnitTypeData) ProtoMessage()               {}
 func (*UnitTypeData) Descriptor() ([]byte, []int) { return fileDescriptorData, []int{3} }
 
 func (m *UnitTypeData) GetUnitId() uint32 {
-	if m != nil && m.UnitId != nil {
-		return *m.UnitId
+	if m != nil {
+		return m.UnitId
 	}
 	return 0
 }
 
 func (m *UnitTypeData) GetName() string {
-	if m != nil && m.Name != nil {
-		return *m.Name
+	if m != nil {
+		return m.Name
 	}
 	return ""
 }
 
 func (m *UnitTypeData) GetAvailable() bool {
-	if m != nil && m.Available != nil {
-		return *m.Available
+	if m != nil {
+		return m.Available
 	}
 	return false
 }
 
 func (m *UnitTypeData) GetCargoSize() uint32 {
-	if m != nil && m.CargoSize != nil {
-		return *m.CargoSize
+	if m != nil {
+		return m.CargoSize
 	}
 	return 0
 }
 
 func (m *UnitTypeData) GetMineralCost() uint32 {
-	if m != nil && m.MineralCost != nil {
-		return *m.MineralCost
+	if m != nil {
+		return m.MineralCost
 	}
 	return 0
 }
 
 func (m *UnitTypeData) GetVespeneCost() uint32 {
-	if m != nil && m.VespeneCost != nil {
-		return *m.VespeneCost
+	if m != nil {
+		return m.VespeneCost
 	}
 	return 0
 }
 
 func (m *UnitTypeData) GetFoodRequired() float32 {
-	if m != nil && m.FoodRequired != nil {
-		return *m.FoodRequired
+	if m != nil {
+		return m.FoodRequired
 	}
 	return 0
 }
 
 func (m *UnitTypeData) GetFoodProvided() float32 {
-	if m != nil && m.FoodProvided != nil {
-		return *m.FoodProvided
+	if m != nil {
+		return m.FoodProvided
 	}
 	return 0
 }
 
 func (m *UnitTypeData) GetAbilityId() uint32 {
-	if m != nil && m.AbilityId != nil {
-		return *m.AbilityId
+	if m != nil {
+		return m.AbilityId
 	}
 	return 0
 }
 
 func (m *UnitTypeData) GetRace() Race {
-	if m != nil && m.Race != nil {
-		return *m.Race
+	if m != nil {
+		return m.Race
 	}
 	return Race_NoRace
 }
 
 func (m *UnitTypeData) GetBuildTime() float32 {
-	if m != nil && m.BuildTime != nil {
-		return *m.BuildTime
+	if m != nil {
+		return m.BuildTime
 	}
 	return 0
 }
 
 func (m *UnitTypeData) GetHasVespene() bool {
-	if m != nil && m.HasVespene != nil {
-		return *m.HasVespene
+	if m != nil {
+		return m.HasVespene
 	}
 	return false
 }
 
 func (m *UnitTypeData) GetHasMinerals() bool {
-	if m != nil && m.HasMinerals != nil {
-		return *m.HasMinerals
+	if m != nil {
+		return m.HasMinerals
 	}
 	return false
 }
 
 func (m *UnitTypeData) GetSightRange() float32 {
-	if m != nil && m.SightRange != nil {
-		return *m.SightRange
+	if m != nil {
+		return m.SightRange
 	}
 	return 0
 }
@@ -527,22 +527,22 @@ func (m *UnitTypeData) GetTechAlias() []uint32 {
 }
 
 func (m *UnitTypeData) GetUnitAlias() uint32 {
-	if m != nil && m.UnitAlias != nil {
-		return *m.UnitAlias
+	if m != nil {
+		return m.UnitAlias
 	}
 	return 0
 }
 
 func (m *UnitTypeData) GetTechRequirement() uint32 {
-	if m != nil && m.TechRequirement != nil {
-		return *m.TechRequirement
+	if m != nil {
+		return m.TechRequirement
 	}
 	return 0
 }
 
 func (m *UnitTypeData) GetRequireAttached() bool {
-	if m != nil && m.RequireAttached != nil {
-		return *m.RequireAttached
+	if m != nil {
+		return m.RequireAttached
 	}
 	return false
 }
@@ -555,15 +555,15 @@ func (m *UnitTypeData) GetAttributes() []Attribute {
 }
 
 func (m *UnitTypeData) GetMovementSpeed() float32 {
-	if m != nil && m.MovementSpeed != nil {
-		return *m.MovementSpeed
+	if m != nil {
+		return m.MovementSpeed
 	}
 	return 0
 }
 
 func (m *UnitTypeData) GetArmor() float32 {
-	if m != nil && m.Armor != nil {
-		return *m.Armor
+	if m != nil {
+		return m.Armor
 	}
 	return 0
 }
@@ -576,13 +576,13 @@ func (m *UnitTypeData) GetWeapons() []*Weapon {
 }
 
 type UpgradeData struct {
-	UpgradeId        *uint32  `protobuf:"varint,1,opt,name=upgrade_id,json=upgradeId" json:"upgrade_id,omitempty"`
-	Name             *string  `protobuf:"bytes,2,opt,name=name" json:"name,omitempty"`
-	MineralCost      *uint32  `protobuf:"varint,3,opt,name=mineral_cost,json=mineralCost" json:"mineral_cost,omitempty"`
-	VespeneCost      *uint32  `protobuf:"varint,4,opt,name=vespene_cost,json=vespeneCost" json:"vespene_cost,omitempty"`
-	ResearchTime     *float32 `protobuf:"fixed32,5,opt,name=research_time,json=researchTime" json:"research_time,omitempty"`
-	AbilityId        *uint32  `protobuf:"varint,6,opt,name=ability_id,json=abilityId" json:"ability_id,omitempty"`
-	XXX_unrecognized []byte   `json:"-"`
+	UpgradeId        uint32  `protobuf:"varint,1,opt,name=upgrade_id,json=upgradeId" json:"upgrade_id,omitempty"`
+	Name             string  `protobuf:"bytes,2,opt,name=name" json:"name,omitempty"`
+	MineralCost      uint32  `protobuf:"varint,3,opt,name=mineral_cost,json=mineralCost" json:"mineral_cost,omitempty"`
+	VespeneCost      uint32  `protobuf:"varint,4,opt,name=vespene_cost,json=vespeneCost" json:"vespene_cost,omitempty"`
+	ResearchTime     float32 `protobuf:"fixed32,5,opt,name=research_time,json=researchTime" json:"research_time,omitempty"`
+	AbilityId        uint32  `protobuf:"varint,6,opt,name=ability_id,json=abilityId" json:"ability_id,omitempty"`
+	XXX_unrecognized []byte  `json:"-"`
 }
 
 func (m *UpgradeData) Reset()                    { *m = UpgradeData{} }
@@ -591,51 +591,51 @@ func (*UpgradeData) ProtoMessage()               {}
 func (*UpgradeData) Descriptor() ([]byte, []int) { return fileDescriptorData, []int{4} }
 
 func (m *UpgradeData) GetUpgradeId() uint32 {
-	if m != nil && m.UpgradeId != nil {
-		return *m.UpgradeId
+	if m != nil {
+		return m.UpgradeId
 	}
 	return 0
 }
 
 func (m *UpgradeData) GetName() string {
-	if m != nil && m.Name != nil {
-		return *m.Name
+	if m != nil {
+		return m.Name
 	}
 	return ""
 }
 
 func (m *UpgradeData) GetMineralCost() uint32 {
-	if m != nil && m.MineralCost != nil {
-		return *m.MineralCost
+	if m != nil {
+		return m.MineralCost
 	}
 	return 0
 }
 
 func (m *UpgradeData) GetVespeneCost() uint32 {
-	if m != nil && m.VespeneCost != nil {
-		return *m.VespeneCost
+	if m != nil {
+		return m.VespeneCost
 	}
 	return 0
 }
 
 func (m *UpgradeData) GetResearchTime() float32 {
-	if m != nil && m.ResearchTime != nil {
-		return *m.ResearchTime
+	if m != nil {
+		return m.ResearchTime
 	}
 	return 0
 }
 
 func (m *UpgradeData) GetAbilityId() uint32 {
-	if m != nil && m.AbilityId != nil {
-		return *m.AbilityId
+	if m != nil {
+		return m.AbilityId
 	}
 	return 0
 }
 
 type BuffData struct {
-	BuffId           *uint32 `protobuf:"varint,1,opt,name=buff_id,json=buffId" json:"buff_id,omitempty"`
-	Name             *string `protobuf:"bytes,2,opt,name=name" json:"name,omitempty"`
-	XXX_unrecognized []byte  `json:"-"`
+	BuffId           uint32 `protobuf:"varint,1,opt,name=buff_id,json=buffId" json:"buff_id,omitempty"`
+	Name             string `protobuf:"bytes,2,opt,name=name" json:"name,omitempty"`
+	XXX_unrecognized []byte `json:"-"`
 }
 
 func (m *BuffData) Reset()                    { *m = BuffData{} }
@@ -644,25 +644,25 @@ func (*BuffData) ProtoMessage()               {}
 func (*BuffData) Descriptor() ([]byte, []int) { return fileDescriptorData, []int{5} }
 
 func (m *BuffData) GetBuffId() uint32 {
-	if m != nil && m.BuffId != nil {
-		return *m.BuffId
+	if m != nil {
+		return m.BuffId
 	}
 	return 0
 }
 
 func (m *BuffData) GetName() string {
-	if m != nil && m.Name != nil {
-		return *m.Name
+	if m != nil {
+		return m.Name
 	}
 	return ""
 }
 
 type EffectData struct {
-	EffectId         *uint32  `protobuf:"varint,1,opt,name=effect_id,json=effectId" json:"effect_id,omitempty"`
-	Name             *string  `protobuf:"bytes,2,opt,name=name" json:"name,omitempty"`
-	FriendlyName     *string  `protobuf:"bytes,3,opt,name=friendly_name,json=friendlyName" json:"friendly_name,omitempty"`
-	Radius           *float32 `protobuf:"fixed32,4,opt,name=radius" json:"radius,omitempty"`
-	XXX_unrecognized []byte   `json:"-"`
+	EffectId         uint32  `protobuf:"varint,1,opt,name=effect_id,json=effectId" json:"effect_id,omitempty"`
+	Name             string  `protobuf:"bytes,2,opt,name=name" json:"name,omitempty"`
+	FriendlyName     string  `protobuf:"bytes,3,opt,name=friendly_name,json=friendlyName" json:"friendly_name,omitempty"`
+	Radius           float32 `protobuf:"fixed32,4,opt,name=radius" json:"radius,omitempty"`
+	XXX_unrecognized []byte  `json:"-"`
 }
 
 func (m *EffectData) Reset()                    { *m = EffectData{} }
@@ -671,29 +671,29 @@ func (*EffectData) ProtoMessage()               {}
 func (*EffectData) Descriptor() ([]byte, []int) { return fileDescriptorData, []int{6} }
 
 func (m *EffectData) GetEffectId() uint32 {
-	if m != nil && m.EffectId != nil {
-		return *m.EffectId
+	if m != nil {
+		return m.EffectId
 	}
 	return 0
 }
 
 func (m *EffectData) GetName() string {
-	if m != nil && m.Name != nil {
-		return *m.Name
+	if m != nil {
+		return m.Name
 	}
 	return ""
 }
 
 func (m *EffectData) GetFriendlyName() string {
-	if m != nil && m.FriendlyName != nil {
-		return *m.FriendlyName
+	if m != nil {
+		return m.FriendlyName
 	}
 	return ""
 }
 
 func (m *EffectData) GetRadius() float32 {
-	if m != nil && m.Radius != nil {
-		return *m.Radius
+	if m != nil {
+		return m.Radius
 	}
 	return 0
 }

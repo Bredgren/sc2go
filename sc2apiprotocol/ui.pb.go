@@ -363,10 +363,10 @@ func _ObservationUI_OneofSizer(msg proto.Message) (n int) {
 }
 
 type ControlGroup struct {
-	ControlGroupIndex *uint32 `protobuf:"varint,1,opt,name=control_group_index,json=controlGroupIndex" json:"control_group_index,omitempty"`
-	LeaderUnitType    *uint32 `protobuf:"varint,2,opt,name=leader_unit_type,json=leaderUnitType" json:"leader_unit_type,omitempty"`
-	Count             *uint32 `protobuf:"varint,3,opt,name=count" json:"count,omitempty"`
-	XXX_unrecognized  []byte  `json:"-"`
+	ControlGroupIndex uint32 `protobuf:"varint,1,opt,name=control_group_index,json=controlGroupIndex" json:"control_group_index,omitempty"`
+	LeaderUnitType    uint32 `protobuf:"varint,2,opt,name=leader_unit_type,json=leaderUnitType" json:"leader_unit_type,omitempty"`
+	Count             uint32 `protobuf:"varint,3,opt,name=count" json:"count,omitempty"`
+	XXX_unrecognized  []byte `json:"-"`
 }
 
 func (m *ControlGroup) Reset()                    { *m = ControlGroup{} }
@@ -375,34 +375,34 @@ func (*ControlGroup) ProtoMessage()               {}
 func (*ControlGroup) Descriptor() ([]byte, []int) { return fileDescriptorUI, []int{1} }
 
 func (m *ControlGroup) GetControlGroupIndex() uint32 {
-	if m != nil && m.ControlGroupIndex != nil {
-		return *m.ControlGroupIndex
+	if m != nil {
+		return m.ControlGroupIndex
 	}
 	return 0
 }
 
 func (m *ControlGroup) GetLeaderUnitType() uint32 {
-	if m != nil && m.LeaderUnitType != nil {
-		return *m.LeaderUnitType
+	if m != nil {
+		return m.LeaderUnitType
 	}
 	return 0
 }
 
 func (m *ControlGroup) GetCount() uint32 {
-	if m != nil && m.Count != nil {
-		return *m.Count
+	if m != nil {
+		return m.Count
 	}
 	return 0
 }
 
 type UnitInfo struct {
-	UnitType            *uint32   `protobuf:"varint,1,opt,name=unit_type,json=unitType" json:"unit_type,omitempty"`
-	PlayerRelative      *uint32   `protobuf:"varint,2,opt,name=player_relative,json=playerRelative" json:"player_relative,omitempty"`
-	Health              *int32    `protobuf:"varint,3,opt,name=health" json:"health,omitempty"`
-	Shields             *int32    `protobuf:"varint,4,opt,name=shields" json:"shields,omitempty"`
-	Energy              *int32    `protobuf:"varint,5,opt,name=energy" json:"energy,omitempty"`
-	TransportSlotsTaken *int32    `protobuf:"varint,6,opt,name=transport_slots_taken,json=transportSlotsTaken" json:"transport_slots_taken,omitempty"`
-	BuildProgress       *float32  `protobuf:"fixed32,7,opt,name=build_progress,json=buildProgress" json:"build_progress,omitempty"`
+	UnitType            uint32    `protobuf:"varint,1,opt,name=unit_type,json=unitType" json:"unit_type,omitempty"`
+	PlayerRelative      uint32    `protobuf:"varint,2,opt,name=player_relative,json=playerRelative" json:"player_relative,omitempty"`
+	Health              int32     `protobuf:"varint,3,opt,name=health" json:"health,omitempty"`
+	Shields             int32     `protobuf:"varint,4,opt,name=shields" json:"shields,omitempty"`
+	Energy              int32     `protobuf:"varint,5,opt,name=energy" json:"energy,omitempty"`
+	TransportSlotsTaken int32     `protobuf:"varint,6,opt,name=transport_slots_taken,json=transportSlotsTaken" json:"transport_slots_taken,omitempty"`
+	BuildProgress       float32   `protobuf:"fixed32,7,opt,name=build_progress,json=buildProgress" json:"build_progress,omitempty"`
 	AddOn               *UnitInfo `protobuf:"bytes,8,opt,name=add_on,json=addOn" json:"add_on,omitempty"`
 	XXX_unrecognized    []byte    `json:"-"`
 }
@@ -413,50 +413,50 @@ func (*UnitInfo) ProtoMessage()               {}
 func (*UnitInfo) Descriptor() ([]byte, []int) { return fileDescriptorUI, []int{2} }
 
 func (m *UnitInfo) GetUnitType() uint32 {
-	if m != nil && m.UnitType != nil {
-		return *m.UnitType
+	if m != nil {
+		return m.UnitType
 	}
 	return 0
 }
 
 func (m *UnitInfo) GetPlayerRelative() uint32 {
-	if m != nil && m.PlayerRelative != nil {
-		return *m.PlayerRelative
+	if m != nil {
+		return m.PlayerRelative
 	}
 	return 0
 }
 
 func (m *UnitInfo) GetHealth() int32 {
-	if m != nil && m.Health != nil {
-		return *m.Health
+	if m != nil {
+		return m.Health
 	}
 	return 0
 }
 
 func (m *UnitInfo) GetShields() int32 {
-	if m != nil && m.Shields != nil {
-		return *m.Shields
+	if m != nil {
+		return m.Shields
 	}
 	return 0
 }
 
 func (m *UnitInfo) GetEnergy() int32 {
-	if m != nil && m.Energy != nil {
-		return *m.Energy
+	if m != nil {
+		return m.Energy
 	}
 	return 0
 }
 
 func (m *UnitInfo) GetTransportSlotsTaken() int32 {
-	if m != nil && m.TransportSlotsTaken != nil {
-		return *m.TransportSlotsTaken
+	if m != nil {
+		return m.TransportSlotsTaken
 	}
 	return 0
 }
 
 func (m *UnitInfo) GetBuildProgress() float32 {
-	if m != nil && m.BuildProgress != nil {
-		return *m.BuildProgress
+	if m != nil {
+		return m.BuildProgress
 	}
 	return 0
 }
@@ -505,7 +505,7 @@ func (m *MultiPanel) GetUnits() []*UnitInfo {
 type CargoPanel struct {
 	Unit             *UnitInfo   `protobuf:"bytes,1,opt,name=unit" json:"unit,omitempty"`
 	Passengers       []*UnitInfo `protobuf:"bytes,2,rep,name=passengers" json:"passengers,omitempty"`
-	SlotsAvailable   *int32      `protobuf:"varint,3,opt,name=slots_available,json=slotsAvailable" json:"slots_available,omitempty"`
+	SlotsAvailable   int32       `protobuf:"varint,3,opt,name=slots_available,json=slotsAvailable" json:"slots_available,omitempty"`
 	XXX_unrecognized []byte      `json:"-"`
 }
 
@@ -529,8 +529,8 @@ func (m *CargoPanel) GetPassengers() []*UnitInfo {
 }
 
 func (m *CargoPanel) GetSlotsAvailable() int32 {
-	if m != nil && m.SlotsAvailable != nil {
-		return *m.SlotsAvailable
+	if m != nil {
+		return m.SlotsAvailable
 	}
 	return 0
 }
@@ -900,9 +900,9 @@ func _ActionUI_OneofSizer(msg proto.Message) (n int) {
 }
 
 type ActionControlGroup struct {
-	Action            *ActionControlGroup_ControlGroupAction `protobuf:"varint,1,opt,name=action,enum=ActionControlGroup_ControlGroupAction" json:"action,omitempty"`
-	ControlGroupIndex *uint32                                `protobuf:"varint,2,opt,name=control_group_index,json=controlGroupIndex" json:"control_group_index,omitempty"`
-	XXX_unrecognized  []byte                                 `json:"-"`
+	Action            ActionControlGroup_ControlGroupAction `protobuf:"varint,1,opt,name=action,enum=ActionControlGroup_ControlGroupAction" json:"action,omitempty"`
+	ControlGroupIndex uint32                                `protobuf:"varint,2,opt,name=control_group_index,json=controlGroupIndex" json:"control_group_index,omitempty"`
+	XXX_unrecognized  []byte                                `json:"-"`
 }
 
 func (m *ActionControlGroup) Reset()                    { *m = ActionControlGroup{} }
@@ -911,21 +911,21 @@ func (*ActionControlGroup) ProtoMessage()               {}
 func (*ActionControlGroup) Descriptor() ([]byte, []int) { return fileDescriptorUI, []int{8} }
 
 func (m *ActionControlGroup) GetAction() ActionControlGroup_ControlGroupAction {
-	if m != nil && m.Action != nil {
-		return *m.Action
+	if m != nil {
+		return m.Action
 	}
 	return ActionControlGroup_Recall
 }
 
 func (m *ActionControlGroup) GetControlGroupIndex() uint32 {
-	if m != nil && m.ControlGroupIndex != nil {
-		return *m.ControlGroupIndex
+	if m != nil {
+		return m.ControlGroupIndex
 	}
 	return 0
 }
 
 type ActionSelectArmy struct {
-	SelectionAdd     *bool  `protobuf:"varint,1,opt,name=selection_add,json=selectionAdd" json:"selection_add,omitempty"`
+	SelectionAdd     bool   `protobuf:"varint,1,opt,name=selection_add,json=selectionAdd" json:"selection_add,omitempty"`
 	XXX_unrecognized []byte `json:"-"`
 }
 
@@ -935,14 +935,14 @@ func (*ActionSelectArmy) ProtoMessage()               {}
 func (*ActionSelectArmy) Descriptor() ([]byte, []int) { return fileDescriptorUI, []int{9} }
 
 func (m *ActionSelectArmy) GetSelectionAdd() bool {
-	if m != nil && m.SelectionAdd != nil {
-		return *m.SelectionAdd
+	if m != nil {
+		return m.SelectionAdd
 	}
 	return false
 }
 
 type ActionSelectWarpGates struct {
-	SelectionAdd     *bool  `protobuf:"varint,1,opt,name=selection_add,json=selectionAdd" json:"selection_add,omitempty"`
+	SelectionAdd     bool   `protobuf:"varint,1,opt,name=selection_add,json=selectionAdd" json:"selection_add,omitempty"`
 	XXX_unrecognized []byte `json:"-"`
 }
 
@@ -952,8 +952,8 @@ func (*ActionSelectWarpGates) ProtoMessage()               {}
 func (*ActionSelectWarpGates) Descriptor() ([]byte, []int) { return fileDescriptorUI, []int{10} }
 
 func (m *ActionSelectWarpGates) GetSelectionAdd() bool {
-	if m != nil && m.SelectionAdd != nil {
-		return *m.SelectionAdd
+	if m != nil {
+		return m.SelectionAdd
 	}
 	return false
 }
@@ -968,8 +968,8 @@ func (*ActionSelectLarva) ProtoMessage()               {}
 func (*ActionSelectLarva) Descriptor() ([]byte, []int) { return fileDescriptorUI, []int{11} }
 
 type ActionSelectIdleWorker struct {
-	Type             *ActionSelectIdleWorker_Type `protobuf:"varint,1,opt,name=type,enum=ActionSelectIdleWorker_Type" json:"type,omitempty"`
-	XXX_unrecognized []byte                       `json:"-"`
+	Type             ActionSelectIdleWorker_Type `protobuf:"varint,1,opt,name=type,enum=ActionSelectIdleWorker_Type" json:"type,omitempty"`
+	XXX_unrecognized []byte                      `json:"-"`
 }
 
 func (m *ActionSelectIdleWorker) Reset()                    { *m = ActionSelectIdleWorker{} }
@@ -978,16 +978,16 @@ func (*ActionSelectIdleWorker) ProtoMessage()               {}
 func (*ActionSelectIdleWorker) Descriptor() ([]byte, []int) { return fileDescriptorUI, []int{12} }
 
 func (m *ActionSelectIdleWorker) GetType() ActionSelectIdleWorker_Type {
-	if m != nil && m.Type != nil {
-		return *m.Type
+	if m != nil {
+		return m.Type
 	}
 	return ActionSelectIdleWorker_Set
 }
 
 type ActionMultiPanel struct {
-	Type             *ActionMultiPanel_Type `protobuf:"varint,1,opt,name=type,enum=ActionMultiPanel_Type" json:"type,omitempty"`
-	UnitIndex        *int32                 `protobuf:"varint,2,opt,name=unit_index,json=unitIndex" json:"unit_index,omitempty"`
-	XXX_unrecognized []byte                 `json:"-"`
+	Type             ActionMultiPanel_Type `protobuf:"varint,1,opt,name=type,enum=ActionMultiPanel_Type" json:"type,omitempty"`
+	UnitIndex        int32                 `protobuf:"varint,2,opt,name=unit_index,json=unitIndex" json:"unit_index,omitempty"`
+	XXX_unrecognized []byte                `json:"-"`
 }
 
 func (m *ActionMultiPanel) Reset()                    { *m = ActionMultiPanel{} }
@@ -996,21 +996,21 @@ func (*ActionMultiPanel) ProtoMessage()               {}
 func (*ActionMultiPanel) Descriptor() ([]byte, []int) { return fileDescriptorUI, []int{13} }
 
 func (m *ActionMultiPanel) GetType() ActionMultiPanel_Type {
-	if m != nil && m.Type != nil {
-		return *m.Type
+	if m != nil {
+		return m.Type
 	}
 	return ActionMultiPanel_SingleSelect
 }
 
 func (m *ActionMultiPanel) GetUnitIndex() int32 {
-	if m != nil && m.UnitIndex != nil {
-		return *m.UnitIndex
+	if m != nil {
+		return m.UnitIndex
 	}
 	return 0
 }
 
 type ActionCargoPanelUnload struct {
-	UnitIndex        *int32 `protobuf:"varint,1,opt,name=unit_index,json=unitIndex" json:"unit_index,omitempty"`
+	UnitIndex        int32  `protobuf:"varint,1,opt,name=unit_index,json=unitIndex" json:"unit_index,omitempty"`
 	XXX_unrecognized []byte `json:"-"`
 }
 
@@ -1020,14 +1020,14 @@ func (*ActionCargoPanelUnload) ProtoMessage()               {}
 func (*ActionCargoPanelUnload) Descriptor() ([]byte, []int) { return fileDescriptorUI, []int{14} }
 
 func (m *ActionCargoPanelUnload) GetUnitIndex() int32 {
-	if m != nil && m.UnitIndex != nil {
-		return *m.UnitIndex
+	if m != nil {
+		return m.UnitIndex
 	}
 	return 0
 }
 
 type ActionProductionPanelRemoveFromQueue struct {
-	UnitIndex        *int32 `protobuf:"varint,1,opt,name=unit_index,json=unitIndex" json:"unit_index,omitempty"`
+	UnitIndex        int32  `protobuf:"varint,1,opt,name=unit_index,json=unitIndex" json:"unit_index,omitempty"`
 	XXX_unrecognized []byte `json:"-"`
 }
 
@@ -1039,14 +1039,14 @@ func (*ActionProductionPanelRemoveFromQueue) Descriptor() ([]byte, []int) {
 }
 
 func (m *ActionProductionPanelRemoveFromQueue) GetUnitIndex() int32 {
-	if m != nil && m.UnitIndex != nil {
-		return *m.UnitIndex
+	if m != nil {
+		return m.UnitIndex
 	}
 	return 0
 }
 
 type ActionToggleAutocast struct {
-	AbilityId        *int32 `protobuf:"varint,1,opt,name=ability_id,json=abilityId" json:"ability_id,omitempty"`
+	AbilityId        int32  `protobuf:"varint,1,opt,name=ability_id,json=abilityId" json:"ability_id,omitempty"`
 	XXX_unrecognized []byte `json:"-"`
 }
 
@@ -1056,8 +1056,8 @@ func (*ActionToggleAutocast) ProtoMessage()               {}
 func (*ActionToggleAutocast) Descriptor() ([]byte, []int) { return fileDescriptorUI, []int{16} }
 
 func (m *ActionToggleAutocast) GetAbilityId() int32 {
-	if m != nil && m.AbilityId != nil {
-		return *m.AbilityId
+	if m != nil {
+		return m.AbilityId
 	}
 	return 0
 }

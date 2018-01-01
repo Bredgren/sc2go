@@ -77,8 +77,8 @@ func (x *Race) UnmarshalJSON(data []byte) error {
 func (Race) EnumDescriptor() ([]byte, []int) { return fileDescriptorCommon, []int{0} }
 
 type AvailableAbility struct {
-	AbilityId        *int32 `protobuf:"varint,1,opt,name=ability_id,json=abilityId" json:"ability_id,omitempty"`
-	RequiresPoint    *bool  `protobuf:"varint,2,opt,name=requires_point,json=requiresPoint" json:"requires_point,omitempty"`
+	AbilityId        int32  `protobuf:"varint,1,opt,name=ability_id,json=abilityId" json:"ability_id,omitempty"`
+	RequiresPoint    bool   `protobuf:"varint,2,opt,name=requires_point,json=requiresPoint" json:"requires_point,omitempty"`
 	XXX_unrecognized []byte `json:"-"`
 }
 
@@ -88,21 +88,21 @@ func (*AvailableAbility) ProtoMessage()               {}
 func (*AvailableAbility) Descriptor() ([]byte, []int) { return fileDescriptorCommon, []int{0} }
 
 func (m *AvailableAbility) GetAbilityId() int32 {
-	if m != nil && m.AbilityId != nil {
-		return *m.AbilityId
+	if m != nil {
+		return m.AbilityId
 	}
 	return 0
 }
 
 func (m *AvailableAbility) GetRequiresPoint() bool {
-	if m != nil && m.RequiresPoint != nil {
-		return *m.RequiresPoint
+	if m != nil {
+		return m.RequiresPoint
 	}
 	return false
 }
 
 type ImageData struct {
-	BitsPerPixel     *int32   `protobuf:"varint,1,opt,name=bits_per_pixel,json=bitsPerPixel" json:"bits_per_pixel,omitempty"`
+	BitsPerPixel     int32    `protobuf:"varint,1,opt,name=bits_per_pixel,json=bitsPerPixel" json:"bits_per_pixel,omitempty"`
 	Size             *Size2DI `protobuf:"bytes,2,opt,name=size" json:"size,omitempty"`
 	Data             []byte   `protobuf:"bytes,3,opt,name=data" json:"data,omitempty"`
 	XXX_unrecognized []byte   `json:"-"`
@@ -114,8 +114,8 @@ func (*ImageData) ProtoMessage()               {}
 func (*ImageData) Descriptor() ([]byte, []int) { return fileDescriptorCommon, []int{1} }
 
 func (m *ImageData) GetBitsPerPixel() int32 {
-	if m != nil && m.BitsPerPixel != nil {
-		return *m.BitsPerPixel
+	if m != nil {
+		return m.BitsPerPixel
 	}
 	return 0
 }
@@ -137,8 +137,8 @@ func (m *ImageData) GetData() []byte {
 // Point on the screen/minimap (e.g., 0..64).
 // Note: bottom left of the screen is 0, 0.
 type PointI struct {
-	X                *int32 `protobuf:"varint,1,opt,name=x" json:"x,omitempty"`
-	Y                *int32 `protobuf:"varint,2,opt,name=y" json:"y,omitempty"`
+	X                int32  `protobuf:"varint,1,opt,name=x" json:"x,omitempty"`
+	Y                int32  `protobuf:"varint,2,opt,name=y" json:"y,omitempty"`
 	XXX_unrecognized []byte `json:"-"`
 }
 
@@ -148,15 +148,15 @@ func (*PointI) ProtoMessage()               {}
 func (*PointI) Descriptor() ([]byte, []int) { return fileDescriptorCommon, []int{2} }
 
 func (m *PointI) GetX() int32 {
-	if m != nil && m.X != nil {
-		return *m.X
+	if m != nil {
+		return m.X
 	}
 	return 0
 }
 
 func (m *PointI) GetY() int32 {
-	if m != nil && m.Y != nil {
-		return *m.Y
+	if m != nil {
+		return m.Y
 	}
 	return 0
 }
@@ -190,9 +190,9 @@ func (m *RectangleI) GetP1() *PointI {
 // Point on the game board, 0..255.
 // Note: bottom left of the screen is 0, 0.
 type Point2D struct {
-	X                *float32 `protobuf:"fixed32,1,opt,name=x" json:"x,omitempty"`
-	Y                *float32 `protobuf:"fixed32,2,opt,name=y" json:"y,omitempty"`
-	XXX_unrecognized []byte   `json:"-"`
+	X                float32 `protobuf:"fixed32,1,opt,name=x" json:"x,omitempty"`
+	Y                float32 `protobuf:"fixed32,2,opt,name=y" json:"y,omitempty"`
+	XXX_unrecognized []byte  `json:"-"`
 }
 
 func (m *Point2D) Reset()                    { *m = Point2D{} }
@@ -201,15 +201,15 @@ func (*Point2D) ProtoMessage()               {}
 func (*Point2D) Descriptor() ([]byte, []int) { return fileDescriptorCommon, []int{4} }
 
 func (m *Point2D) GetX() float32 {
-	if m != nil && m.X != nil {
-		return *m.X
+	if m != nil {
+		return m.X
 	}
 	return 0
 }
 
 func (m *Point2D) GetY() float32 {
-	if m != nil && m.Y != nil {
-		return *m.Y
+	if m != nil {
+		return m.Y
 	}
 	return 0
 }
@@ -217,10 +217,10 @@ func (m *Point2D) GetY() float32 {
 // Point on the game board, 0..255.
 // Note: bottom left of the screen is 0, 0.
 type Point struct {
-	X                *float32 `protobuf:"fixed32,1,opt,name=x" json:"x,omitempty"`
-	Y                *float32 `protobuf:"fixed32,2,opt,name=y" json:"y,omitempty"`
-	Z                *float32 `protobuf:"fixed32,3,opt,name=z" json:"z,omitempty"`
-	XXX_unrecognized []byte   `json:"-"`
+	X                float32 `protobuf:"fixed32,1,opt,name=x" json:"x,omitempty"`
+	Y                float32 `protobuf:"fixed32,2,opt,name=y" json:"y,omitempty"`
+	Z                float32 `protobuf:"fixed32,3,opt,name=z" json:"z,omitempty"`
+	XXX_unrecognized []byte  `json:"-"`
 }
 
 func (m *Point) Reset()                    { *m = Point{} }
@@ -229,30 +229,30 @@ func (*Point) ProtoMessage()               {}
 func (*Point) Descriptor() ([]byte, []int) { return fileDescriptorCommon, []int{5} }
 
 func (m *Point) GetX() float32 {
-	if m != nil && m.X != nil {
-		return *m.X
+	if m != nil {
+		return m.X
 	}
 	return 0
 }
 
 func (m *Point) GetY() float32 {
-	if m != nil && m.Y != nil {
-		return *m.Y
+	if m != nil {
+		return m.Y
 	}
 	return 0
 }
 
 func (m *Point) GetZ() float32 {
-	if m != nil && m.Z != nil {
-		return *m.Z
+	if m != nil {
+		return m.Z
 	}
 	return 0
 }
 
 // Screen dimensions.
 type Size2DI struct {
-	X                *int32 `protobuf:"varint,1,opt,name=x" json:"x,omitempty"`
-	Y                *int32 `protobuf:"varint,2,opt,name=y" json:"y,omitempty"`
+	X                int32  `protobuf:"varint,1,opt,name=x" json:"x,omitempty"`
+	Y                int32  `protobuf:"varint,2,opt,name=y" json:"y,omitempty"`
 	XXX_unrecognized []byte `json:"-"`
 }
 
@@ -262,15 +262,15 @@ func (*Size2DI) ProtoMessage()               {}
 func (*Size2DI) Descriptor() ([]byte, []int) { return fileDescriptorCommon, []int{6} }
 
 func (m *Size2DI) GetX() int32 {
-	if m != nil && m.X != nil {
-		return *m.X
+	if m != nil {
+		return m.X
 	}
 	return 0
 }
 
 func (m *Size2DI) GetY() int32 {
-	if m != nil && m.Y != nil {
-		return *m.Y
+	if m != nil {
+		return m.Y
 	}
 	return 0
 }

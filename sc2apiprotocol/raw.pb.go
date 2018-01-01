@@ -261,10 +261,10 @@ func (m *ObservationRaw) GetEffects() []*Effect {
 }
 
 type PowerSource struct {
-	Pos              *Point   `protobuf:"bytes,1,opt,name=pos" json:"pos,omitempty"`
-	Radius           *float32 `protobuf:"fixed32,2,opt,name=radius" json:"radius,omitempty"`
-	Tag              *uint64  `protobuf:"varint,3,opt,name=tag" json:"tag,omitempty"`
-	XXX_unrecognized []byte   `json:"-"`
+	Pos              *Point  `protobuf:"bytes,1,opt,name=pos" json:"pos,omitempty"`
+	Radius           float32 `protobuf:"fixed32,2,opt,name=radius" json:"radius,omitempty"`
+	Tag              uint64  `protobuf:"varint,3,opt,name=tag" json:"tag,omitempty"`
+	XXX_unrecognized []byte  `json:"-"`
 }
 
 func (m *PowerSource) Reset()                    { *m = PowerSource{} }
@@ -280,15 +280,15 @@ func (m *PowerSource) GetPos() *Point {
 }
 
 func (m *PowerSource) GetRadius() float32 {
-	if m != nil && m.Radius != nil {
-		return *m.Radius
+	if m != nil {
+		return m.Radius
 	}
 	return 0
 }
 
 func (m *PowerSource) GetTag() uint64 {
-	if m != nil && m.Tag != nil {
-		return *m.Tag
+	if m != nil {
+		return m.Tag
 	}
 	return 0
 }
@@ -327,12 +327,12 @@ func (m *PlayerRaw) GetUpgradeIds() []uint32 {
 }
 
 type UnitOrder struct {
-	AbilityId *uint32 `protobuf:"varint,1,opt,name=ability_id,json=abilityId" json:"ability_id,omitempty"`
+	AbilityId uint32 `protobuf:"varint,1,opt,name=ability_id,json=abilityId" json:"ability_id,omitempty"`
 	// Types that are valid to be assigned to Target:
 	//	*UnitOrder_TargetWorldSpacePos
 	//	*UnitOrder_TargetUnitTag
 	Target           isUnitOrder_Target `protobuf_oneof:"target"`
-	Progress         *float32           `protobuf:"fixed32,4,opt,name=progress" json:"progress,omitempty"`
+	Progress         float32            `protobuf:"fixed32,4,opt,name=progress" json:"progress,omitempty"`
 	XXX_unrecognized []byte             `json:"-"`
 }
 
@@ -363,8 +363,8 @@ func (m *UnitOrder) GetTarget() isUnitOrder_Target {
 }
 
 func (m *UnitOrder) GetAbilityId() uint32 {
-	if m != nil && m.AbilityId != nil {
-		return *m.AbilityId
+	if m != nil {
+		return m.AbilityId
 	}
 	return 0
 }
@@ -384,8 +384,8 @@ func (m *UnitOrder) GetTargetUnitTag() uint64 {
 }
 
 func (m *UnitOrder) GetProgress() float32 {
-	if m != nil && m.Progress != nil {
-		return *m.Progress
+	if m != nil {
+		return m.Progress
 	}
 	return 0
 }
@@ -460,15 +460,15 @@ func _UnitOrder_OneofSizer(msg proto.Message) (n int) {
 }
 
 type PassengerUnit struct {
-	Tag              *uint64  `protobuf:"varint,1,opt,name=tag" json:"tag,omitempty"`
-	Health           *float32 `protobuf:"fixed32,2,opt,name=health" json:"health,omitempty"`
-	HealthMax        *float32 `protobuf:"fixed32,3,opt,name=health_max,json=healthMax" json:"health_max,omitempty"`
-	Shield           *float32 `protobuf:"fixed32,4,opt,name=shield" json:"shield,omitempty"`
-	ShieldMax        *float32 `protobuf:"fixed32,7,opt,name=shield_max,json=shieldMax" json:"shield_max,omitempty"`
-	Energy           *float32 `protobuf:"fixed32,5,opt,name=energy" json:"energy,omitempty"`
-	EnergyMax        *float32 `protobuf:"fixed32,8,opt,name=energy_max,json=energyMax" json:"energy_max,omitempty"`
-	UnitType         *uint32  `protobuf:"varint,6,opt,name=unit_type,json=unitType" json:"unit_type,omitempty"`
-	XXX_unrecognized []byte   `json:"-"`
+	Tag              uint64  `protobuf:"varint,1,opt,name=tag" json:"tag,omitempty"`
+	Health           float32 `protobuf:"fixed32,2,opt,name=health" json:"health,omitempty"`
+	HealthMax        float32 `protobuf:"fixed32,3,opt,name=health_max,json=healthMax" json:"health_max,omitempty"`
+	Shield           float32 `protobuf:"fixed32,4,opt,name=shield" json:"shield,omitempty"`
+	ShieldMax        float32 `protobuf:"fixed32,7,opt,name=shield_max,json=shieldMax" json:"shield_max,omitempty"`
+	Energy           float32 `protobuf:"fixed32,5,opt,name=energy" json:"energy,omitempty"`
+	EnergyMax        float32 `protobuf:"fixed32,8,opt,name=energy_max,json=energyMax" json:"energy_max,omitempty"`
+	UnitType         uint32  `protobuf:"varint,6,opt,name=unit_type,json=unitType" json:"unit_type,omitempty"`
+	XXX_unrecognized []byte  `json:"-"`
 }
 
 func (m *PassengerUnit) Reset()                    { *m = PassengerUnit{} }
@@ -477,101 +477,101 @@ func (*PassengerUnit) ProtoMessage()               {}
 func (*PassengerUnit) Descriptor() ([]byte, []int) { return fileDescriptorRaw, []int{5} }
 
 func (m *PassengerUnit) GetTag() uint64 {
-	if m != nil && m.Tag != nil {
-		return *m.Tag
+	if m != nil {
+		return m.Tag
 	}
 	return 0
 }
 
 func (m *PassengerUnit) GetHealth() float32 {
-	if m != nil && m.Health != nil {
-		return *m.Health
+	if m != nil {
+		return m.Health
 	}
 	return 0
 }
 
 func (m *PassengerUnit) GetHealthMax() float32 {
-	if m != nil && m.HealthMax != nil {
-		return *m.HealthMax
+	if m != nil {
+		return m.HealthMax
 	}
 	return 0
 }
 
 func (m *PassengerUnit) GetShield() float32 {
-	if m != nil && m.Shield != nil {
-		return *m.Shield
+	if m != nil {
+		return m.Shield
 	}
 	return 0
 }
 
 func (m *PassengerUnit) GetShieldMax() float32 {
-	if m != nil && m.ShieldMax != nil {
-		return *m.ShieldMax
+	if m != nil {
+		return m.ShieldMax
 	}
 	return 0
 }
 
 func (m *PassengerUnit) GetEnergy() float32 {
-	if m != nil && m.Energy != nil {
-		return *m.Energy
+	if m != nil {
+		return m.Energy
 	}
 	return 0
 }
 
 func (m *PassengerUnit) GetEnergyMax() float32 {
-	if m != nil && m.EnergyMax != nil {
-		return *m.EnergyMax
+	if m != nil {
+		return m.EnergyMax
 	}
 	return 0
 }
 
 func (m *PassengerUnit) GetUnitType() uint32 {
-	if m != nil && m.UnitType != nil {
-		return *m.UnitType
+	if m != nil {
+		return m.UnitType
 	}
 	return 0
 }
 
 type Unit struct {
 	// Fields are populated based on type/alliance
-	DisplayType   *DisplayType `protobuf:"varint,1,opt,name=display_type,json=displayType,enum=DisplayType" json:"display_type,omitempty"`
-	Alliance      *Alliance    `protobuf:"varint,2,opt,name=alliance,enum=Alliance" json:"alliance,omitempty"`
-	Tag           *uint64      `protobuf:"varint,3,opt,name=tag" json:"tag,omitempty"`
-	UnitType      *uint32      `protobuf:"varint,4,opt,name=unit_type,json=unitType" json:"unit_type,omitempty"`
-	Owner         *int32       `protobuf:"varint,5,opt,name=owner" json:"owner,omitempty"`
-	Pos           *Point       `protobuf:"bytes,6,opt,name=pos" json:"pos,omitempty"`
-	Facing        *float32     `protobuf:"fixed32,7,opt,name=facing" json:"facing,omitempty"`
-	Radius        *float32     `protobuf:"fixed32,8,opt,name=radius" json:"radius,omitempty"`
-	BuildProgress *float32     `protobuf:"fixed32,9,opt,name=build_progress,json=buildProgress" json:"build_progress,omitempty"`
-	Cloak         *CloakState  `protobuf:"varint,10,opt,name=cloak,enum=CloakState" json:"cloak,omitempty"`
-	DetectRange   *float32     `protobuf:"fixed32,31,opt,name=detect_range,json=detectRange" json:"detect_range,omitempty"`
-	RadarRange    *float32     `protobuf:"fixed32,32,opt,name=radar_range,json=radarRange" json:"radar_range,omitempty"`
-	IsSelected    *bool        `protobuf:"varint,11,opt,name=is_selected,json=isSelected" json:"is_selected,omitempty"`
-	IsOnScreen    *bool        `protobuf:"varint,12,opt,name=is_on_screen,json=isOnScreen" json:"is_on_screen,omitempty"`
-	IsBlip        *bool        `protobuf:"varint,13,opt,name=is_blip,json=isBlip" json:"is_blip,omitempty"`
-	IsPowered     *bool        `protobuf:"varint,35,opt,name=is_powered,json=isPowered" json:"is_powered,omitempty"`
+	DisplayType   DisplayType `protobuf:"varint,1,opt,name=display_type,json=displayType,enum=DisplayType" json:"display_type,omitempty"`
+	Alliance      Alliance    `protobuf:"varint,2,opt,name=alliance,enum=Alliance" json:"alliance,omitempty"`
+	Tag           uint64      `protobuf:"varint,3,opt,name=tag" json:"tag,omitempty"`
+	UnitType      uint32      `protobuf:"varint,4,opt,name=unit_type,json=unitType" json:"unit_type,omitempty"`
+	Owner         int32       `protobuf:"varint,5,opt,name=owner" json:"owner,omitempty"`
+	Pos           *Point      `protobuf:"bytes,6,opt,name=pos" json:"pos,omitempty"`
+	Facing        float32     `protobuf:"fixed32,7,opt,name=facing" json:"facing,omitempty"`
+	Radius        float32     `protobuf:"fixed32,8,opt,name=radius" json:"radius,omitempty"`
+	BuildProgress float32     `protobuf:"fixed32,9,opt,name=build_progress,json=buildProgress" json:"build_progress,omitempty"`
+	Cloak         CloakState  `protobuf:"varint,10,opt,name=cloak,enum=CloakState" json:"cloak,omitempty"`
+	DetectRange   float32     `protobuf:"fixed32,31,opt,name=detect_range,json=detectRange" json:"detect_range,omitempty"`
+	RadarRange    float32     `protobuf:"fixed32,32,opt,name=radar_range,json=radarRange" json:"radar_range,omitempty"`
+	IsSelected    bool        `protobuf:"varint,11,opt,name=is_selected,json=isSelected" json:"is_selected,omitempty"`
+	IsOnScreen    bool        `protobuf:"varint,12,opt,name=is_on_screen,json=isOnScreen" json:"is_on_screen,omitempty"`
+	IsBlip        bool        `protobuf:"varint,13,opt,name=is_blip,json=isBlip" json:"is_blip,omitempty"`
+	IsPowered     bool        `protobuf:"varint,35,opt,name=is_powered,json=isPowered" json:"is_powered,omitempty"`
 	// Not populated for snapshots
-	Health          *float32 `protobuf:"fixed32,14,opt,name=health" json:"health,omitempty"`
-	HealthMax       *float32 `protobuf:"fixed32,15,opt,name=health_max,json=healthMax" json:"health_max,omitempty"`
-	Shield          *float32 `protobuf:"fixed32,16,opt,name=shield" json:"shield,omitempty"`
-	ShieldMax       *float32 `protobuf:"fixed32,36,opt,name=shield_max,json=shieldMax" json:"shield_max,omitempty"`
-	Energy          *float32 `protobuf:"fixed32,17,opt,name=energy" json:"energy,omitempty"`
-	EnergyMax       *float32 `protobuf:"fixed32,37,opt,name=energy_max,json=energyMax" json:"energy_max,omitempty"`
-	MineralContents *int32   `protobuf:"varint,18,opt,name=mineral_contents,json=mineralContents" json:"mineral_contents,omitempty"`
-	VespeneContents *int32   `protobuf:"varint,19,opt,name=vespene_contents,json=vespeneContents" json:"vespene_contents,omitempty"`
-	IsFlying        *bool    `protobuf:"varint,20,opt,name=is_flying,json=isFlying" json:"is_flying,omitempty"`
-	IsBurrowed      *bool    `protobuf:"varint,21,opt,name=is_burrowed,json=isBurrowed" json:"is_burrowed,omitempty"`
+	Health          float32 `protobuf:"fixed32,14,opt,name=health" json:"health,omitempty"`
+	HealthMax       float32 `protobuf:"fixed32,15,opt,name=health_max,json=healthMax" json:"health_max,omitempty"`
+	Shield          float32 `protobuf:"fixed32,16,opt,name=shield" json:"shield,omitempty"`
+	ShieldMax       float32 `protobuf:"fixed32,36,opt,name=shield_max,json=shieldMax" json:"shield_max,omitempty"`
+	Energy          float32 `protobuf:"fixed32,17,opt,name=energy" json:"energy,omitempty"`
+	EnergyMax       float32 `protobuf:"fixed32,37,opt,name=energy_max,json=energyMax" json:"energy_max,omitempty"`
+	MineralContents int32   `protobuf:"varint,18,opt,name=mineral_contents,json=mineralContents" json:"mineral_contents,omitempty"`
+	VespeneContents int32   `protobuf:"varint,19,opt,name=vespene_contents,json=vespeneContents" json:"vespene_contents,omitempty"`
+	IsFlying        bool    `protobuf:"varint,20,opt,name=is_flying,json=isFlying" json:"is_flying,omitempty"`
+	IsBurrowed      bool    `protobuf:"varint,21,opt,name=is_burrowed,json=isBurrowed" json:"is_burrowed,omitempty"`
 	// Not populated for enemies
 	Orders             []*UnitOrder     `protobuf:"bytes,22,rep,name=orders" json:"orders,omitempty"`
-	AddOnTag           *uint64          `protobuf:"varint,23,opt,name=add_on_tag,json=addOnTag" json:"add_on_tag,omitempty"`
+	AddOnTag           uint64           `protobuf:"varint,23,opt,name=add_on_tag,json=addOnTag" json:"add_on_tag,omitempty"`
 	Passengers         []*PassengerUnit `protobuf:"bytes,24,rep,name=passengers" json:"passengers,omitempty"`
-	CargoSpaceTaken    *int32           `protobuf:"varint,25,opt,name=cargo_space_taken,json=cargoSpaceTaken" json:"cargo_space_taken,omitempty"`
-	CargoSpaceMax      *int32           `protobuf:"varint,26,opt,name=cargo_space_max,json=cargoSpaceMax" json:"cargo_space_max,omitempty"`
+	CargoSpaceTaken    int32            `protobuf:"varint,25,opt,name=cargo_space_taken,json=cargoSpaceTaken" json:"cargo_space_taken,omitempty"`
+	CargoSpaceMax      int32            `protobuf:"varint,26,opt,name=cargo_space_max,json=cargoSpaceMax" json:"cargo_space_max,omitempty"`
 	BuffIds            []uint32         `protobuf:"varint,27,rep,name=buff_ids,json=buffIds" json:"buff_ids,omitempty"`
-	AssignedHarvesters *int32           `protobuf:"varint,28,opt,name=assigned_harvesters,json=assignedHarvesters" json:"assigned_harvesters,omitempty"`
-	IdealHarvesters    *int32           `protobuf:"varint,29,opt,name=ideal_harvesters,json=idealHarvesters" json:"ideal_harvesters,omitempty"`
-	WeaponCooldown     *float32         `protobuf:"fixed32,30,opt,name=weapon_cooldown,json=weaponCooldown" json:"weapon_cooldown,omitempty"`
-	EngagedTargetTag   *uint64          `protobuf:"varint,34,opt,name=engaged_target_tag,json=engagedTargetTag" json:"engaged_target_tag,omitempty"`
+	AssignedHarvesters int32            `protobuf:"varint,28,opt,name=assigned_harvesters,json=assignedHarvesters" json:"assigned_harvesters,omitempty"`
+	IdealHarvesters    int32            `protobuf:"varint,29,opt,name=ideal_harvesters,json=idealHarvesters" json:"ideal_harvesters,omitempty"`
+	WeaponCooldown     float32          `protobuf:"fixed32,30,opt,name=weapon_cooldown,json=weaponCooldown" json:"weapon_cooldown,omitempty"`
+	EngagedTargetTag   uint64           `protobuf:"varint,34,opt,name=engaged_target_tag,json=engagedTargetTag" json:"engaged_target_tag,omitempty"`
 	XXX_unrecognized   []byte           `json:"-"`
 }
 
@@ -581,36 +581,36 @@ func (*Unit) ProtoMessage()               {}
 func (*Unit) Descriptor() ([]byte, []int) { return fileDescriptorRaw, []int{6} }
 
 func (m *Unit) GetDisplayType() DisplayType {
-	if m != nil && m.DisplayType != nil {
-		return *m.DisplayType
+	if m != nil {
+		return m.DisplayType
 	}
 	return DisplayType_Visible
 }
 
 func (m *Unit) GetAlliance() Alliance {
-	if m != nil && m.Alliance != nil {
-		return *m.Alliance
+	if m != nil {
+		return m.Alliance
 	}
 	return Alliance_Self
 }
 
 func (m *Unit) GetTag() uint64 {
-	if m != nil && m.Tag != nil {
-		return *m.Tag
+	if m != nil {
+		return m.Tag
 	}
 	return 0
 }
 
 func (m *Unit) GetUnitType() uint32 {
-	if m != nil && m.UnitType != nil {
-		return *m.UnitType
+	if m != nil {
+		return m.UnitType
 	}
 	return 0
 }
 
 func (m *Unit) GetOwner() int32 {
-	if m != nil && m.Owner != nil {
-		return *m.Owner
+	if m != nil {
+		return m.Owner
 	}
 	return 0
 }
@@ -623,141 +623,141 @@ func (m *Unit) GetPos() *Point {
 }
 
 func (m *Unit) GetFacing() float32 {
-	if m != nil && m.Facing != nil {
-		return *m.Facing
+	if m != nil {
+		return m.Facing
 	}
 	return 0
 }
 
 func (m *Unit) GetRadius() float32 {
-	if m != nil && m.Radius != nil {
-		return *m.Radius
+	if m != nil {
+		return m.Radius
 	}
 	return 0
 }
 
 func (m *Unit) GetBuildProgress() float32 {
-	if m != nil && m.BuildProgress != nil {
-		return *m.BuildProgress
+	if m != nil {
+		return m.BuildProgress
 	}
 	return 0
 }
 
 func (m *Unit) GetCloak() CloakState {
-	if m != nil && m.Cloak != nil {
-		return *m.Cloak
+	if m != nil {
+		return m.Cloak
 	}
 	return CloakState_Cloaked
 }
 
 func (m *Unit) GetDetectRange() float32 {
-	if m != nil && m.DetectRange != nil {
-		return *m.DetectRange
+	if m != nil {
+		return m.DetectRange
 	}
 	return 0
 }
 
 func (m *Unit) GetRadarRange() float32 {
-	if m != nil && m.RadarRange != nil {
-		return *m.RadarRange
+	if m != nil {
+		return m.RadarRange
 	}
 	return 0
 }
 
 func (m *Unit) GetIsSelected() bool {
-	if m != nil && m.IsSelected != nil {
-		return *m.IsSelected
+	if m != nil {
+		return m.IsSelected
 	}
 	return false
 }
 
 func (m *Unit) GetIsOnScreen() bool {
-	if m != nil && m.IsOnScreen != nil {
-		return *m.IsOnScreen
+	if m != nil {
+		return m.IsOnScreen
 	}
 	return false
 }
 
 func (m *Unit) GetIsBlip() bool {
-	if m != nil && m.IsBlip != nil {
-		return *m.IsBlip
+	if m != nil {
+		return m.IsBlip
 	}
 	return false
 }
 
 func (m *Unit) GetIsPowered() bool {
-	if m != nil && m.IsPowered != nil {
-		return *m.IsPowered
+	if m != nil {
+		return m.IsPowered
 	}
 	return false
 }
 
 func (m *Unit) GetHealth() float32 {
-	if m != nil && m.Health != nil {
-		return *m.Health
+	if m != nil {
+		return m.Health
 	}
 	return 0
 }
 
 func (m *Unit) GetHealthMax() float32 {
-	if m != nil && m.HealthMax != nil {
-		return *m.HealthMax
+	if m != nil {
+		return m.HealthMax
 	}
 	return 0
 }
 
 func (m *Unit) GetShield() float32 {
-	if m != nil && m.Shield != nil {
-		return *m.Shield
+	if m != nil {
+		return m.Shield
 	}
 	return 0
 }
 
 func (m *Unit) GetShieldMax() float32 {
-	if m != nil && m.ShieldMax != nil {
-		return *m.ShieldMax
+	if m != nil {
+		return m.ShieldMax
 	}
 	return 0
 }
 
 func (m *Unit) GetEnergy() float32 {
-	if m != nil && m.Energy != nil {
-		return *m.Energy
+	if m != nil {
+		return m.Energy
 	}
 	return 0
 }
 
 func (m *Unit) GetEnergyMax() float32 {
-	if m != nil && m.EnergyMax != nil {
-		return *m.EnergyMax
+	if m != nil {
+		return m.EnergyMax
 	}
 	return 0
 }
 
 func (m *Unit) GetMineralContents() int32 {
-	if m != nil && m.MineralContents != nil {
-		return *m.MineralContents
+	if m != nil {
+		return m.MineralContents
 	}
 	return 0
 }
 
 func (m *Unit) GetVespeneContents() int32 {
-	if m != nil && m.VespeneContents != nil {
-		return *m.VespeneContents
+	if m != nil {
+		return m.VespeneContents
 	}
 	return 0
 }
 
 func (m *Unit) GetIsFlying() bool {
-	if m != nil && m.IsFlying != nil {
-		return *m.IsFlying
+	if m != nil {
+		return m.IsFlying
 	}
 	return false
 }
 
 func (m *Unit) GetIsBurrowed() bool {
-	if m != nil && m.IsBurrowed != nil {
-		return *m.IsBurrowed
+	if m != nil {
+		return m.IsBurrowed
 	}
 	return false
 }
@@ -770,8 +770,8 @@ func (m *Unit) GetOrders() []*UnitOrder {
 }
 
 func (m *Unit) GetAddOnTag() uint64 {
-	if m != nil && m.AddOnTag != nil {
-		return *m.AddOnTag
+	if m != nil {
+		return m.AddOnTag
 	}
 	return 0
 }
@@ -784,15 +784,15 @@ func (m *Unit) GetPassengers() []*PassengerUnit {
 }
 
 func (m *Unit) GetCargoSpaceTaken() int32 {
-	if m != nil && m.CargoSpaceTaken != nil {
-		return *m.CargoSpaceTaken
+	if m != nil {
+		return m.CargoSpaceTaken
 	}
 	return 0
 }
 
 func (m *Unit) GetCargoSpaceMax() int32 {
-	if m != nil && m.CargoSpaceMax != nil {
-		return *m.CargoSpaceMax
+	if m != nil {
+		return m.CargoSpaceMax
 	}
 	return 0
 }
@@ -805,29 +805,29 @@ func (m *Unit) GetBuffIds() []uint32 {
 }
 
 func (m *Unit) GetAssignedHarvesters() int32 {
-	if m != nil && m.AssignedHarvesters != nil {
-		return *m.AssignedHarvesters
+	if m != nil {
+		return m.AssignedHarvesters
 	}
 	return 0
 }
 
 func (m *Unit) GetIdealHarvesters() int32 {
-	if m != nil && m.IdealHarvesters != nil {
-		return *m.IdealHarvesters
+	if m != nil {
+		return m.IdealHarvesters
 	}
 	return 0
 }
 
 func (m *Unit) GetWeaponCooldown() float32 {
-	if m != nil && m.WeaponCooldown != nil {
-		return *m.WeaponCooldown
+	if m != nil {
+		return m.WeaponCooldown
 	}
 	return 0
 }
 
 func (m *Unit) GetEngagedTargetTag() uint64 {
-	if m != nil && m.EngagedTargetTag != nil {
-		return *m.EngagedTargetTag
+	if m != nil {
+		return m.EngagedTargetTag
 	}
 	return 0
 }
@@ -875,7 +875,7 @@ func (m *Event) GetDeadUnits() []uint64 {
 }
 
 type Effect struct {
-	EffectId         *uint32    `protobuf:"varint,1,opt,name=effect_id,json=effectId" json:"effect_id,omitempty"`
+	EffectId         uint32     `protobuf:"varint,1,opt,name=effect_id,json=effectId" json:"effect_id,omitempty"`
 	Pos              []*Point2D `protobuf:"bytes,2,rep,name=pos" json:"pos,omitempty"`
 	XXX_unrecognized []byte     `json:"-"`
 }
@@ -886,8 +886,8 @@ func (*Effect) ProtoMessage()               {}
 func (*Effect) Descriptor() ([]byte, []int) { return fileDescriptorRaw, []int{9} }
 
 func (m *Effect) GetEffectId() uint32 {
-	if m != nil && m.EffectId != nil {
-		return *m.EffectId
+	if m != nil {
+		return m.EffectId
 	}
 	return 0
 }
@@ -1053,13 +1053,13 @@ func _ActionRaw_OneofSizer(msg proto.Message) (n int) {
 }
 
 type ActionRawUnitCommand struct {
-	AbilityId *int32 `protobuf:"varint,1,opt,name=ability_id,json=abilityId" json:"ability_id,omitempty"`
+	AbilityId int32 `protobuf:"varint,1,opt,name=ability_id,json=abilityId" json:"ability_id,omitempty"`
 	// Types that are valid to be assigned to Target:
 	//	*ActionRawUnitCommand_TargetWorldSpacePos
 	//	*ActionRawUnitCommand_TargetUnitTag
 	Target           isActionRawUnitCommand_Target `protobuf_oneof:"target"`
 	UnitTags         []uint64                      `protobuf:"varint,4,rep,name=unit_tags,json=unitTags" json:"unit_tags,omitempty"`
-	QueueCommand     *bool                         `protobuf:"varint,5,opt,name=queue_command,json=queueCommand" json:"queue_command,omitempty"`
+	QueueCommand     bool                          `protobuf:"varint,5,opt,name=queue_command,json=queueCommand" json:"queue_command,omitempty"`
 	XXX_unrecognized []byte                        `json:"-"`
 }
 
@@ -1090,8 +1090,8 @@ func (m *ActionRawUnitCommand) GetTarget() isActionRawUnitCommand_Target {
 }
 
 func (m *ActionRawUnitCommand) GetAbilityId() int32 {
-	if m != nil && m.AbilityId != nil {
-		return *m.AbilityId
+	if m != nil {
+		return m.AbilityId
 	}
 	return 0
 }
@@ -1118,8 +1118,8 @@ func (m *ActionRawUnitCommand) GetUnitTags() []uint64 {
 }
 
 func (m *ActionRawUnitCommand) GetQueueCommand() bool {
-	if m != nil && m.QueueCommand != nil {
-		return *m.QueueCommand
+	if m != nil {
+		return m.QueueCommand
 	}
 	return false
 }
@@ -1211,7 +1211,7 @@ func (m *ActionRawCameraMove) GetCenterWorldSpace() *Point {
 }
 
 type ActionRawToggleAutocast struct {
-	AbilityId        *int32   `protobuf:"varint,1,opt,name=ability_id,json=abilityId" json:"ability_id,omitempty"`
+	AbilityId        int32    `protobuf:"varint,1,opt,name=ability_id,json=abilityId" json:"ability_id,omitempty"`
 	UnitTags         []uint64 `protobuf:"varint,2,rep,name=unit_tags,json=unitTags" json:"unit_tags,omitempty"`
 	XXX_unrecognized []byte   `json:"-"`
 }
@@ -1222,8 +1222,8 @@ func (*ActionRawToggleAutocast) ProtoMessage()               {}
 func (*ActionRawToggleAutocast) Descriptor() ([]byte, []int) { return fileDescriptorRaw, []int{13} }
 
 func (m *ActionRawToggleAutocast) GetAbilityId() int32 {
-	if m != nil && m.AbilityId != nil {
-		return *m.AbilityId
+	if m != nil {
+		return m.AbilityId
 	}
 	return 0
 }

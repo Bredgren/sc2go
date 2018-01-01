@@ -589,10 +589,10 @@ func (m *Line) GetP1() *Point {
 }
 
 type Color struct {
-	R                *uint32 `protobuf:"varint,1,opt,name=r" json:"r,omitempty"`
-	G                *uint32 `protobuf:"varint,2,opt,name=g" json:"g,omitempty"`
-	B                *uint32 `protobuf:"varint,3,opt,name=b" json:"b,omitempty"`
-	XXX_unrecognized []byte  `json:"-"`
+	R                uint32 `protobuf:"varint,1,opt,name=r" json:"r,omitempty"`
+	G                uint32 `protobuf:"varint,2,opt,name=g" json:"g,omitempty"`
+	B                uint32 `protobuf:"varint,3,opt,name=b" json:"b,omitempty"`
+	XXX_unrecognized []byte `json:"-"`
 }
 
 func (m *Color) Reset()                    { *m = Color{} }
@@ -601,34 +601,34 @@ func (*Color) ProtoMessage()               {}
 func (*Color) Descriptor() ([]byte, []int) { return fileDescriptorDebug, []int{3} }
 
 func (m *Color) GetR() uint32 {
-	if m != nil && m.R != nil {
-		return *m.R
+	if m != nil {
+		return m.R
 	}
 	return 0
 }
 
 func (m *Color) GetG() uint32 {
-	if m != nil && m.G != nil {
-		return *m.G
+	if m != nil {
+		return m.G
 	}
 	return 0
 }
 
 func (m *Color) GetB() uint32 {
-	if m != nil && m.B != nil {
-		return *m.B
+	if m != nil {
+		return m.B
 	}
 	return 0
 }
 
 // Display debug text on screen.
 type DebugText struct {
-	Color            *Color  `protobuf:"bytes,1,opt,name=color" json:"color,omitempty"`
-	Text             *string `protobuf:"bytes,2,opt,name=text" json:"text,omitempty"`
-	VirtualPos       *Point  `protobuf:"bytes,3,opt,name=virtual_pos,json=virtualPos" json:"virtual_pos,omitempty"`
-	WorldPos         *Point  `protobuf:"bytes,4,opt,name=world_pos,json=worldPos" json:"world_pos,omitempty"`
-	Size             *uint32 `protobuf:"varint,5,opt,name=size" json:"size,omitempty"`
-	XXX_unrecognized []byte  `json:"-"`
+	Color            *Color `protobuf:"bytes,1,opt,name=color" json:"color,omitempty"`
+	Text             string `protobuf:"bytes,2,opt,name=text" json:"text,omitempty"`
+	VirtualPos       *Point `protobuf:"bytes,3,opt,name=virtual_pos,json=virtualPos" json:"virtual_pos,omitempty"`
+	WorldPos         *Point `protobuf:"bytes,4,opt,name=world_pos,json=worldPos" json:"world_pos,omitempty"`
+	Size             uint32 `protobuf:"varint,5,opt,name=size" json:"size,omitempty"`
+	XXX_unrecognized []byte `json:"-"`
 }
 
 func (m *DebugText) Reset()                    { *m = DebugText{} }
@@ -644,8 +644,8 @@ func (m *DebugText) GetColor() *Color {
 }
 
 func (m *DebugText) GetText() string {
-	if m != nil && m.Text != nil {
-		return *m.Text
+	if m != nil {
+		return m.Text
 	}
 	return ""
 }
@@ -665,8 +665,8 @@ func (m *DebugText) GetWorldPos() *Point {
 }
 
 func (m *DebugText) GetSize() uint32 {
-	if m != nil && m.Size != nil {
-		return *m.Size
+	if m != nil {
+		return m.Size
 	}
 	return 0
 }
@@ -733,10 +733,10 @@ func (m *DebugBox) GetMax() *Point {
 
 // Display debug spheres on screen.
 type DebugSphere struct {
-	Color            *Color   `protobuf:"bytes,1,opt,name=color" json:"color,omitempty"`
-	P                *Point   `protobuf:"bytes,2,opt,name=p" json:"p,omitempty"`
-	R                *float32 `protobuf:"fixed32,3,opt,name=r" json:"r,omitempty"`
-	XXX_unrecognized []byte   `json:"-"`
+	Color            *Color  `protobuf:"bytes,1,opt,name=color" json:"color,omitempty"`
+	P                *Point  `protobuf:"bytes,2,opt,name=p" json:"p,omitempty"`
+	R                float32 `protobuf:"fixed32,3,opt,name=r" json:"r,omitempty"`
+	XXX_unrecognized []byte  `json:"-"`
 }
 
 func (m *DebugSphere) Reset()                    { *m = DebugSphere{} }
@@ -759,17 +759,17 @@ func (m *DebugSphere) GetP() *Point {
 }
 
 func (m *DebugSphere) GetR() float32 {
-	if m != nil && m.R != nil {
-		return *m.R
+	if m != nil {
+		return m.R
 	}
 	return 0
 }
 
 type DebugCreateUnit struct {
-	UnitType         *uint32  `protobuf:"varint,1,opt,name=unit_type,json=unitType" json:"unit_type,omitempty"`
-	Owner            *int32   `protobuf:"varint,2,opt,name=owner" json:"owner,omitempty"`
+	UnitType         uint32   `protobuf:"varint,1,opt,name=unit_type,json=unitType" json:"unit_type,omitempty"`
+	Owner            int32    `protobuf:"varint,2,opt,name=owner" json:"owner,omitempty"`
 	Pos              *Point2D `protobuf:"bytes,3,opt,name=pos" json:"pos,omitempty"`
-	Quantity         *uint32  `protobuf:"varint,4,opt,name=quantity" json:"quantity,omitempty"`
+	Quantity         uint32   `protobuf:"varint,4,opt,name=quantity" json:"quantity,omitempty"`
 	XXX_unrecognized []byte   `json:"-"`
 }
 
@@ -779,15 +779,15 @@ func (*DebugCreateUnit) ProtoMessage()               {}
 func (*DebugCreateUnit) Descriptor() ([]byte, []int) { return fileDescriptorDebug, []int{8} }
 
 func (m *DebugCreateUnit) GetUnitType() uint32 {
-	if m != nil && m.UnitType != nil {
-		return *m.UnitType
+	if m != nil {
+		return m.UnitType
 	}
 	return 0
 }
 
 func (m *DebugCreateUnit) GetOwner() int32 {
-	if m != nil && m.Owner != nil {
-		return *m.Owner
+	if m != nil {
+		return m.Owner
 	}
 	return 0
 }
@@ -800,8 +800,8 @@ func (m *DebugCreateUnit) GetPos() *Point2D {
 }
 
 func (m *DebugCreateUnit) GetQuantity() uint32 {
-	if m != nil && m.Quantity != nil {
-		return *m.Quantity
+	if m != nil {
+		return m.Quantity
 	}
 	return 0
 }
@@ -824,9 +824,9 @@ func (m *DebugKillUnit) GetTag() []uint64 {
 }
 
 type DebugTestProcess struct {
-	Test             *DebugTestProcess_Test `protobuf:"varint,1,opt,name=test,enum=DebugTestProcess_Test" json:"test,omitempty"`
-	DelayMs          *int32                 `protobuf:"varint,2,opt,name=delay_ms,json=delayMs" json:"delay_ms,omitempty"`
-	XXX_unrecognized []byte                 `json:"-"`
+	Test             DebugTestProcess_Test `protobuf:"varint,1,opt,name=test,enum=DebugTestProcess_Test" json:"test,omitempty"`
+	DelayMs          int32                 `protobuf:"varint,2,opt,name=delay_ms,json=delayMs" json:"delay_ms,omitempty"`
+	XXX_unrecognized []byte                `json:"-"`
 }
 
 func (m *DebugTestProcess) Reset()                    { *m = DebugTestProcess{} }
@@ -835,22 +835,22 @@ func (*DebugTestProcess) ProtoMessage()               {}
 func (*DebugTestProcess) Descriptor() ([]byte, []int) { return fileDescriptorDebug, []int{10} }
 
 func (m *DebugTestProcess) GetTest() DebugTestProcess_Test {
-	if m != nil && m.Test != nil {
-		return *m.Test
+	if m != nil {
+		return m.Test
 	}
 	return DebugTestProcess_hang
 }
 
 func (m *DebugTestProcess) GetDelayMs() int32 {
-	if m != nil && m.DelayMs != nil {
-		return *m.DelayMs
+	if m != nil {
+		return m.DelayMs
 	}
 	return 0
 }
 
 type DebugSetScore struct {
-	Score            *float32 `protobuf:"fixed32,1,opt,name=score" json:"score,omitempty"`
-	XXX_unrecognized []byte   `json:"-"`
+	Score            float32 `protobuf:"fixed32,1,opt,name=score" json:"score,omitempty"`
+	XXX_unrecognized []byte  `json:"-"`
 }
 
 func (m *DebugSetScore) Reset()                    { *m = DebugSetScore{} }
@@ -859,15 +859,15 @@ func (*DebugSetScore) ProtoMessage()               {}
 func (*DebugSetScore) Descriptor() ([]byte, []int) { return fileDescriptorDebug, []int{11} }
 
 func (m *DebugSetScore) GetScore() float32 {
-	if m != nil && m.Score != nil {
-		return *m.Score
+	if m != nil {
+		return m.Score
 	}
 	return 0
 }
 
 type DebugEndGame struct {
-	EndResult        *DebugEndGame_EndResult `protobuf:"varint,1,opt,name=end_result,json=endResult,enum=DebugEndGame_EndResult" json:"end_result,omitempty"`
-	XXX_unrecognized []byte                  `json:"-"`
+	EndResult        DebugEndGame_EndResult `protobuf:"varint,1,opt,name=end_result,json=endResult,enum=DebugEndGame_EndResult" json:"end_result,omitempty"`
+	XXX_unrecognized []byte                 `json:"-"`
 }
 
 func (m *DebugEndGame) Reset()                    { *m = DebugEndGame{} }
@@ -876,17 +876,17 @@ func (*DebugEndGame) ProtoMessage()               {}
 func (*DebugEndGame) Descriptor() ([]byte, []int) { return fileDescriptorDebug, []int{12} }
 
 func (m *DebugEndGame) GetEndResult() DebugEndGame_EndResult {
-	if m != nil && m.EndResult != nil {
-		return *m.EndResult
+	if m != nil {
+		return m.EndResult
 	}
 	return DebugEndGame_Surrender
 }
 
 type DebugSetUnitValue struct {
-	UnitValue        *DebugSetUnitValue_UnitValue `protobuf:"varint,1,opt,name=unit_value,json=unitValue,enum=DebugSetUnitValue_UnitValue" json:"unit_value,omitempty"`
-	Value            *float32                     `protobuf:"fixed32,2,opt,name=value" json:"value,omitempty"`
-	UnitTag          *uint64                      `protobuf:"varint,3,opt,name=unit_tag,json=unitTag" json:"unit_tag,omitempty"`
-	XXX_unrecognized []byte                       `json:"-"`
+	UnitValue        DebugSetUnitValue_UnitValue `protobuf:"varint,1,opt,name=unit_value,json=unitValue,enum=DebugSetUnitValue_UnitValue" json:"unit_value,omitempty"`
+	Value            float32                     `protobuf:"fixed32,2,opt,name=value" json:"value,omitempty"`
+	UnitTag          uint64                      `protobuf:"varint,3,opt,name=unit_tag,json=unitTag" json:"unit_tag,omitempty"`
+	XXX_unrecognized []byte                      `json:"-"`
 }
 
 func (m *DebugSetUnitValue) Reset()                    { *m = DebugSetUnitValue{} }
@@ -895,22 +895,22 @@ func (*DebugSetUnitValue) ProtoMessage()               {}
 func (*DebugSetUnitValue) Descriptor() ([]byte, []int) { return fileDescriptorDebug, []int{13} }
 
 func (m *DebugSetUnitValue) GetUnitValue() DebugSetUnitValue_UnitValue {
-	if m != nil && m.UnitValue != nil {
-		return *m.UnitValue
+	if m != nil {
+		return m.UnitValue
 	}
 	return DebugSetUnitValue_Energy
 }
 
 func (m *DebugSetUnitValue) GetValue() float32 {
-	if m != nil && m.Value != nil {
-		return *m.Value
+	if m != nil {
+		return m.Value
 	}
 	return 0
 }
 
 func (m *DebugSetUnitValue) GetUnitTag() uint64 {
-	if m != nil && m.UnitTag != nil {
-		return *m.UnitTag
+	if m != nil {
+		return m.UnitTag
 	}
 	return 0
 }

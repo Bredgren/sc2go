@@ -65,10 +65,10 @@ func (x *Score_ScoreType) UnmarshalJSON(data []byte) error {
 func (Score_ScoreType) EnumDescriptor() ([]byte, []int) { return fileDescriptorScore, []int{0, 0} }
 
 type Score struct {
-	ScoreType        *Score_ScoreType `protobuf:"varint,6,opt,name=score_type,json=scoreType,enum=Score_ScoreType" json:"score_type,omitempty"`
-	Score            *int32           `protobuf:"varint,7,opt,name=score" json:"score,omitempty"`
-	ScoreDetails     *ScoreDetails    `protobuf:"bytes,8,opt,name=score_details,json=scoreDetails" json:"score_details,omitempty"`
-	XXX_unrecognized []byte           `json:"-"`
+	ScoreType        Score_ScoreType `protobuf:"varint,6,opt,name=score_type,json=scoreType,enum=Score_ScoreType" json:"score_type,omitempty"`
+	Score            int32           `protobuf:"varint,7,opt,name=score" json:"score,omitempty"`
+	ScoreDetails     *ScoreDetails   `protobuf:"bytes,8,opt,name=score_details,json=scoreDetails" json:"score_details,omitempty"`
+	XXX_unrecognized []byte          `json:"-"`
 }
 
 func (m *Score) Reset()                    { *m = Score{} }
@@ -77,15 +77,15 @@ func (*Score) ProtoMessage()               {}
 func (*Score) Descriptor() ([]byte, []int) { return fileDescriptorScore, []int{0} }
 
 func (m *Score) GetScoreType() Score_ScoreType {
-	if m != nil && m.ScoreType != nil {
-		return *m.ScoreType
+	if m != nil {
+		return m.ScoreType
 	}
 	return Score_Curriculum
 }
 
 func (m *Score) GetScore() int32 {
-	if m != nil && m.Score != nil {
-		return *m.Score
+	if m != nil {
+		return m.Score
 	}
 	return 0
 }
@@ -98,12 +98,12 @@ func (m *Score) GetScoreDetails() *ScoreDetails {
 }
 
 type CategoryScoreDetails struct {
-	None             *float32 `protobuf:"fixed32,1,opt,name=none" json:"none,omitempty"`
-	Army             *float32 `protobuf:"fixed32,2,opt,name=army" json:"army,omitempty"`
-	Economy          *float32 `protobuf:"fixed32,3,opt,name=economy" json:"economy,omitempty"`
-	Technology       *float32 `protobuf:"fixed32,4,opt,name=technology" json:"technology,omitempty"`
-	Upgrade          *float32 `protobuf:"fixed32,5,opt,name=upgrade" json:"upgrade,omitempty"`
-	XXX_unrecognized []byte   `json:"-"`
+	None             float32 `protobuf:"fixed32,1,opt,name=none" json:"none,omitempty"`
+	Army             float32 `protobuf:"fixed32,2,opt,name=army" json:"army,omitempty"`
+	Economy          float32 `protobuf:"fixed32,3,opt,name=economy" json:"economy,omitempty"`
+	Technology       float32 `protobuf:"fixed32,4,opt,name=technology" json:"technology,omitempty"`
+	Upgrade          float32 `protobuf:"fixed32,5,opt,name=upgrade" json:"upgrade,omitempty"`
+	XXX_unrecognized []byte  `json:"-"`
 }
 
 func (m *CategoryScoreDetails) Reset()                    { *m = CategoryScoreDetails{} }
@@ -112,45 +112,45 @@ func (*CategoryScoreDetails) ProtoMessage()               {}
 func (*CategoryScoreDetails) Descriptor() ([]byte, []int) { return fileDescriptorScore, []int{1} }
 
 func (m *CategoryScoreDetails) GetNone() float32 {
-	if m != nil && m.None != nil {
-		return *m.None
+	if m != nil {
+		return m.None
 	}
 	return 0
 }
 
 func (m *CategoryScoreDetails) GetArmy() float32 {
-	if m != nil && m.Army != nil {
-		return *m.Army
+	if m != nil {
+		return m.Army
 	}
 	return 0
 }
 
 func (m *CategoryScoreDetails) GetEconomy() float32 {
-	if m != nil && m.Economy != nil {
-		return *m.Economy
+	if m != nil {
+		return m.Economy
 	}
 	return 0
 }
 
 func (m *CategoryScoreDetails) GetTechnology() float32 {
-	if m != nil && m.Technology != nil {
-		return *m.Technology
+	if m != nil {
+		return m.Technology
 	}
 	return 0
 }
 
 func (m *CategoryScoreDetails) GetUpgrade() float32 {
-	if m != nil && m.Upgrade != nil {
-		return *m.Upgrade
+	if m != nil {
+		return m.Upgrade
 	}
 	return 0
 }
 
 type VitalScoreDetails struct {
-	Life             *float32 `protobuf:"fixed32,1,opt,name=life" json:"life,omitempty"`
-	Shields          *float32 `protobuf:"fixed32,2,opt,name=shields" json:"shields,omitempty"`
-	Energy           *float32 `protobuf:"fixed32,3,opt,name=energy" json:"energy,omitempty"`
-	XXX_unrecognized []byte   `json:"-"`
+	Life             float32 `protobuf:"fixed32,1,opt,name=life" json:"life,omitempty"`
+	Shields          float32 `protobuf:"fixed32,2,opt,name=shields" json:"shields,omitempty"`
+	Energy           float32 `protobuf:"fixed32,3,opt,name=energy" json:"energy,omitempty"`
+	XXX_unrecognized []byte  `json:"-"`
 }
 
 func (m *VitalScoreDetails) Reset()                    { *m = VitalScoreDetails{} }
@@ -159,51 +159,51 @@ func (*VitalScoreDetails) ProtoMessage()               {}
 func (*VitalScoreDetails) Descriptor() ([]byte, []int) { return fileDescriptorScore, []int{2} }
 
 func (m *VitalScoreDetails) GetLife() float32 {
-	if m != nil && m.Life != nil {
-		return *m.Life
+	if m != nil {
+		return m.Life
 	}
 	return 0
 }
 
 func (m *VitalScoreDetails) GetShields() float32 {
-	if m != nil && m.Shields != nil {
-		return *m.Shields
+	if m != nil {
+		return m.Shields
 	}
 	return 0
 }
 
 func (m *VitalScoreDetails) GetEnergy() float32 {
-	if m != nil && m.Energy != nil {
-		return *m.Energy
+	if m != nil {
+		return m.Energy
 	}
 	return 0
 }
 
 type ScoreDetails struct {
 	// Sum of time any available structure able to produce a unit is not. The time stacks, as in, three idle barracks will increase idle_production_time three times quicker than just one.
-	IdleProductionTime *float32 `protobuf:"fixed32,1,opt,name=idle_production_time,json=idleProductionTime" json:"idle_production_time,omitempty"`
+	IdleProductionTime float32 `protobuf:"fixed32,1,opt,name=idle_production_time,json=idleProductionTime" json:"idle_production_time,omitempty"`
 	// Sum of time any worker is not mining. Note a worker building is not idle and three idle workers will increase this value three times quicker than just one.
-	IdleWorkerTime *float32 `protobuf:"fixed32,2,opt,name=idle_worker_time,json=idleWorkerTime" json:"idle_worker_time,omitempty"`
+	IdleWorkerTime float32 `protobuf:"fixed32,2,opt,name=idle_worker_time,json=idleWorkerTime" json:"idle_worker_time,omitempty"`
 	// Sum of minerals and vespene spent on completed units.
-	TotalValueUnits *float32 `protobuf:"fixed32,3,opt,name=total_value_units,json=totalValueUnits" json:"total_value_units,omitempty"`
+	TotalValueUnits float32 `protobuf:"fixed32,3,opt,name=total_value_units,json=totalValueUnits" json:"total_value_units,omitempty"`
 	// Sum of minerals and vespene spent on completed structures.
-	TotalValueStructures *float32 `protobuf:"fixed32,4,opt,name=total_value_structures,json=totalValueStructures" json:"total_value_structures,omitempty"`
+	TotalValueStructures float32 `protobuf:"fixed32,4,opt,name=total_value_structures,json=totalValueStructures" json:"total_value_structures,omitempty"`
 	// Sum of minerals and vespene of units, belonging to the opponent, that the player has destroyed.
-	KilledValueUnits *float32 `protobuf:"fixed32,5,opt,name=killed_value_units,json=killedValueUnits" json:"killed_value_units,omitempty"`
+	KilledValueUnits float32 `protobuf:"fixed32,5,opt,name=killed_value_units,json=killedValueUnits" json:"killed_value_units,omitempty"`
 	// Sum of minerals and vespene of structures, belonging to the opponent, that the player has destroyed.
-	KilledValueStructures *float32 `protobuf:"fixed32,6,opt,name=killed_value_structures,json=killedValueStructures" json:"killed_value_structures,omitempty"`
+	KilledValueStructures float32 `protobuf:"fixed32,6,opt,name=killed_value_structures,json=killedValueStructures" json:"killed_value_structures,omitempty"`
 	// Sum of minerals collected by the player.
-	CollectedMinerals *float32 `protobuf:"fixed32,7,opt,name=collected_minerals,json=collectedMinerals" json:"collected_minerals,omitempty"`
+	CollectedMinerals float32 `protobuf:"fixed32,7,opt,name=collected_minerals,json=collectedMinerals" json:"collected_minerals,omitempty"`
 	// Sum of vespene collected by the player.
-	CollectedVespene *float32 `protobuf:"fixed32,8,opt,name=collected_vespene,json=collectedVespene" json:"collected_vespene,omitempty"`
+	CollectedVespene float32 `protobuf:"fixed32,8,opt,name=collected_vespene,json=collectedVespene" json:"collected_vespene,omitempty"`
 	// Estimated income of minerals over the next minute based on the players current income. The unit is minerals per minute.
-	CollectionRateMinerals *float32 `protobuf:"fixed32,9,opt,name=collection_rate_minerals,json=collectionRateMinerals" json:"collection_rate_minerals,omitempty"`
+	CollectionRateMinerals float32 `protobuf:"fixed32,9,opt,name=collection_rate_minerals,json=collectionRateMinerals" json:"collection_rate_minerals,omitempty"`
 	// Estimated income of vespene over the next minute based on the players current income. The unit is vespene per minute.
-	CollectionRateVespene *float32 `protobuf:"fixed32,10,opt,name=collection_rate_vespene,json=collectionRateVespene" json:"collection_rate_vespene,omitempty"`
+	CollectionRateVespene float32 `protobuf:"fixed32,10,opt,name=collection_rate_vespene,json=collectionRateVespene" json:"collection_rate_vespene,omitempty"`
 	// Sum of spent minerals at the moment it is spent. For example, this number is incremented by 50 the moment an scv is queued in a command center.  It is decremented by 50 if that unit is canceled.
-	SpentMinerals *float32 `protobuf:"fixed32,11,opt,name=spent_minerals,json=spentMinerals" json:"spent_minerals,omitempty"`
+	SpentMinerals float32 `protobuf:"fixed32,11,opt,name=spent_minerals,json=spentMinerals" json:"spent_minerals,omitempty"`
 	// Sum of spent vespene at the moment it is spent. For example, this number is incremented by 50 when a reaper is queued but decremented by 50 if it is canceled.
-	SpentVespene *float32 `protobuf:"fixed32,12,opt,name=spent_vespene,json=spentVespene" json:"spent_vespene,omitempty"`
+	SpentVespene float32 `protobuf:"fixed32,12,opt,name=spent_vespene,json=spentVespene" json:"spent_vespene,omitempty"`
 	// Sum of food, or supply, utilized in the categories above.
 	FoodUsed *CategoryScoreDetails `protobuf:"bytes,13,opt,name=food_used,json=foodUsed" json:"food_used,omitempty"`
 	// Sum of enemies catagories destroyed in minerals.
@@ -241,85 +241,85 @@ func (*ScoreDetails) ProtoMessage()               {}
 func (*ScoreDetails) Descriptor() ([]byte, []int) { return fileDescriptorScore, []int{3} }
 
 func (m *ScoreDetails) GetIdleProductionTime() float32 {
-	if m != nil && m.IdleProductionTime != nil {
-		return *m.IdleProductionTime
+	if m != nil {
+		return m.IdleProductionTime
 	}
 	return 0
 }
 
 func (m *ScoreDetails) GetIdleWorkerTime() float32 {
-	if m != nil && m.IdleWorkerTime != nil {
-		return *m.IdleWorkerTime
+	if m != nil {
+		return m.IdleWorkerTime
 	}
 	return 0
 }
 
 func (m *ScoreDetails) GetTotalValueUnits() float32 {
-	if m != nil && m.TotalValueUnits != nil {
-		return *m.TotalValueUnits
+	if m != nil {
+		return m.TotalValueUnits
 	}
 	return 0
 }
 
 func (m *ScoreDetails) GetTotalValueStructures() float32 {
-	if m != nil && m.TotalValueStructures != nil {
-		return *m.TotalValueStructures
+	if m != nil {
+		return m.TotalValueStructures
 	}
 	return 0
 }
 
 func (m *ScoreDetails) GetKilledValueUnits() float32 {
-	if m != nil && m.KilledValueUnits != nil {
-		return *m.KilledValueUnits
+	if m != nil {
+		return m.KilledValueUnits
 	}
 	return 0
 }
 
 func (m *ScoreDetails) GetKilledValueStructures() float32 {
-	if m != nil && m.KilledValueStructures != nil {
-		return *m.KilledValueStructures
+	if m != nil {
+		return m.KilledValueStructures
 	}
 	return 0
 }
 
 func (m *ScoreDetails) GetCollectedMinerals() float32 {
-	if m != nil && m.CollectedMinerals != nil {
-		return *m.CollectedMinerals
+	if m != nil {
+		return m.CollectedMinerals
 	}
 	return 0
 }
 
 func (m *ScoreDetails) GetCollectedVespene() float32 {
-	if m != nil && m.CollectedVespene != nil {
-		return *m.CollectedVespene
+	if m != nil {
+		return m.CollectedVespene
 	}
 	return 0
 }
 
 func (m *ScoreDetails) GetCollectionRateMinerals() float32 {
-	if m != nil && m.CollectionRateMinerals != nil {
-		return *m.CollectionRateMinerals
+	if m != nil {
+		return m.CollectionRateMinerals
 	}
 	return 0
 }
 
 func (m *ScoreDetails) GetCollectionRateVespene() float32 {
-	if m != nil && m.CollectionRateVespene != nil {
-		return *m.CollectionRateVespene
+	if m != nil {
+		return m.CollectionRateVespene
 	}
 	return 0
 }
 
 func (m *ScoreDetails) GetSpentMinerals() float32 {
-	if m != nil && m.SpentMinerals != nil {
-		return *m.SpentMinerals
+	if m != nil {
+		return m.SpentMinerals
 	}
 	return 0
 }
 
 func (m *ScoreDetails) GetSpentVespene() float32 {
-	if m != nil && m.SpentVespene != nil {
-		return *m.SpentVespene
+	if m != nil {
+		return m.SpentVespene
 	}
 	return 0
 }
