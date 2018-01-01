@@ -14,12 +14,12 @@ import (
 
 const timeout = 120
 
-// LaunchSC2 starts the SC2 client and returns a connection to it for communicating.
-// exePath should be the full path to the SC2 executable. cwd is a path to the directory
-// to run SC2 from. If cwd is the empty string then the current directory is used. If
-// windowed is false then the SC2 client will start in fullscreen mode. When the SC2 client
-// exits one value will be sent over the exit channel.
-func LaunchSC2(exePath, cwd string, windowed bool, exit chan<- struct{}) (*websocket.Conn, error) {
+// LaunchSC2 starts the SC2 client and returns a Client object for communicating. exePath
+// should be the full path to the SC2 executable. cwd is a path to the directory to run
+// SC2 from. If cwd is the empty string then the current directory is used. If windowed
+// is false then the SC2 client will start in fullscreen mode. When the SC2 client exits
+// one value will be sent over the exit channel.
+func LaunchSC2(exePath, cwd string, windowed bool, exit chan<- struct{}) (*Client, error) {
 	freePort, err := freeport.GetFreePort()
 	if err != nil {
 		return nil, fmt.Errorf("finding a free port: %v", err)
@@ -65,5 +65,9 @@ func LaunchSC2(exePath, cwd string, windowed bool, exit chan<- struct{}) (*webso
 		exit <- struct{}{}
 	}()
 
-	return conn, nil
+	cl := &Client{
+		Conn: conn,
+	}
+	cl.init()
+	return cl, nil
 }
