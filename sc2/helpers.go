@@ -1,7 +1,10 @@
 package sc2
 
 import (
+	"log"
+
 	sc2api "github.com/Bredgren/sc2go/sc2apiprotocol"
+	"github.com/phayes/freeport"
 )
 
 // LocalMap returns a RequestCreateGame_LocalMap for SC2Map files.
@@ -26,5 +29,20 @@ func LocalMapData(data []byte) *sc2api.RequestCreateGame_LocalMap {
 func BattleNetMap(name string) *sc2api.RequestCreateGame_BattlenetMapName {
 	return &sc2api.RequestCreateGame_BattlenetMapName{
 		BattlenetMapName: name,
+	}
+}
+
+func GetFreePort() int32 {
+	port, err := freeport.GetFreePort()
+	if err != nil {
+		log.Fatalf("finding a free port: %v", err)
+	}
+	return int32(port)
+}
+
+func GetFreePortSet() sc2api.PortSet {
+	return sc2api.PortSet{
+		GamePort: GetFreePort(),
+		BasePort: GetFreePort(),
 	}
 }
