@@ -88,8 +88,16 @@ func main() {
 		log.Fatal(err)
 	}
 
-	// id, err := cl.JoinGameAsParticipant(sc2api.Race_Random, nil)
-	id, err := cl.JoinGameAsObserver(nil)
+	settings := &sc2api.RequestJoinGame{
+		// Participation: &sc2api.RequestJoinGame_Race{
+		// 	Race: sc2api.Race_Random,
+		// },
+		Participation: &sc2api.RequestJoinGame_ObservedPlayerId{
+			ObservedPlayerId: 0,
+		},
+		Options: &sc2api.InterfaceOptions{},
+	}
+	id, err := cl.JoinGame(settings)
 	if err != nil {
 		log.Fatal(err)
 	}

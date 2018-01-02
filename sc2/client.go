@@ -164,43 +164,28 @@ func (c *Client) CreateGame(settings *sc2api.RequestCreateGame) error {
 	return nil
 }
 
-// JoinGameAsObserver joins the game as an observer of all players. Options can be nil.
-func (c *Client) JoinGameAsObserver(options *sc2api.InterfaceOptions) (playerID uint32, e error) {
-	if options == nil {
-		options = &sc2api.InterfaceOptions{}
+// JoinGame joins the game and returns your player id.
+func (c *Client) JoinGame(settings *sc2api.RequestJoinGame) (playerID uint32, e error) {
+	id, err := c.JoinGameRequest(settings)
+	if err != nil {
+		return 0, err
 	}
-	settings := &sc2api.RequestJoinGame{
-		Participation: &sc2api.RequestJoinGame_ObservedPlayerId{
-			ObservedPlayerId: 0,
-		},
-		Options: options,
-	}
-
-	return c.joinGame(settings)
+	return c.JoinGameResponse(id)
 }
 
-// JoinGameAsParticipant joins the game as a participant. Options can be nil.
-func (c *Client) JoinGameAsParticipant(race sc2api.Race, options *sc2api.InterfaceOptions) (playerID uint32, e error) {
-	if options == nil {
-		options = &sc2api.InterfaceOptions{}
-	}
-	settings := &sc2api.RequestJoinGame{
-		Participation: &sc2api.RequestJoinGame_Race{
-			Race: race,
-		},
-		Options: options,
-	}
-
-	return c.joinGame(settings)
-}
-
-func (c *Client) joinGame(settings *sc2api.RequestJoinGame) (playerID uint32, e error) {
+// JoinGameRequest does just the request part of joining a game.
+func (c *Client) JoinGameRequest(settings *sc2api.RequestJoinGame) (RequestID, error) {
 	req := &sc2api.Request{
 		Request: &sc2api.Request_JoinGame{
 			JoinGame: settings,
 		},
 	}
-	resp, err := c.ReqResp(req)
+	return c.Request(req)
+}
+
+// JoinGameResponse waits until joining was successful and returns the player id.
+func (c *Client) JoinGameResponse(id RequestID) (playerID uint32, e error) {
+	resp, err := c.Response(id)
 	if err != nil {
 		return 0, err
 	}
