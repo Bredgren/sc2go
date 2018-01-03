@@ -83,18 +83,11 @@ func main() {
 	exePath := filepath.Join(basePath, "Versions", version, exe)
 	cwd := filepath.Join(basePath, "Support64")
 
-	exit := make(chan struct{})
-	cl, err := sc2.LaunchSC2(exePath, cwd, true, exit)
+	cl, err := sc2.LaunchSC2(exePath, cwd, true)
 	if err != nil {
 		log.Fatalln("LaunchSC2:", err)
 	}
 	defer cl.Close()
-	defer func() {
-		cl.Close()
-		// Wait for application to close (not necessarily caused by cl.Close())
-		<-exit
-		log.Println("Done.")
-	}()
 	log.Println(cl.GetStatus())
 
 	if host {
@@ -115,6 +108,9 @@ func main() {
 	}
 
 	fmt.Println("Joined as player", id)
+
+	cl.WaitForClose()
+	log.Println("Done.")
 }
 
 func createGame(cl *sc2.Client) {

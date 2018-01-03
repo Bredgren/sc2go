@@ -2,6 +2,8 @@ package sc2
 
 import (
 	"fmt"
+	"net/url"
+	"time"
 
 	sc2api "github.com/Bredgren/sc2go/sc2apiprotocol"
 	"github.com/golang/protobuf/proto"
@@ -16,14 +18,57 @@ type RequestID int
 type Client struct {
 	*websocket.Conn
 	status       sc2api.Status
+	port         int
 	responseBuf  map[RequestID]*sc2api.Response
 	lastRequest  RequestID
 	lastResponse RequestID
 }
 
-func (c *Client) init() {
-	c.status = sc2api.Status_launched
-	c.responseBuf = make(map[RequestID]*sc2api.Response)
+func NewClient(port int) (*Client, error) {
+	u := url.URL{Scheme: "ws", Host: fmt.Sprintf("127.0.0.1:%d", port), Path: "/sc2api"}
+
+	origin := "http://localhost/"
+	var conn *websocket.Conn
+	var err error
+	for secondsToTry := timeout; secondsToTry > 0; secondsToTry-- {
+		conn, err = websocket.Dial(u.String(), "", origin)
+		if err == nil {
+			break
+		}
+		time.Sleep(1 * time.Second)
+	}
+	if conn == nil {
+		return nil, fmt.Errorf("timed out connecting to SC2")
+	}
+
+	cl := &Client{
+		Conn:        conn,
+		status:      sc2api.Status_launched,
+		port:        port,
+		responseBuf: make(map[RequestID]*sc2api.Response),
+	}
+	return cl, nil
+}
+
+// GetStatus returns the current state of the client.
+func (c *Client) GetStatus() sc2api.Status {
+	return c.status
+}
+
+// GetStatus returns the current state of the client.
+func (c *Client) GetPort() int {
+	return c.port
+}
+
+// WaitForClose blocks until the application is closed for any reason.
+func (c *Client) WaitForClose() {
+	for {
+		_, err := c.Ping()
+		if err != nil {
+			break
+		}
+		time.Sleep(1 * time.Second)
+	}
 }
 
 // Request initiates an API request and returns a RequestID for retrieving the response.
@@ -109,11 +154,6 @@ func (c *Client) Quit() {
 		},
 	}
 	c.Request(req)
-}
-
-// GetStatus returns the current state of the client.
-func (c *Client) GetStatus() sc2api.Status {
-	return c.status
 }
 
 // GetAvailableMaps returns maps available to play on.
