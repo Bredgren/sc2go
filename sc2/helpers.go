@@ -32,6 +32,7 @@ func BattleNetMap(name string) *sc2api.RequestCreateGame_BattlenetMapName {
 	}
 }
 
+// GetFreePort returns a free port. Crashes if there isn't one.
 func GetFreePort() int32 {
 	port, err := freeport.GetFreePort()
 	if err != nil {
@@ -40,6 +41,7 @@ func GetFreePort() int32 {
 	return int32(port)
 }
 
+// GetFreePortSet returns a PortSet with free ports. Crashes if enough can't be found.
 func GetFreePortSet() sc2api.PortSet {
 	return sc2api.PortSet{
 		GamePort: GetFreePort(),
