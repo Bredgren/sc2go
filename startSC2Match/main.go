@@ -16,8 +16,9 @@ import (
 )
 
 var (
-	seed = uint32(time.Now().Unix())
-	// gameMap = ""
+	seed     = uint32(time.Now().Unix())
+	seedFlag int
+	gameMap  = ""
 )
 
 var raceMap = map[string]sc2api.Race{
@@ -47,44 +48,49 @@ var (
 
 func init() {
 	rand.Seed(int64(seed))
+	flag.IntVar(&seedFlag, "seed", seedFlag, "The random seed to use. Default is random")
+	flag.StringVar(&gameMap, "map", gameMap, "The game map to play on. Default is a random Battle.net map")
+
 	flag.Usage = func() {
 		fmt.Fprintf(os.Stderr, "Usage: %s [options] Player1 [Player2] ...\n", os.Args[0])
 		fmt.Fprintf(os.Stderr, `
-Each Player can be one of the following:
-  Human_<Race>
-	AI_<Difficulty>_<Race>
-	<path to bot executable>
+  Each Player can be one of the following:
+    Human_<Race>
+    AI_<Difficulty>_<Race>
+    <path to bot executable>
 
-Where <Race> is one of:
-	Random
-	Protoss
-	Terran
-	Zerg
+  Where <Race> is one of:
+    Random
+    Protoss
+    Terran
+    Zerg
 
-And Difficulty is one of:
-	VeryEasy
-	Easy
-	Medium
-	MediumHard
-	Hard
-	Harder
-	VeryHard
-	CheatVision
-	CheatMoney
-	CheatInsane
+  And <Difficulty> is one of:
+    VeryEasy
+    Easy
+    Medium
+    MediumHard
+    Hard
+    Harder
+    VeryHard
+    CheatVision
+    CheatMoney
+    CheatInsane
 
-There can only be one Human player. If more than one bot is given then there can only be
-two of them and there can be no other players.
+  There can only be one Human player. If more than one bot is given then there can only be
+  two of them and there can be no other human or bot players.
 
-The bot executable must support the following command line options:
-  -sc2Port         A number
-	-sharedPort      A number
-	-serverPortGame  A number
-	-serverPortBase  A number
-	-clientPortGame  Comma-separated list of numbers
-	-clientPortBase  Comma-separated list of numbers
-	-host            If present then the bot should be host
-	-seed            Random seed
+  The bot executable must support the following command line options:
+  TODO: make these environment variables instead (partly so bots can take easily take their own options)
+    -sc2Port        The port number used to connect to the SC2 cliet
+    -sharedPort     The shared port number needed for joining the game
+    -serverPortGame The server game port number needed for joining the game
+    -serverPortBase The server base port number needed for joining the game
+    -clientPortGame Comma-separated list of client game port numbers needed for joining the game
+    -host           Comma-separated list of client base port numbers needed for joining the game
+    -seed           Random seed
+
+Options:
 `)
 		flag.PrintDefaults()
 	}
@@ -96,6 +102,12 @@ func parseArgs() bool {
 		flag.Usage()
 		return false
 	}
+
+	if seedFlag != 0 {
+		seed = uint32(seedFlag)
+	}
+
+	log.Println("Random seed:", seed)
 
 	return true
 }
@@ -126,9 +138,13 @@ func main() {
 		log.Fatalln("LaunchSC2:", err)
 	}
 	defer cl.Close()
+	defer cl.Quit()
 	log.Println(cl.GetStatus())
 
-	createGame(cl, playerSetup)
+	if err = createGame(cl, playerSetup); err != nil {
+		log.Println(err)
+		return
+	}
 
 	if humanCount == 1 {
 		var race sc2api.Race
@@ -218,25 +234,47 @@ func getPlayerSetup(playerArgs []string) ([]*sc2api.PlayerSetup, int, int, int) 
 	return setup, humanCount, aiCount, botCount
 }
 
-func createGame(cl *sc2.Client, players []*sc2api.PlayerSetup) {
+func createGame(cl *sc2.Client, players []*sc2api.PlayerSetup) error {
 	maps, err := cl.GetAvailableMaps()
 	if err != nil {
-		log.Fatal(err)
+		return err
 	}
 	fmt.Print("\nBattlenet Maps:\n", strings.Join(maps.GetBattlenetMapNames(), "\n"), "\n")
 	fmt.Print("\nLocal Maps:\n", strings.Join(maps.GetLocalMapPaths(), "\n"), "\n")
 
-	mapChoice := maps.GetBattlenetMapNames()[rand.Intn(len(maps.GetBattlenetMapNames()))]
-	log.Printf("Creating game on map '%s'\n", mapChoice)
-	err = cl.CreateGame(&sc2api.RequestCreateGame{
-		Map:         sc2.BattleNetMap(mapChoice),
+	settings := &sc2api.RequestCreateGame{
 		PlayerSetup: players,
 		RandomSeed:  seed,
 		Realtime:    true,
-	})
-	if err != nil {
-		log.Fatal(err)
 	}
+
+	if gameMap == "" {
+		gameMap = maps.GetBattlenetMapNames()[rand.Intn(len(maps.GetBattlenetMapNames()))]
+		settings.Map = sc2.BattleNetMap(gameMap)
+		log.Printf("Creating game on map '%s'\n", gameMap)
+	} else {
+		valid := false
+		for _, mapName := range maps.GetBattlenetMapNames() {
+			if gameMap == mapName {
+				valid = true
+				settings.Map = sc2.BattleNetMap(gameMap)
+				break
+			}
+		}
+		for _, mapName := range maps.GetLocalMapPaths() {
+			if gameMap == mapName {
+				valid = true
+				settings.Map = sc2.LocalMap(gameMap)
+				break
+			}
+		}
+		if !valid {
+			return fmt.Errorf("invalid map: %s", gameMap)
+		}
+
+	}
+
+	return cl.CreateGame(settings)
 }
 
 // 	botProgNames := flag.Args()
