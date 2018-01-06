@@ -24,6 +24,7 @@ type Client struct {
 	lastResponse RequestID
 }
 
+// NewClient connects to an SC2 client instance at the given port.
 func NewClient(port int) (*Client, error) {
 	u := url.URL{Scheme: "ws", Host: fmt.Sprintf("127.0.0.1:%d", port), Path: "/sc2api"}
 
