@@ -55,7 +55,8 @@ func GetFreePortSet() *sc2api.PortSet {
 }
 
 // GetSC2Path returns the path to the SC2 executable and the directory it should be
-// executed from.
+// executed from. Checks environment variables SC2PATH and SC2CWD before trying platform
+// defaults.
 func GetSC2Path() (exec, cwd string) {
 	path := os.Getenv("SC2PATH")
 	if path == "" {
