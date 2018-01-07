@@ -56,7 +56,7 @@ func (c *Client) GetStatus() sc2api.Status {
 	return c.status
 }
 
-// GetStatus returns the current state of the client.
+// GetPort returns the port used to connect to SC2.
 func (c *Client) GetPort() int {
 	return c.port
 }
@@ -66,6 +66,20 @@ func (c *Client) WaitForClose() {
 	for {
 		_, err := c.Ping()
 		if err != nil {
+			break
+		}
+		time.Sleep(1 * time.Second)
+	}
+}
+
+// WaitForEnd blocks until the game state is ended or closed.
+func (c *Client) WaitForEnd() {
+	for {
+		_, err := c.Ping()
+		if err != nil {
+			break
+		}
+		if c.GetStatus() == sc2api.Status_ended {
 			break
 		}
 		time.Sleep(1 * time.Second)
