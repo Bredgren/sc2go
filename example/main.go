@@ -4,7 +4,6 @@ import (
 	"fmt"
 	"log"
 	"math/rand"
-	"path/filepath"
 	"strings"
 	"time"
 
@@ -21,13 +20,11 @@ func init() {
 func main() {
 	fmt.Println("Random Seed:", seed)
 
-	basePath := "C:/Program Files (x86)/StarCraft II"
-	version := "Base60321"
-	exe := "SC2_x64.exe"
-	exePath := filepath.Join(basePath, "Versions", version, exe)
-	cwd := filepath.Join(basePath, "Support64")
-
-	cl, err := sc2.LaunchSC2(exePath, cwd, true)
+	path, cwd, err := sc2.GetSC2Path()
+	if err != nil {
+		log.Fatalln(err)
+	}
+	cl, err := sc2.LaunchSC2(path, cwd, true)
 	if err != nil {
 		log.Fatalln("LaunchSC2:", err)
 	}
